@@ -1,0 +1,29 @@
+<hibernate-mapping package="project.domain.pojo.organizations">
+
+    <class name="Organization" abstract="true">
+        <id name="id" column="org_id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="name"   column="name"   type="java.lang.String" />
+        <property name="owner"  column="owner"  type="java.lang.String" />
+
+        <set name="trucks" inverse="false" cascade="all" lazy="false">
+            <key column="organization"/>
+            <one-to-many class="project.domain.pojo.truck.Truck"/>
+        </set>
+
+        <set name="clients" inverse="false" cascade="all" lazy="false">
+            <key column="organization"/>
+            <one-to-many class="project.domain.pojo.clients.Client"/>
+        </set>
+
+        <set name="employees" inverse="false" cascade="all" lazy="false">
+            <key column="organization"/>
+            <one-to-many class="project.domain.pojo.employees.Employee"/>
+        </set>
+
+    </class>
+
+    <union-subclass name="LogisticOrganization" extends="Organization" table="Organizations"/>
+
+</hibernate-mapping>

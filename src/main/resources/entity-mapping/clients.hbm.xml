@@ -1,0 +1,26 @@
+<hibernate-mapping package="project.domain.pojo.clients">
+
+    <class name="Client" abstract="true">
+        <id name="id" column="client_id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="name" type="java.lang.String"  />
+        <many-to-one
+                name="organization"
+                class="project.domain.pojo.organizations.Organization"
+                column="organization"
+                not-null="true"
+                cascade="save-update"
+                lazy="false"
+        />
+
+        <set name="cargoSet" inverse="false" cascade="all" lazy="false">
+            <key column="owner"/>
+            <one-to-many class="project.domain.pojo.cargo.Cargo"/>
+        </set>
+
+    </class>
+
+    <union-subclass name="LogisticClient" extends="Client" table="Clients"/>
+
+</hibernate-mapping>

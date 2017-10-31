@@ -1,0 +1,42 @@
+<hibernate-mapping package="project.domain.pojo.cargo">
+
+    <class name="Cargo" abstract="true">
+        <id name="id" column="cargo_id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="name"            column="name"             type="java.lang.String"  />
+        <property name="productionDate"  column="production_date"  type="java.util.Date"    />
+        <property name="shelfLife"       column="shelf_date"       type="java.util.Date"    />
+        <property name="size"            column="size"             type="java.lang.Integer" />
+        <property name="format"          column="format"           type="java.lang.String"  />
+
+        <many-to-one
+                name="owner"
+                class="project.domain.pojo.clients.Client"
+                column="owner"
+                not-null="true"
+                cascade="save-update"
+                lazy="false"
+        />
+
+    </class>
+
+    <union-subclass
+            name="project.domain.pojo.cargo.box.BoxCargo"
+            extends="Cargo"
+            table="CargoList"
+    />
+
+    <union-subclass
+            name="project.domain.pojo.cargo.oil.OilCargo"
+            extends="Cargo"
+            table="CargoList"
+    />
+
+    <union-subclass
+            name="project.domain.pojo.cargo.products.ProductCargo"
+            extends="Cargo"
+            table="CargoList"
+    />
+
+</hibernate-mapping>
