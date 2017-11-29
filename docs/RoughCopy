@@ -1,2 +1,8 @@
 all people(associates, clients, owners) in own table; enum's; archive;
+add comments in xml-files;
+
+<servlet-mapping>
+    <servlet-name>logistic</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 
