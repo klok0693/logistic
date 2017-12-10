@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.NotNullByDefault;
 import project.factory.Factory;
@@ -20,25 +21,36 @@ import java.util.Map;
 @NotNullByDefault
 public class LogisticServlet {
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView index() {
-        Factory factory;
+    private Factory getFactory() throws Exception {
         try {
-            factory = Factory.getFactory("root-context.xml");
+            return Factory.getFactory("root-context.xml");
         }
         catch (Exception e) {
-            log.error("Can't create factory, return null",e);
-            return null;
+            log.error("Can't create beanFactory, throw exception", e);
+            throw e;
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getTrucks",method = RequestMethod.GET)
+    public ModelAndView getTrucks() {
 
         try {
+            Factory factory = getFactory();
             Map<String, String> model = new HashMap<>();
             model.put("trucks", factory.getTruckData().getAll().toString());
 
-            return new ModelAndView("index", model);
+            return new ModelAndView("trucks", model);
         }
         catch (DaoException e) {
-            return null;
+            return getErrorView();
         }
+        catch (Exception e) {
+            return getErrorView();
+        }
+    }
+
+    private ModelAndView getErrorView() {
+        return new ModelAndView("error");
     }
 }

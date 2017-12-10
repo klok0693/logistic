@@ -18,7 +18,6 @@
                 cascade="save-update"
                 lazy="false"
         />
-
     </class>
 
     <union-subclass

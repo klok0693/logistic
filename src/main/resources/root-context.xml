@@ -10,6 +10,4 @@
     <import resource="domain-beans.xml"/>
     <import resource="data-beans.xml"/>
 
-
-
 </beans>
