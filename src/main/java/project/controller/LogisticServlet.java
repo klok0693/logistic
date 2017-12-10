@@ -1,6 +1,7 @@
 package project.controller;
 
 import lombok.extern.log4j.Log4j;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,7 @@ public class LogisticServlet {
     }
 
     @ResponseBody
+    @Secured(value = {"ROLE_USER"})
     @RequestMapping(value = "/getTrucks",method = RequestMethod.GET)
     public ModelAndView getTrucks() {
 
