@@ -1,4 +1,6 @@
-Ext.define('Catalog.view.GridView', {
+Ext.Loader.setConfig({enabled:true});
+
+Ext.define('app.view.GridView', {
     extends: 'Ext.grid.Panel',
     alias:  'widget.gridView',
     width: 400,
