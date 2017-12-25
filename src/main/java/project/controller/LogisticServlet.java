@@ -52,9 +52,12 @@ public class LogisticServlet {
     //@Secured(value = {"ROLE_ANONYMOUS"})
     @RequestMapping(value = "/client", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody Client getClients() {
+
+        Factory factory;
+        Deque<Client> clientDeque;
         try {
-            Factory factory = getFactory();
-            Deque<Client> clientDeque = new LinkedList<>();
+            factory      = getFactory();
+            clientDeque  = new LinkedList<>();
             clientDeque.addAll(factory.getClientData().getAll());
 
             if(!clientDeque.isEmpty()) {

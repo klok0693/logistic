@@ -1,20 +1,5 @@
-
-
-var staticData = [
-        {
-         number: 1,
-         name: 'Boris',
-         organization: 'OOO'
-         },
-         {
-          number: 2,
-          name: 'Gena',
-          organization: 'FFF'
-          }
-    ];
-
- var fields = [
-     {name: 'number', type: 'int'},
+var fields = [
+     {name: 'id', type: 'int'},
      {name: 'name'},
      {name: 'organization'}
  ];
@@ -22,28 +7,26 @@ var staticData = [
 Ext.define('app.store.CatalogStore', {
     extend: 'Ext.data.Store',
     fields: fields,
-    //alias: 'store.catalogStore',
-    data: staticData
-    //model: 'app.model.CatalogModel',
-    ,autoLoad: true
+    storeId: 'catalogStore',
+    autoLoad: true,
     //,autoSync: true
-    /*proxy: {
-            type: 'rest',
+    proxy: {
+            type: 'ajax',
             api: {
-                create: 'client',
-                read: 'client',
-                destroy: 'client',
-                update: 'client'
+                create: 'http://localhost:8082/client',
+                read: 'http://localhost:8082/client'
+                //destroy: '',
+                //update: ''
             },
             reader: {
                 type: 'json',
-                root: 'data',
+                root: '',
                 successProperty: 'success'
-            },
-            writer: {
+            }
+            /*writer: {
                 type: 'json',
                 writeAllFields: true
-            }
+            }*/
 
-        }*/
+        }
 });

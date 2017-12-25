@@ -30,12 +30,8 @@ Ext.define('app.view.welcome_page.Login', {
         {
         text: 'login',
         handler: function() {
-            /*if(this.getForm().submit)
-               url: 'http://localhost:8082/client'*/
-               /*Ext.Ajax.request({
-                   url: 'http://localhost:8082/client'
-               });*/
-            }
+
+          }
         }
     ]
     ,renderTo: Ext.getBody()

@@ -1,10 +1,6 @@
 Ext.Loader.setConfig({enabled:true});
 Ext.Loader.setPath('Ext', '/main/webapp/resources');
-Ext.require(
-    'app.view.catalog.GridView'
-    //'app.controller.CatalogController',
-    //,'app.store.CatalogStore'
-);
+Ext.require('app.view.catalog.GridView');
 
 Ext.application({
     name: 'catalog',
@@ -12,11 +8,6 @@ Ext.application({
     width: 500,
     height: 360,
     padding: 10,
-    //layout: 'border',
-    //extend: 'Ext.panel.Panel',
-    //width: 500,
-    //height: 360,
-    //padding: 10,
     launch: function(){
             Ext.create('Ext.container.Viewport', {
             layout: 'border',

@@ -4,8 +4,6 @@ Ext.require('app.view.welcome_page.Login');
 
 Ext.application({
     name: 'Catalog',
-    //extend: 'Ext.form.Panel',
-    //alias: 'widget.welcome',
     width: 500,
     height: 360,
     padding: 10,
@@ -31,7 +29,7 @@ Ext.application({
             xtype: 'panel',
             html: '<div style="font: normal 18px cursive"><center><font size = "3">Welcome Page</font></center></div>',
             region: 'center',
-            //flex: 3,
+            //flex: 1,
             height: 300
             }
     ]

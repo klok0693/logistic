@@ -1,31 +1,14 @@
-var staticData = [
-        {
-         number: 1,
-         name: 'Boris',
-         organization: 'OOO'
-         },
-         {
-          number: 2,
-          name: 'Gena',
-          organization: 'FFF'
-          }
-    ];
-
  var fields = [
-     {name: 'number', type: 'int'},
+     {name: 'id', type: 'int'},
      {name: 'name'},
      {name: 'organization'}
  ];
 
 var store = Ext.create('Ext.data.Store', {
-    //extend: 'Ext.data.Store',
-    fields: fields
-    //alias: 'store.catalogStore',
-    //data: staticData
-    //model: 'app.model.CatalogModel',
-    ,autoLoad: true
+    fields: fields,
+    autoLoad: true,
     //,autoSync: true
-    ,proxy: {
+    proxy: {
             type: 'ajax',
             api: {
                 create: 'http://localhost:8082/client',
@@ -51,10 +34,7 @@ var store = Ext.create('Ext.data.Store', {
 Ext.define('app.view.catalog.GridView', {
     extend: 'Ext.grid.Panel',
     alias:  'widget.gridView',
-    //store: Ext.getStore('app.store.CatalogStore'),
-    //store: Ext.StoreMgr.lookup('mStore'),
     store: store,
-    //store: 'CatalogStore',
     width: 400,
     height: 300,
     frame: true,
@@ -65,40 +45,38 @@ Ext.define('app.view.catalog.GridView', {
     columns: [
         {
             text: '№',
-            //name: 'id',
             flex: 1,
-            //sortable: true,
-            dataIndex: 'id'
-            /*,editor: {
+            sortable: true,
+            dataIndex: 'id',
+            editor: {
                 xtype: 'textfield',
                 regex: /^([0-9]{1,20})*$/,
                 regexText: '№ должен состоять из цифр',
                 allowBlank: false,
                 blankText: 'Укажите номер клиента'
-            }*/
+            }
         },
         {
             text: 'ФИО',
             flex: 1,
-            //sortable: true,
-            dataIndex: 'name'
-            /*,editor: {
+            sortable: true,
+            dataIndex: 'name',
+            editor: {
                 xtype: 'textfield',
                 allowBlank: false,
                 blankText: 'Это поле должно быть заполнено'
-            }*/
-        } ,
+            }
+        },
         {
             text: 'Организация',
-            //name: 'organization',
             flex: 1,
-            //sortable: true,
-            dataIndex: 'organization'
-            /*,editor: {
+            sortable: true,
+            dataIndex: 'organization',
+            editor: {
                 xtype: 'textfield',
                 allowBlank: false,
                 blankText: 'Необходимо указать организацию'
-            }*/
+            }
         }
     ],
     plugins: [
@@ -107,9 +85,9 @@ Ext.define('app.view.catalog.GridView', {
         saveBtnText: 'Сохранить',
         cancelBtnText: 'Отмена'
         })
-    ]
-    //selType: 'rowmodel',
-    /*dockedItems: [
+    ],
+    selType: 'rowmodel',
+    dockedItems: [
         {
             xtype: 'toolbar',
             items: [
@@ -122,10 +100,9 @@ Ext.define('app.view.catalog.GridView', {
                 {
                     text: 'Удалить',
                     action: 'delete',
-                    iconCls: 'icon-delete',
-                    disabled: true
+                    iconCls: 'icon-delete'
                 }
             ]
         }
-    ]*/
+    ]
 });
