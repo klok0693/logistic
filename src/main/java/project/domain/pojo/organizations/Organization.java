@@ -1,5 +1,6 @@
 package project.domain.pojo.organizations;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.pojo.Entity;
@@ -25,12 +26,15 @@ public interface Organization extends Entity, Instance<Organization> {
     String getOwner();
     void setOwner(String owner);
 
+    @JsonBackReference
     Set<Truck> getTrucks();
     void setTrucks(Set<Truck> trucks);
 
+    @JsonBackReference
     Set<Client> getClients();
     void setClients(Set<Client> clients);
 
+    @JsonBackReference
     Set<Employee> getEmployees();
     void setEmployees(Set<Employee> employees);
 }

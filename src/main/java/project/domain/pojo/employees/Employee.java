@@ -1,5 +1,6 @@
 package project.domain.pojo.employees;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.pojo.Entity;
@@ -25,6 +26,7 @@ public interface Employee<V extends Employee<V>> extends Entity, Instance<V> {
     String getPosition();
     void setPosition(String position);
 
+    @JsonBackReference
     Organization getOrganization();
     void setOrganization(Organization organization);
 }

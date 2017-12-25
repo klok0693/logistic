@@ -1,5 +1,6 @@
 package project.domain.pojo.truck;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.pojo.Entity;
@@ -31,6 +32,7 @@ public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, In
     String getTrailer();
     void setTrailer(String trailer);
 
+    @JsonBackReference
     Organization getOrganization();
     void setOrganization(Organization organization);
 }
