@@ -1,10 +1,10 @@
 package project.controller;
 
 import lombok.extern.log4j.Log4j;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.NotNullByDefault;
 import project.domain.pojo.clients.Client;
@@ -20,22 +20,18 @@ import java.util.Map;
  * Created by klok on 6.10.17.
  */
 @Log4j
-@RestController
+@Controller
 @NotNullByDefault
 public class LogisticServlet {
 
-    private Factory getFactory() throws Exception {
-        try {
-            return Factory.getFactory("root-context.xml");
-        }
-        catch (Exception e) {
-            log.error("Can't create beanFactory, throw exception", e);
-            throw e;
-        }
+    @ResponseBody
+    @RequestMapping(value = "/")
+    public ModelAndView getIndex() {
+        return new ModelAndView("index");
     }
 
-    @Secured(value = {"ROLE_USER"})
-    @RequestMapping(value = "/getTrucks",method = RequestMethod.GET)
+    //@Secured(value = {"ROLE_USER"})
+    @RequestMapping(value = "/getTrucks", method = RequestMethod.GET)
     public ModelAndView getTrucks() {
 
         try {
@@ -53,18 +49,39 @@ public class LogisticServlet {
         }
     }
 
-    @Secured(value = {"ROLE_ANONYMOUS"})
-    @RequestMapping(value = "/clients", method = RequestMethod.GET, produces = "application/json")
-    public Deque<Client> getClients() {
+    //@Secured(value = {"ROLE_ANONYMOUS"})
+    @RequestMapping(value = "/client", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody Client getClients() {
         try {
             Factory factory = getFactory();
             Deque<Client> clientDeque = new LinkedList<>();
             clientDeque.addAll(factory.getClientData().getAll());
 
-            return clientDeque;
+            if(!clientDeque.isEmpty()) {
+                Client client = clientDeque.getFirst();
+                //client.setOrganization(null);
+                return client;
+            }
+            return null;
         }
         catch (Exception e) {
             return null;
+        }
+    }
+
+    //@Secured(value = {"ROLE_ANONYMOUS"})
+    @RequestMapping(value = "/login")
+    public String getCatalogIndex(){
+        return "CatalogIndex";
+    }
+
+    private Factory getFactory() throws Exception {
+        try {
+            return Factory.getFactory("root-context.xml");
+        }
+        catch (Exception e) {
+            log.error("Can't create beanFactory, throw exception", e);
+            throw e;
         }
     }
 

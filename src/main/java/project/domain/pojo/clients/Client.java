@@ -1,5 +1,6 @@
 package project.domain.pojo.clients;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.pojo.Entity;
@@ -25,6 +26,7 @@ public interface Client extends Entity, Instance<Client> {
     Organization getOrganization();
     void setOrganization(Organization organization);
 
+    @JsonBackReference
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
 }

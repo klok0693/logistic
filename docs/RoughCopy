@@ -1,8 +1,49 @@
 all people(associates, clients, owners) in own table; enum's; archive;
 add comments in xml-files;
 
-<servlet-mapping>
-    <servlet-name>logistic</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+
+xmlns:security  = "http://www.springframework.org/schema/security"
+
+                http://www.springframework.org/schema/security
+                http://www.springframework.org/schema/security/spring-security.xsd
+
+
+
+      Ext.require('Ext.data.proxy.Ajax');
+
+      /*var model = Ext.create('Ext.data.Model', {
+          fields: [
+              {name: 'id', type: 'int'},
+              {name: 'name'},
+              {name: 'organization'}
+          ]
+      });*/
+
+      /*Ext.define('myModel', {
+              extend: 'Ext.data.Model',
+              fields: [
+                      {name: 'id', type: 'int'},
+                      {name: 'name'},
+                      {name: 'organization'}
+                      ]
+           });*/
+
+      var staticData = [
+              {
+               number: 1,
+               name: 'Boris',
+               //organization: 'OOO'
+               },
+               {
+                number: 2,
+                name: 'Gena',
+                //organization: 'FFF'
+                }
+          ];
+
+       /*var fields = [
+           {name: 'number', type: 'int'},
+           {name: 'name'},
+           //{name: 'organization'}
+       ];*/
 

@@ -7,6 +7,6 @@ Ext.define('AM.view.user.List' ,{
 
     columns: [
         {header: 'Name',  dataIndex: 'name',  flex: 1},
-        {header: 'Email', dataIndex: 'email', flex: 1}
+        {header: 'Organization', dataIndex: 'organization', flex: 1}
     ]
 });

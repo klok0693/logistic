@@ -23,7 +23,19 @@ Ext.define('app.view.welcome_page.Login', {
           name: 'password',
           labelAlign: 'top',
           cls: 'field-margin',
-          flex: 1
+          flex: 2
+        }
+    ],
+    buttons: [
+        {
+        text: 'login',
+        handler: function() {
+            /*if(this.getForm().submit)
+               url: 'http://localhost:8082/client'*/
+               /*Ext.Ajax.request({
+                   url: 'http://localhost:8082/client'
+               });*/
+            }
         }
     ]
     ,renderTo: Ext.getBody()
