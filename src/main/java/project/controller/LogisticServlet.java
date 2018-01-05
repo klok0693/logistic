@@ -3,18 +3,16 @@ package project.controller;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.NotNullByDefault;
 import project.domain.pojo.clients.Client;
 import project.factory.Factory;
-import project.model.data.DaoException;
 
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Created by klok on 6.10.17.
@@ -24,34 +22,32 @@ import java.util.Map;
 @NotNullByDefault
 public class LogisticServlet {
 
+    //welcome page
     @ResponseBody
     @RequestMapping(value = "/")
     public ModelAndView getIndex() {
-        return new ModelAndView("index");
+        return new ModelAndView("Index");
     }
 
-    //@Secured(value = {"ROLE_USER"})
-    @RequestMapping(value = "/getTrucks", method = RequestMethod.GET)
-    public ModelAndView getTrucks() {
 
-        try {
-            Factory factory = getFactory();
-            Map<String, String> model = new HashMap<>();
-            model.put("trucks", factory.getTruckData().getAll().toString());
-
-            return new ModelAndView("trucks", model);
-        }
-        catch (DaoException e) {
-            return getErrorView();
-        }
-        catch (Exception e) {
-            return getErrorView();
-        }
+    //success authorization
+    @RequestMapping(value = "/success", method = GET, produces = "application/json")
+    public @ResponseBody boolean getSuccessAuth() {
+        return true;
     }
 
-    //@Secured(value = {"ROLE_ANONYMOUS"})
-    @RequestMapping(value = "/client", method = RequestMethod.GET, produces = "application/json")
+
+    //authorization failure
+    @RequestMapping(value = "/failure", method = GET, produces = "application/json")
+    public @ResponseBody boolean getFailureAuth() {
+        return false;
+    }
+
+
+    //(json) get Clients
+    @RequestMapping(value = "/client", method = GET, produces = "application/json")
     public @ResponseBody Client getClients() {
+        System.out.println("client servlet is calling");
 
         Factory factory;
         Deque<Client> clientDeque;
@@ -68,15 +64,19 @@ public class LogisticServlet {
             return null;
         }
         catch (Exception e) {
+            log.error("Exception while connecting to url /client", e);
             return null;
         }
     }
 
-    //@Secured(value = {"ROLE_ANONYMOUS"})
-    @RequestMapping(value = "/login")
-    public String getCatalogIndex(){
-        return "CatalogIndex";
+
+    //get table with clients
+    @ResponseBody
+    @RequestMapping(value = "/grid")
+    public ModelAndView getGrid() {
+        return new ModelAndView("Catalog");
     }
+
 
     private Factory getFactory() throws Exception {
         try {
@@ -86,9 +86,5 @@ public class LogisticServlet {
             log.error("Can't create beanFactory, throw exception", e);
             throw e;
         }
-    }
-
-    private ModelAndView getErrorView() {
-        return new ModelAndView("error");
     }
 }

@@ -2,48 +2,24 @@ all people(associates, clients, owners) in own table; enum's; archive;
 add comments in xml-files;
 
 
-xmlns:security  = "http://www.springframework.org/schema/security"
-
-                http://www.springframework.org/schema/security
-                http://www.springframework.org/schema/security/spring-security.xsd
 
 
+    @RequestMapping(value = "/getTrucks", method = GET)
+    public ModelAndView getTrucks() {
 
-      Ext.require('Ext.data.proxy.Ajax');
+        try {
+            Factory factory = getFactory();
+            Map<String, String> model = new HashMap<>();
+            model.put("trucks", factory.getTruckData().getAll().toString());
 
-      /*var model = Ext.create('Ext.data.Model', {
-          fields: [
-              {name: 'id', type: 'int'},
-              {name: 'name'},
-              {name: 'organization'}
-          ]
-      });*/
+            return new ModelAndView("trucks", model);
+        }
+        catch (Exception e) {
+            return new ModelAndView("error");
+        }
+    }
 
-      /*Ext.define('myModel', {
-              extend: 'Ext.data.Model',
-              fields: [
-                      {name: 'id', type: 'int'},
-                      {name: 'name'},
-                      {name: 'organization'}
-                      ]
-           });*/
 
-      var staticData = [
-              {
-               number: 1,
-               name: 'Boris',
-               //organization: 'OOO'
-               },
-               {
-                number: 2,
-                name: 'Gena',
-                //organization: 'FFF'
-                }
-          ];
-
-       /*var fields = [
-           {name: 'number', type: 'int'},
-           {name: 'name'},
-           //{name: 'organization'}
-       ];*/
-
+  <welcome-file-list>
+    <welcome-file>Catalog.html</welcome-file>
+  </welcome-file-list>

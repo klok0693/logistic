@@ -8,31 +8,36 @@
                  http://www.springframework.org/schema/security
                  http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http auto-config= "true" use-expressions= "true"  >
+    <http auto-config= "true" ><!--use-expressions= "true"-->
 
-        <intercept-url pattern= "/security/**" access= "hasRole('ADMIN')"/>
+        <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>-->
+
+        <!--<intercept-url pattern= "/security/**" access= "ROLE_ADMIN"/>-->
         <!--Если попытаться войти без логина на страницу в этом маппинге (например http://localhost:8080/user/),
         то будет переброшено на страницу, указанную в form-login login-page='pageName.html' -->
-        <intercept-url pattern= "/user/**" access= "hasRole('USER')"/>
+        <!--<intercept-url pattern= "/" access= "ROLE_ANONYMOUS"/>-->
+        <intercept-url pattern="/client" access="ROLE_USER" />
+        <!--<intercept-url pattern="/*" access="isAuthenticated()" />-->
 
 
         <form-login
-                login-page              = "/login.html"
-                username-parameter       = "j_username"
-                password-parameter        = "j_password"
-                login-processing-url       = "/j_spring_security_check"
-                authentication-failure-url  = "/login.html?error=true" />
+                login-page="/Index"
+                default-target-url="/success"
+                username-parameter="j_username"
+                password-parameter="j_password"
+                login-processing-url="/j_spring_security_check"
+                authentication-failure-url= "/failure"/>
 
         <logout logout-url= "/j_spring_security_logout" logout-success-url= "/"/>
 
         <!--Save logged user in cookie with name key='name' -->
-        <remember-me key= "myKey" token-validity-seconds= "300"/>
+        <!--<remember-me key= "myKey" token-validity-seconds= "300"/>-->
 
-        <!-- <csrf disabled= "true"/> not correct(why?) -->
+        <!--<csrf enabled = "true"/> not correct(why?) -->
 
     </http>
 
-    <jdbc-user-service
+    <!--<jdbc-user-service
             id                       = "jdbcUserService"
             data-source-ref            = "dataSource"
             users-by-username-query      = "SELECT USERNAME, PASSWORD, ENABLED FROM USER WHERE USERNAME=?"
@@ -41,6 +46,14 @@
 
     <authentication-manager alias= "authenticationManager">
         <authentication-provider user-service-ref= "jdbcUserService"/>
+    </authentication-manager>-->
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service >
+                <user name="user" password="pass" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
     </authentication-manager>
 
 
