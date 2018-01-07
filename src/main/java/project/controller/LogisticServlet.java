@@ -47,7 +47,7 @@ public class LogisticServlet {
     //(json) get Clients
     @RequestMapping(value = "/client", method = GET, produces = "application/json")
     public @ResponseBody Client getClients() {
-        System.out.println("client servlet is calling");
+        System.out.println("/client url is calling "+Thread.currentThread().getName());
 
         Factory factory;
         Deque<Client> clientDeque;

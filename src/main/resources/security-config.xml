@@ -52,6 +52,7 @@
         <authentication-provider>
             <user-service >
                 <user name="user" password="pass" authorities="ROLE_USER" />
+                <user name="lexitan" password="pass0" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
