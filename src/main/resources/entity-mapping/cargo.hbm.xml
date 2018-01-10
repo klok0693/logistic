@@ -1,4 +1,4 @@
-<hibernate-mapping package="project.domain.pojo.cargo">
+<hibernate-mapping package="project.domain.entity.cargo">
 
     <class name="Cargo" abstract="true">
         <id name="id" column="cargo_id" type="java.lang.Integer">
@@ -12,7 +12,7 @@
 
         <many-to-one
                 name="owner"
-                class="project.domain.pojo.clients.Client"
+                class="project.domain.entity.clients.Client"
                 column="owner"
                 not-null="true"
                 cascade="save-update"
@@ -21,19 +21,19 @@
     </class>
 
     <union-subclass
-            name="project.domain.pojo.cargo.box.BoxCargo"
+            name="project.domain.entity.cargo.box.BoxCargo"
             extends="Cargo"
             table="CargoList"
     />
 
     <union-subclass
-            name="project.domain.pojo.cargo.oil.OilCargo"
+            name="project.domain.entity.cargo.oil.OilCargo"
             extends="Cargo"
             table="CargoList"
     />
 
     <union-subclass
-            name="project.domain.pojo.cargo.products.ProductCargo"
+            name="project.domain.entity.cargo.products.ProductCargo"
             extends="Cargo"
             table="CargoList"
     />

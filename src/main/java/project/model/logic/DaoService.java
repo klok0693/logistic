@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 import project.NotNullByDefault;
-import project.domain.pojo.Entity;
+import project.domain.entity.Entity;
 import project.model.data.GenericDao;
 
 /**

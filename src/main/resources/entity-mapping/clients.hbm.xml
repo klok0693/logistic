@@ -1,4 +1,4 @@
-<hibernate-mapping package="project.domain.pojo.clients">
+<hibernate-mapping package="project.domain.entity.clients">
 
     <class name="Client" abstract="true">
         <id name="id" column="client_id" type="java.lang.Integer">
@@ -7,7 +7,7 @@
         <property name="name" column="name" type="java.lang.String"  />
         <many-to-one
                 name="organization"
-                class="project.domain.pojo.organizations.Organization"
+                class="project.domain.entity.organizations.Organization"
                 column="organization"
                 not-null="true"
                 cascade="save-update"
@@ -16,7 +16,7 @@
 
         <set name="cargoSet" inverse="false" cascade="all" lazy="false">
             <key column="owner"/>
-            <one-to-many class="project.domain.pojo.cargo.Cargo"/>
+            <one-to-many class="project.domain.entity.cargo.Cargo"/>
         </set>
 
     </class>

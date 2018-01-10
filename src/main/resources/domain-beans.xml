@@ -4,19 +4,19 @@
                "http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean name="tentedTruck"        class="project.domain.pojo.truck.tented.TentedTruck" scope="prototype"/>
-    <bean name="tankTruck"          class="project.domain.pojo.truck.tank.TankTruck" scope="prototype"/>
-    <bean name="refrigeratedTruck"  class="project.domain.pojo.truck.refrigerated.RefrigeratedTruck" scope="prototype"/>
+    <bean name="tentedTruck" class="project.domain.entity.truck.tented.TentedTruck" scope="prototype"/>
+    <bean name="tankTruck" class="project.domain.entity.truck.tank.TankTruck" scope="prototype"/>
+    <bean name="refrigeratedTruck" class="project.domain.entity.truck.refrigerated.RefrigeratedTruck" scope="prototype"/>
 
-    <bean name="organization" class="project.domain.pojo.organizations.LogisticOrganization" scope="prototype"/>
+    <bean name="organization" class="project.domain.entity.organizations.LogisticOrganization" scope="prototype"/>
 
-    <bean name="box"      class="project.domain.pojo.cargo.box.BoxCargo"           scope="prototype"/>
-    <bean name="oil"      class="project.domain.pojo.cargo.oil.OilCargo"           scope="prototype"/>
-    <bean name="product"  class="project.domain.pojo.cargo.products.ProductCargo"  scope="prototype"/>
+    <bean name="box" class="project.domain.entity.cargo.box.BoxCargo" scope="prototype"/>
+    <bean name="oil" class="project.domain.entity.cargo.oil.OilCargo" scope="prototype"/>
+    <bean name="product" class="project.domain.entity.cargo.products.ProductCargo" scope="prototype"/>
 
-    <bean name="driver"   class="project.domain.pojo.employees.drivers.TruckDriver"       scope="prototype"/>
-    <bean name="manager"  class="project.domain.pojo.employees.managers.LogisticManager"  scope="prototype"/>
+    <bean name="driver" class="project.domain.entity.employees.drivers.TruckDriver" scope="prototype"/>
+    <bean name="manager" class="project.domain.entity.employees.managers.LogisticManager" scope="prototype"/>
 
-    <bean name="client" class="project.domain.pojo.clients.LogisticClient" scope="prototype"/>
+    <bean name="client" class="project.domain.entity.clients.LogisticClient" scope="prototype"/>
 
 </beans>

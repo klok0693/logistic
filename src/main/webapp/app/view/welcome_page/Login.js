@@ -3,7 +3,7 @@ Ext.define('app.view.welcome_page.Login', {
     alias: 'widget.login',
     title: 'авторизация',
     wight: 300,
-    height: 130,
+    height: 150,
     layout: 'anchor',
      defaults: {
         anchor: '80%'
@@ -48,5 +48,5 @@ Ext.define('app.view.welcome_page.Login', {
             this.up('form').getForm().reset();
             }
         }
-        ]
+    ]
 });

@@ -1,7 +1,7 @@
 package project.model.data;
 
 import project.NotNullByDefault;
-import project.domain.pojo.Entity;
+import project.domain.entity.Entity;
 
 import java.util.List;
 
@@ -20,5 +20,5 @@ public interface GenericDao<T extends Entity> {
 
     void delete(T obj) throws DaoException;
 
-    List<T> getAll()   throws DaoException;
+    List<? extends T> getAll()   throws DaoException;
 }

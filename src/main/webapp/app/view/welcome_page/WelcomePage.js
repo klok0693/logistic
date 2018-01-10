@@ -22,7 +22,7 @@ Ext.application({
                      {
                      xtype: 'login',
                      region: 'east',
-                     height: 130
+                     height: 150
                      }]
                 },
                 {

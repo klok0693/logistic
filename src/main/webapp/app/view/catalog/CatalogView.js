@@ -3,7 +3,7 @@ Ext.Loader.setPath('Ext', '/main/webapp/resources');
 Ext.require('app.view.catalog.GridView');
 
 Ext.application({
-    name: 'catalog',
+    name: 'grid',
     views: 'GridView',
     width: 500,
     height: 360,
@@ -19,10 +19,17 @@ Ext.application({
                          height: 130
                         },
                         {
+                         //TODO: text in textfield
                          xtype: 'panel',
                          region: 'west',
-                         title: 'search',
-                         width: 150
+                         title: 'Фамилия',
+                         width: 150,
+                         items: {
+                                 xtype: 'textfield',
+                                 name: 'Фамилия',
+                                 //fieldLabel: 'Фамилия',
+                                 maxLength: 50
+                             }
                         },
                        {
                          xtype: 'gridView',
