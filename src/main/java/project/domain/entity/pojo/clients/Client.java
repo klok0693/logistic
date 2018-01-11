@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
+import project.domain.entity.ejb.authentication.Authentication;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organizations.Organization;
 
@@ -15,7 +16,7 @@ import java.util.Set;
  * Hibernate mapped-superclass;
  */
 @NotNullByDefault
-public interface Client extends Entity, Instance<Client> {
+public interface Client extends Entity, Instance<Client>, Authentication {
 
     int getId();
     void setId(int id);

@@ -35,6 +35,7 @@
                 <value>entity-mapping/employees.hbm.xml</value>
                 <value>entity-mapping/organizations.hbm.xml</value>
                 <value>entity-mapping/trucks.hbm.xml</value>
+                <value>entity-mapping/users.hbm.xml</value>
             </list>
         </property>
     </bean>

@@ -6,27 +6,27 @@
 
     <bean name="cargoData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.entity.cargo.Cargo"/>
+        <constructor-arg value="project.domain.entity.pojo.cargo.Cargo"/>
     </bean>
 
     <bean name="clientData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.entity.clients.Client"/>
+        <constructor-arg value="project.domain.entity.pojo.clients.Client"/>
     </bean>
 
     <bean name="employeeData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.entity.employees.Employee"/>
+        <constructor-arg value="project.domain.entity.pojo.employees.Employee"/>
     </bean>
 
     <bean name="organizationData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.entity.organizations.Organization"/>
+        <constructor-arg value="project.domain.entity.pojo.organizations.Organization"/>
     </bean>
 
     <bean name="truckData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.entity.truck.Truck"/>
+        <constructor-arg value="project.domain.entity.pojo.truck.Truck"/>
     </bean>
 
 </beans>

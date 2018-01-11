@@ -2,6 +2,7 @@ package project.domain.entity.pojo.clients;
 
 import lombok.*;
 import project.NotNullByDefault;
+import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organizations.Organization;
 
@@ -15,13 +16,13 @@ import java.util.Set;
  * see https://projectlombok.org or https://habrahabr.ru/post/142356/;
  */
 @NotNullByDefault
-
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 class LogisticClient implements Client {
     private int          id;
     private String       name;
     private Organization organization;
+    private User         user;
 
     private Set<Cargo> cargoSet;
 

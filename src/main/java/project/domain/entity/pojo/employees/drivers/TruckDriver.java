@@ -1,5 +1,7 @@
 package project.domain.entity.pojo.employees.drivers;
 
+import lombok.Getter;
+import lombok.Setter;
 import project.NotNullByDefault;
 import project.domain.entity.pojo.employees.AbstractEmployee;
 import project.domain.entity.pojo.organizations.Organization;
@@ -8,8 +10,10 @@ import project.domain.entity.pojo.organizations.Organization;
  * Created by klok on 11.10.17.
  * hibernate entity
  */
+@Getter @Setter
 @NotNullByDefault
 class TruckDriver extends AbstractEmployee implements Driver {
+    private String driveCard;
 
     public TruckDriver() {}
 

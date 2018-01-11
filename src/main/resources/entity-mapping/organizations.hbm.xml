@@ -1,4 +1,4 @@
-<hibernate-mapping package="project.domain.entity.organizations">
+<hibernate-mapping package="project.domain.entity.pojo.organizations">
 
     <class name="Organization" abstract="true">
         <id name="id" column="org_id" type="java.lang.Integer">
@@ -9,17 +9,17 @@
 
         <set name="trucks" inverse="false" cascade="all" lazy="false">
             <key column="organization"/>
-            <one-to-many class="project.domain.entity.truck.Truck"/>
+            <one-to-many class="project.domain.entity.pojo.truck.Truck"/>
         </set>
 
         <set name="clients" inverse="false" cascade="all" lazy="false">
             <key column="organization"/>
-            <one-to-many class="project.domain.entity.clients.Client"/>
+            <one-to-many class="project.domain.entity.pojo.clients.Client"/>
         </set>
 
         <set name="employees" inverse="false" cascade="all" lazy="false">
             <key column="organization"/>
-            <one-to-many class="project.domain.entity.employees.Employee"/>
+            <one-to-many class="project.domain.entity.pojo.employees.Employee"/>
         </set>
 
     </class>

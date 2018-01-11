@@ -1,5 +1,5 @@
 all people(associates, clients, owners) in own table; enum's; archive;
-add comments in xml-files;
+add comments in xml-files; add @JsonIgnore and @JsonBackReference
 
 
 

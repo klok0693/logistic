@@ -3,7 +3,7 @@ package project.domain.entity.pojo.employees.managers;
 import lombok.Getter;
 import lombok.Setter;
 import project.NotNullByDefault;
-import project.domain.entity.ejb.user.User;
+import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.employees.AbstractEmployee;
 import project.domain.entity.pojo.organizations.Organization;
 

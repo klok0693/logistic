@@ -10,4 +10,7 @@ import project.domain.entity.pojo.employees.Employee;
 public interface Driver extends Employee<Driver> {
 
     String drive();
+
+    String getDriveCard();
+    void setDriveCard(String driveCard);
 }
