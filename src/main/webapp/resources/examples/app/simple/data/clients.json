@@ -1,0 +1,7 @@
+{
+  success: true,
+  clients: [
+    {id: 1, name: 'Tom', organization: 'OOO'},
+    {id: 2, name: 'Ted', organization: 'FFF'}
+    ]
+}

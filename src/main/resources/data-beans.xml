@@ -1,32 +1,32 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns      ="http://www.springframework.org/schema/beans"
+       xmlns:xsi  ="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation=
                "http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <bean name="cargoData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.pojo.cargo.Cargo"/>
+        <constructor-arg value="project.domain.entity.pojo.cargo.Cargo"/>
     </bean>
 
     <bean name="clientData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.pojo.clients.Client"/>
+        <constructor-arg value="project.domain.entity.pojo.clients.Client"/>
     </bean>
 
     <bean name="employeeData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.pojo.employees.Employee"/>
+        <constructor-arg value="project.domain.entity.pojo.employees.Employee"/>
     </bean>
 
     <bean name="organizationData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.pojo.organizations.Organization"/>
+        <constructor-arg value="project.domain.entity.pojo.organizations.Organization"/>
     </bean>
 
     <bean name="truckData" class="project.model.data.EntityGenericDao">
         <constructor-arg ref="sessionFactory"/>
-        <constructor-arg value="project.domain.pojo.truck.Truck"/>
+        <constructor-arg value="project.domain.entity.pojo.truck.Truck"/>
     </bean>
 
 </beans>

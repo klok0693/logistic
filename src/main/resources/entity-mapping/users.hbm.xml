@@ -1,0 +1,35 @@
+<hibernate-mapping package="project.domain.entity.ejb.authentication">
+
+    <class name="User" table="Users">
+        <id name="id" column="user_id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="username"                 column="username"                type="java.lang.String"/>
+        <property name="password"                 column="password"                type="java.lang.String"/>
+        <property name="isAccountNonExpired"      column="isAccountNonExpired"     type="boolean"/>
+        <property name="isAccountNonLocked"       column="isAccountNonLocked"      type="org.hibernate.type.NumericBooleanType"/>
+        <property name="isCredentialsNonExpired"  column="isCredentialsNonExpired" type="org.hibernate.type.NumericBooleanType"/>
+        <property name="isEnabled"                column="isEnabled"               type="org.hibernate.type.NumericBooleanType"/>
+
+        <set name="authorities" table="UsersRoles" cascade="save-update" lazy="false">
+                <key column="user_id"/>
+                <many-to-many column="role_name" class="Roles"/>
+        </set>
+    </class>
+
+
+
+    <class name="Roles" table="Roles">
+        <id name="id" column="role_id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="name" type="java.lang.String"/>
+
+        <set name="users" table="UsersRoles" cascade="save-update" lazy="false">
+            <key column="role_id"/>
+            <many-to-many column="user_id" class="User"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>

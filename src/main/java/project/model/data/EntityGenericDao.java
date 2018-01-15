@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import project.NotNullByDefault;
-import project.domain.pojo.Entity;
+import project.domain.entity.Entity;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ class EntityGenericDao<T extends Entity> implements GenericDao<T> {
         }
     }
 
-    public List<T> getAll() throws DaoException {
+    public List<? extends T> getAll() throws DaoException {
         try {
             return getCurrentSession()
                     .createCriteria(type)

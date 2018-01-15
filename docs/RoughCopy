@@ -1,2 +1,25 @@
 all people(associates, clients, owners) in own table; enum's; archive;
+add comments in xml-files; add @JsonIgnore and @JsonBackReference
 
+
+
+
+    @RequestMapping(value = "/getTrucks", method = GET)
+    public ModelAndView getTrucks() {
+
+        try {
+            Factory factory = getFactory();
+            Map<String, String> model = new HashMap<>();
+            model.put("trucks", factory.getTruckData().getAll().toString());
+
+            return new ModelAndView("trucks", model);
+        }
+        catch (Exception e) {
+            return new ModelAndView("error");
+        }
+    }
+
+
+  <welcome-file-list>
+    <welcome-file>Catalog.html</welcome-file>
+  </welcome-file-list>

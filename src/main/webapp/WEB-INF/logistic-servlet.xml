@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns           ="http://www.springframework.org/schema/beans"
+       xmlns:xsi       ="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc       ="http://www.springframework.org/schema/mvc"
+       xmlns:context   ="http://www.springframework.org/schema/context"
+       xmlns:security  = "http://www.springframework.org/schema/security"
        xsi:schemaLocation="
                 http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
                 http://www.springframework.org/schema/mvc
                 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
                 http://www.springframework.org/schema/context
-                http://www.springframework.org/schema/context/spring-context.xsd">
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/security
+                http://www.springframework.org/schema/security/spring-security.xsd
+">
 
     <context:annotation-config/>
     <context:component-scan base-package="project.controller"/>
     <mvc:annotation-driven />
 
+    <mvc:default-servlet-handler/>
+
+    <!--Spring security enabled annotations-->
+    <security:global-method-security pre-post-annotations= "enabled" secured-annotations= "enabled"/>
+
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
-        <property name="prefix"><value>/WEB-INF/jsp/</value></property>
-        <property name="suffix"><value>.jsp</value></property>
+        <property name="viewClass">  <value>org.springframework.web.servlet.view.JstlView</value></property>
+        <property name="prefix">     <value>/</value></property>
+        <property name="suffix">     <value>.html</value></property>
     </bean>
 
 </beans>

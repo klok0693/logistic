@@ -1,8 +1,36 @@
-CREATE DATABASE logistic;
+CREATE DATABASE IF NOT EXISTS logistic;
 use logistic;
 alter database `logistic` character set utf8;
 set names utf8;
 set collation_connection = utf8_general_ci;
+
+create table Roles(
+role_id int unsigned NOT NULL AUTO_INCREMENT,
+name varchar(100) UNIQUE,
+
+PRIMARY KEY(role_id)
+);
+
+create table Users(
+user_id                  int unsigned NOT NULL AUTO_INCREMENT,
+username                 varchar(100) NOT NULL,
+password                 varchar(100) NOT NULL,
+isAccountNonExpired      tinyint(1),
+isAccountNonLocked       tinyint(1),
+isCredentialsNonExpired  tinyint(1),
+isEnabled                tinyint(1),
+
+PRIMARY KEY(user_id)
+);
+
+create table UsersRoles(
+user_id  int unsigned NOT NULL,
+role_name varchar(100),
+
+PRIMARY KEY(user_id, role_name),
+FOREIGN KEY(user_id) REFERENCES Users(user_id) ON UPDATE cascade,
+FOREIGN KEY(role_name) REFERENCES Roles(name) ON UPDATE cascade
+);
 
 create table Organizations(
 org_id int unsigned NOT NULL AUTO_INCREMENT,
@@ -13,7 +41,7 @@ PRIMARY KEY(org_id)
 );
 
 create table Employees(
-empl_id int unsigned NOT NULL AUTO_INCREMENT,
+empl_id       int unsigned NOT NULL AUTO_INCREMENT,
 name          varchar(40)  NOT NULL,
 surname       varchar(40)  NOT NULL,
 position      varchar(40)  NOT NULL,
@@ -21,6 +49,23 @@ organization  int unsigned NOT NULL,
 
 PRIMARY KEY(empl_id),
 FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade
+);
+
+create table Managers(
+manager_id  int unsigned UNIQUE,
+user        int unsigned UNIQUE NOT NULL,
+
+PRIMARY KEY(manager_id),
+FOREIGN KEY(manager_id) REFERENCES Employees(empl_id)  ON DELETE cascade ON UPDATE cascade,
+FOREIGN KEY(user)       REFERENCES Users(user_id)      ON DELETE cascade ON UPDATE cascade
+);
+
+create table Drivers(
+driver_id int unsigned UNIQUE,
+driveCard varchar(100) NOT NULL,
+
+PRIMARY KEY(driver_id),
+FOREIGN KEY(driver_id) REFERENCES Employees(empl_id) ON DELETE cascade ON UPDATE cascade
 );
 
 create table Trucks(
@@ -38,9 +83,11 @@ create table Clients(
 client_id     int unsigned NOT NULL AUTO_INCREMENT,
 name          varchar(100) NOT NULL,
 organization  int unsigned NOT NULL,
+user          int unsigned NOT NULL UNIQUE,
 
 PRIMARY KEY(client_id),
-FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade
+FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade,
+FOREIGN KEY(user)         REFERENCES Users(user_id)        ON DELETE cascade ON UPDATE cascade
 );
 
 create table CargoList(

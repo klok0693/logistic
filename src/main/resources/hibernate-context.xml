@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+<beans xmlns      ="http://www.springframework.org/schema/beans"
+       xmlns:xsi  ="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx   ="http://www.springframework.org/schema/tx"
        xsi:schemaLocation=
                 "http://www.springframework.org/schema/beans
                  http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -11,10 +11,10 @@
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/logistic" />
-        <property name="username" value="logistic_Manager" />
-        <property name="password" value="l78" />
+        <property name="driverClassName"  value="com.mysql.jdbc.Driver" />
+        <property name="url"              value="jdbc:mysql://localhost:3306/logistic" />
+        <property name="username"         value="logistic_Manager" />
+        <property name="password"         value="l78" />
     </bean>
 
 
@@ -35,6 +35,7 @@
                 <value>entity-mapping/employees.hbm.xml</value>
                 <value>entity-mapping/organizations.hbm.xml</value>
                 <value>entity-mapping/trucks.hbm.xml</value>
+                <value>entity-mapping/users.hbm.xml</value>
             </list>
         </property>
     </bean>
