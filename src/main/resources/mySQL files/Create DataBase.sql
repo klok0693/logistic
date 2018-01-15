@@ -6,7 +6,7 @@ set collation_connection = utf8_general_ci;
 
 create table Roles(
 role_id int unsigned NOT NULL AUTO_INCREMENT,
-name varchar(100),
+name varchar(100) UNIQUE,
 
 PRIMARY KEY(role_id)
 );
@@ -15,19 +15,21 @@ create table Users(
 user_id                  int unsigned NOT NULL AUTO_INCREMENT,
 username                 varchar(100) NOT NULL,
 password                 varchar(100) NOT NULL,
-AccountNonExpired      tinyint(1),
-AccountNonLocked       tinyint(1),
-CredentialsNonExpired  tinyint(1),
-Enabled                tinyint(1),
+isAccountNonExpired      tinyint(1),
+isAccountNonLocked       tinyint(1),
+isCredentialsNonExpired  tinyint(1),
+isEnabled                tinyint(1),
 
 PRIMARY KEY(user_id)
 );
 
 create table UsersRoles(
 user_id  int unsigned NOT NULL,
-role_id  int unsigned NOT NULL,
+role_name varchar(100),
 
-PRIMARY KEY(user_id, role_id)
+PRIMARY KEY(user_id, role_name),
+FOREIGN KEY(user_id) REFERENCES Users(user_id) ON UPDATE cascade,
+FOREIGN KEY(role_name) REFERENCES Roles(name) ON UPDATE cascade
 );
 
 create table Organizations(

@@ -10,15 +10,8 @@
 
     <http auto-config= "true" ><!--use-expressions= "true"-->
 
-        <!--<anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>-->
-
-        <!--<intercept-url pattern= "/security/**" access= "ROLE_ADMIN"/>-->
-        <!--Если попытаться войти без логина на страницу в этом маппинге (например http://localhost:8080/user/),
-        то будет переброшено на страницу, указанную в form-login login-page='pageName.html' -->
-        <!--<intercept-url pattern= "/" access= "ROLE_ANONYMOUS"/>-->
         <intercept-url pattern="/client" access="ROLE_USER" />
-        <!--<intercept-url pattern="/*" access="isAuthenticated()" />-->
-
+        <intercept-url pattern="/grid" access="ROLE_USER" />
 
         <form-login
                 login-page="/Index"
@@ -37,25 +30,15 @@
 
     </http>
 
-    <!--<jdbc-user-service
+    <jdbc-user-service
             id                       = "jdbcUserService"
             data-source-ref            = "dataSource"
-            users-by-username-query      = "SELECT USERNAME, PASSWORD, ENABLED FROM USER WHERE USERNAME=?"
-            authorities-by-username-query  = "SELECT U.USERNAME, A.AUTHORITY
-        	 FROM AUTHORITIES A, USER U WHERE U.USERNAME = A.USERNAME AND U.USERNAME = ? "/>
+            users-by-username-query      = "SELECT username, password, isEnabled FROM Users WHERE username=?"
+            authorities-by-username-query  = "SELECT u.user_id, a.role_name
+        	 FROM UsersRoles a, Users u WHERE u.user_id = a.user_id AND u.username = ? "/>
 
     <authentication-manager alias= "authenticationManager">
         <authentication-provider user-service-ref= "jdbcUserService"/>
-    </authentication-manager>-->
-
-    <authentication-manager>
-        <authentication-provider>
-            <user-service >
-                <user name="user" password="pass" authorities="ROLE_USER" />
-                <user name="lexitan" password="pass0" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
     </authentication-manager>
-
 
 </beans:beans>
