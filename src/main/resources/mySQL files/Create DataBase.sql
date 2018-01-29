@@ -1,8 +1,6 @@
-CREATE DATABASE IF NOT EXISTS logistic;
+CREATE DATABASE IF NOT EXISTS logistic CHARACTER SET utf8;
 use logistic;
-alter database `logistic` character set utf8;
-set names utf8;
-set collation_connection = utf8_general_ci;
+SET NAMES utf8 COLLATE utf8_general_ci;
 
 create table Roles(
 role_id int unsigned NOT NULL AUTO_INCREMENT,
@@ -24,8 +22,8 @@ PRIMARY KEY(user_id)
 );
 
 create table UsersRoles(
-user_id  int unsigned NOT NULL,
-role_name varchar(100),
+user_id    int unsigned NOT NULL,
+role_name  varchar(100),
 
 PRIMARY KEY(user_id, role_name),
 FOREIGN KEY(user_id) REFERENCES Users(user_id) ON UPDATE cascade,

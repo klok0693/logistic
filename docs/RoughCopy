@@ -23,3 +23,68 @@ add comments in xml-files; add @JsonIgnore and @JsonBackReference
   <welcome-file-list>
     <welcome-file>Catalog.html</welcome-file>
   </welcome-file-list>
+
+
+
+    public GenericDao<Cargo> getCargoData() {
+        return (GenericDao<Cargo>) context.getBean("cargoData");
+    }
+
+    public GenericDao<Client> getClientData() {
+        return (GenericDao<Client>) context.getBean("clientData");
+    }
+
+    public GenericDao<Employee> getEmployeeData() {
+        return (GenericDao<Employee>) context.getBean("employeeData");
+    }
+
+    public GenericDao<Organization> getOrganizationData() {
+        return (GenericDao<Organization>) context.getBean("organizationData");
+    }
+
+    public GenericDao<Truck> getTruckData() {
+        return (GenericDao<Truck>) context.getBean("truckData");
+    }
+
+
+
+        public Tented getTentedTruck() {
+            return (Tented) context.getBean("tentedTruck");
+        }
+
+        public Tank getTankTruck() {
+            return (Tank) context.getBean("tankTruck");
+        }
+
+        public Refrigerated getRefrigeratedTruck() {
+            return (Refrigerated) context.getBean("refrigeratedTruck");
+        }
+
+        public Organization getOrganization() {
+            return (Organization) context.getBean("organization");
+        }
+
+        public Box getBox() {
+            return (Box) context.getBean("box");
+        }
+
+        public Oil getOil() {
+            return (Oil) context.getBean("oil");
+        }
+
+        public Product getProduct() {
+            return (Product) context.getBean("product");
+        }
+
+        public Driver getDriver() {
+            return (Driver) context.getBean("driver");
+        }
+
+        public Manager getManager() {
+            return (Manager) context.getBean("Manager");
+        }
+
+        public Client getClient() {
+            return (Client) context.getBean("client");
+        }
+

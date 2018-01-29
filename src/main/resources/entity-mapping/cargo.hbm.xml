@@ -1,6 +1,7 @@
 <hibernate-mapping package="project.domain.entity.pojo.cargo">
 
-    <class name="Cargo" abstract="true">
+    <class name="Cargo" abstract="true" dynamic-update="true">
+        <!--<cache usage="read-write"/>-->
         <id name="id" column="cargo_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>

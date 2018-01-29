@@ -18,7 +18,7 @@ import java.util.Set;
 @NotNullByDefault
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
-class LogisticClient implements Client {
+public class LogisticClient implements Client {
     private int          id;
     private String       name;
     private Organization organization;

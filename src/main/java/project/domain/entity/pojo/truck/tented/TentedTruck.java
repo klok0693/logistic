@@ -12,7 +12,7 @@ import java.util.List;
  * hibernate entity
  */
 @NotNullByDefault
-class TentedTruck extends AbstractTruck<Box> implements Tented {
+public class TentedTruck extends AbstractTruck<Box> implements Tented {
 
     public TentedTruck() {}
 

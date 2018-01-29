@@ -1,12 +1,12 @@
 <hibernate-mapping package="project.domain.entity.pojo.clients">
 
-    <class name="Client" abstract="true">
+    <class name="Client" abstract="true" dynamic-update="true">
         <id name="id" column="client_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
-        <property name="name" column="name" type="java.lang.String"  />
+        <property name="name" column="name" type="java.lang.String" />
         <!--<property name="user" column="user" type="project.domain.entity.ejb.authentication.User"/>-->
-        <one-to-one name="user" cascade="all-delete-orphan" lazy="false" class="project.domain.entity.ejb.authentication.User"/>
+        <one-to-one name="user" cascade="all-delete-orphan" lazy="proxy" class="project.domain.entity.ejb.authentication.User"/>
         <many-to-one
                 name="organization"
                 class="project.domain.entity.pojo.organizations.Organization"
@@ -16,7 +16,7 @@
                 lazy="false"
         />
 
-        <set name="cargoSet" inverse="false" cascade="all" lazy="false">
+        <set name="cargoSet" inverse="false" cascade="all" lazy="true">
             <key column="owner"/>
             <one-to-many class="project.domain.entity.pojo.cargo.Cargo"/>
         </set>

@@ -12,7 +12,7 @@ import project.domain.entity.pojo.organizations.Organization;
  */
 @Getter @Setter
 @NotNullByDefault
-class TruckDriver extends AbstractEmployee implements Driver {
+public class TruckDriver extends AbstractEmployee implements Driver {
     private String driveCard;
 
     public TruckDriver() {}

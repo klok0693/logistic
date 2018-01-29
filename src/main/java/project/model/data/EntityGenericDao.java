@@ -1,6 +1,9 @@
 package project.model.data;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -22,10 +25,12 @@ import java.util.List;
 @Log4j
 @Transactional(propagation = Propagation.SUPPORTS)
 @NotNullByDefault
+@Getter @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 class EntityGenericDao<T extends Entity> implements GenericDao<T> {
     private SessionFactory factory;
-    private Class<T> type;
+    private Class<T> entityClass;
 
 
     public void save(T obj) throws DaoException{
@@ -40,10 +45,10 @@ class EntityGenericDao<T extends Entity> implements GenericDao<T> {
 
     public T get(int id) throws DaoException {
         try {
-            return getCurrentSession().get(type, id);
+            return getCurrentSession().get(entityClass, id);
         }
         catch (HibernateException e) {
-            log.error("Can't load object: id="+id+" "+getErrorMessage(type), e);
+            log.error("Can't load object: id="+id+" "+getErrorMessage(entityClass), e);
             throw getException(e);
         }
     }
@@ -71,12 +76,12 @@ class EntityGenericDao<T extends Entity> implements GenericDao<T> {
     public List<? extends T> getAll() throws DaoException {
         try {
             return getCurrentSession()
-                    .createCriteria(type)
+                    .createCriteria(entityClass)
                     .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
                     .list();
         }
         catch (HibernateException e) {
-            log.error("Can't load list "+getErrorMessage(type), e);
+            log.error("Can't load list "+getErrorMessage(entityClass), e);
             throw getException(e);
         }
     }
@@ -92,5 +97,10 @@ class EntityGenericDao<T extends Entity> implements GenericDao<T> {
 
     private String getErrorMessage(Object obj) {
         return obj.getClass()+", throws DaoException";
+    }
+
+    public GenericDao<T> setEntityClass(Class<T> aClass){
+        this.entityClass=aClass;
+        return this;
     }
 }

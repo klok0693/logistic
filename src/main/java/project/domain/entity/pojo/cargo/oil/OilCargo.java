@@ -11,7 +11,7 @@ import java.util.Date;
  * hibernate entity
  */
 @NotNullByDefault
-class OilCargo extends AbstractCargo implements Oil {
+public class OilCargo extends AbstractCargo implements Oil {
 
     public OilCargo() {}
 

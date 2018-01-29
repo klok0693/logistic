@@ -1,13 +1,13 @@
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm"
                       package="project.domain.entity.pojo.employees">
 
-    <class name="Employee" abstract="true">
+    <class name="Employee" abstract="true" dynamic-update="true">
         <id name="id" column="empl_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
-        <property name="name"          column="name"          type="java.lang.String"  />
-        <property name="surname"       column="surname"       type="java.lang.String"  />
-        <property name="position"      column="position"      type="java.lang.String"  />
+        <property name="name"          column="name"     type="java.lang.String" />
+        <property name="surname"       column="surname"  type="java.lang.String" />
+        <property name="position"      column="position" type="java.lang.String" />
 
         <many-to-one
                 name="organization"
@@ -31,9 +31,11 @@
             table="Employees"
     />
 
+
     <union-subclass
             name="project.domain.entity.pojo.employees.managers.LogisticManager"
             extends="Employee"
             table="Employees"
     />
+
 </hibernate-mapping>

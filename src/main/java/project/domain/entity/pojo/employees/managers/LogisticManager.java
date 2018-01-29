@@ -13,7 +13,7 @@ import project.domain.entity.pojo.organizations.Organization;
  */
 @Getter @Setter
 @NotNullByDefault
-class LogisticManager extends AbstractEmployee implements Manager{
+public class LogisticManager extends AbstractEmployee implements Manager{
     private User user;
 
     public LogisticManager() {}

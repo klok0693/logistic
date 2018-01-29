@@ -1,23 +1,24 @@
 <hibernate-mapping package="project.domain.entity.pojo.organizations">
 
-    <class name="Organization" abstract="true">
-        <id name="id" column="org_id" type="java.lang.Integer">
+    <class name="Organization" abstract="true" dynamic-update="true">
+        <id name="id" column="org_id" type="java.lang.Integer" unsaved-value="-1">
             <generator class="increment"/>
         </id>
-        <property name="name"   column="name"   type="java.lang.String" />
-        <property name="owner"  column="owner"  type="java.lang.String" />
+        <property name="name"   column="name"  type="java.lang.String" />
+        <property name="owner"  column="owner" type="java.lang.String" />
 
-        <set name="trucks" inverse="false" cascade="all" lazy="false">
+        <set name="trucks" inverse="false" cascade="all" lazy="true">
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.truck.Truck"/>
+            <!--<cache usage="read-write"/>-->
         </set>
 
-        <set name="clients" inverse="false" cascade="all" lazy="false">
+        <set name="clients" inverse="false" cascade="all" lazy="true">
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.clients.Client"/>
         </set>
 
-        <set name="employees" inverse="false" cascade="all" lazy="false">
+        <set name="employees" inverse="false" cascade="all" lazy="true">
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.employees.Employee"/>
         </set>

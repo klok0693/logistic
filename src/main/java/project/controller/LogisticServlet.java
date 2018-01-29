@@ -22,6 +22,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @NotNullByDefault
 public class LogisticServlet {
 
+    static { Factory.setApplicationContext("root-context.xml"); }
+
     //welcome page
     @ResponseBody
     @RequestMapping(value = "/")
@@ -47,14 +49,11 @@ public class LogisticServlet {
     //(json) get Clients
     @RequestMapping(value = "/client", method = GET, produces = "application/json")
     public @ResponseBody Client getClients() {
-        System.out.println("/client url is calling "+Thread.currentThread().getName());
 
-        Factory factory;
         Deque<Client> clientDeque;
         try {
-            factory      = getFactory();
             clientDeque  = new LinkedList<>();
-            clientDeque.addAll(factory.getClientData().getAll());
+            clientDeque.addAll(getFactory().getData(Client.class).getAll());
 
             if(!clientDeque.isEmpty()) {
                 Client client = clientDeque.getFirst();
@@ -64,7 +63,6 @@ public class LogisticServlet {
             return null;
         }
         catch (Exception e) {
-            log.error("Exception while connecting to url /client", e);
             return null;
         }
     }
@@ -80,7 +78,7 @@ public class LogisticServlet {
 
     private Factory getFactory() throws Exception {
         try {
-            return Factory.getFactory("root-context.xml");
+            return Factory.getFactory();
         }
         catch (Exception e) {
             log.error("Can't create beanFactory, throw exception", e);

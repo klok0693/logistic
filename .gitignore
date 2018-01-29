@@ -1,6 +1,6 @@
 exclude/
 target/
 logistic.iml
-src/main/webapp/node_modules/
 .idea/
 *~
+src/main/webapp/resources/

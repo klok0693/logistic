@@ -28,8 +28,8 @@ insert into Employees values
 insert into Drivers values ('1','вод. ндостоверение №3');
 
 insert into Managers values
-('2','1'),
-('3','2');
+('1','1'),
+('2','2');
 
 insert into Trucks values
 ('1','Маз 21-107','53087','тентованый','1'),

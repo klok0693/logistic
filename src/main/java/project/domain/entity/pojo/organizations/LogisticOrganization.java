@@ -17,7 +17,7 @@ import java.util.Set;
  * see https://projectlombok.org or https://habrahabr.ru/post/142356/;
  */
 //TODO: separate organization on two table - with one-to-one reference,
-//one table with basic information, one with full.
+//one table with basic information, one with other, or use discriminator.
 @NotNullByDefault
 
 @Getter @Setter
