@@ -1,5 +1,6 @@
 all people(associates, clients, owners) in own table; enum's; archive;
-add comments in xml-files; add @JsonIgnore and @JsonBackReference
+add comments in xml-files; add @JsonIgnore and @JsonBackReference;
+add second-level cache to hibernate;
 
 
 

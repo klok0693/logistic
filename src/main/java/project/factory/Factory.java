@@ -1,6 +1,7 @@
 package project.factory;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import project.NotNullByDefault;
 import project.domain.entity.Entity;
@@ -11,13 +12,13 @@ import project.model.data.GenericDao;
  * Singleton-class, generated Spring bean's, accessed by static method's get factory()
  */
 @NotNullByDefault
-public class Factory {
+public class Factory implements ApplicationContextAware {
     private ApplicationContext context;
 
     private Factory() {}
 
     private Factory(String contextWay) {
-        this.context = new ClassPathXmlApplicationContext(contextWay);
+        setApplicationContext(contextWay);
     }
 
     private Factory(ApplicationContext context) {
@@ -28,11 +29,15 @@ public class Factory {
         private static final Factory factory = new Factory();
     }
 
+    public static Factory getFactory() {
+        return FactoryHolder.factory;
+    }
+
+
 
     //example: getClass(Client.class) -> return GenericDao<Client>
     public <T extends Entity> GenericDao<T> getData(Class<T> aClass) {
-        GenericDao data = (GenericDao<?>) context.getBean("data");
-        return data.setEntityClass(aClass);
+        return ((GenericDao) context.getBean("data")).setEntityClass(aClass);
     }
 
     //example: getEntity(TruckDriver.class) -> return TruckDriver
@@ -42,17 +47,12 @@ public class Factory {
 
 
 
-    public static Factory getFactory() {
-        return FactoryHolder.factory;
-    }
 
-    public static Factory setApplicationContext(String contextWay){
+    public void setApplicationContext(String contextWay){
         FactoryHolder.factory.context = new ClassPathXmlApplicationContext(contextWay);
-        return FactoryHolder.factory;
     }
 
-    public static Factory setApplicationContext(ApplicationContext context){
+    public void setApplicationContext(ApplicationContext context){
         FactoryHolder.factory.context = context;
-        return FactoryHolder.factory;
     }
 }

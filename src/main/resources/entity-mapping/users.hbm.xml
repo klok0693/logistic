@@ -11,7 +11,7 @@
         <property name="isCredentialsNonExpired"  column="isCredentialsNonExpired" type="org.hibernate.type.NumericBooleanType" />
         <property name="isEnabled"                column="isEnabled"               type="org.hibernate.type.NumericBooleanType" />
 
-        <set name="authorities" table="UsersRoles" cascade="all" lazy="false">
+        <set name="authorities" table="UsersRoles" cascade="save-update" lazy="false">
                 <key column="user_id"/>
                 <many-to-many column="role_name" class="Roles"/>
         </set>
@@ -25,7 +25,7 @@
         </id>
         <property name="name" column="name" type="java.lang.String"/>
 
-        <set name="users" table="UsersRoles" cascade="all" lazy="false">
+        <set name="users" table="UsersRoles" cascade="save-update" lazy="false">
             <key column="role_id"/>
             <many-to-many column="user_id" class="User"/>
         </set>

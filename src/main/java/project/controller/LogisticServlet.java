@@ -9,6 +9,7 @@ import project.NotNullByDefault;
 import project.domain.entity.pojo.clients.Client;
 import project.factory.Factory;
 
+import java.util.Collection;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -22,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @NotNullByDefault
 public class LogisticServlet {
 
-    static { Factory.setApplicationContext("root-context.xml"); }
+    static { Factory.getFactory().setApplicationContext("root-context.xml"); }
 
     //welcome page
     @ResponseBody
@@ -48,19 +49,14 @@ public class LogisticServlet {
 
     //(json) get Clients
     @RequestMapping(value = "/client", method = GET, produces = "application/json")
-    public @ResponseBody Client getClients() {
+    public @ResponseBody Collection<Client> getClients() {
 
         Deque<Client> clientDeque;
         try {
-            clientDeque  = new LinkedList<>();
-            clientDeque.addAll(getFactory().getData(Client.class).getAll());
+            //get all Client's from bd
+            clientDeque  = new LinkedList<>(getFactory().getData(Client.class).getAll());
 
-            if(!clientDeque.isEmpty()) {
-                Client client = clientDeque.getFirst();
-                //client.setOrganization(null);
-                return client;
-            }
-            return null;
+            return clientDeque.isEmpty()? null : clientDeque;
         }
         catch (Exception e) {
             return null;
