@@ -3,89 +3,40 @@ add comments in xml-files; add @JsonIgnore and @JsonBackReference;
 add second-level cache to hibernate;
 
 
-
-
-    @RequestMapping(value = "/getTrucks", method = GET)
-    public ModelAndView getTrucks() {
-
-        try {
-            Factory factory = getFactory();
-            Map<String, String> model = new HashMap<>();
-            model.put("trucks", factory.getTruckData().getAll().toString());
-
-            return new ModelAndView("trucks", model);
-        }
-        catch (Exception e) {
-            return new ModelAndView("error");
-        }
-    }
-
-
   <welcome-file-list>
     <welcome-file>Catalog.html</welcome-file>
   </welcome-file-list>
 
 
+            Organization g = new LogisticOrganization();
+            g.setName("Мигом-Транс");
+            g.setOwner("Черепахов");
 
-    public GenericDao<Cargo> getCargoData() {
-        return (GenericDao<Cargo>) context.getBean("cargoData");
-    }
+            Client c = new LogisticClient();
+            c.setName("Весёлый");
+            c.setOrganization(g);
 
-    public GenericDao<Client> getClientData() {
-        return (GenericDao<Client>) context.getBean("clientData");
-    }
+            User user = new User();
+            user.setUsername("client3");
+            user.setPassword("pass3");
 
-    public GenericDao<Employee> getEmployeeData() {
-        return (GenericDao<Employee>) context.getBean("employeeData");
-    }
+            Roles role = Factory.getData(Roles.class).get(1);
 
-    public GenericDao<Organization> getOrganizationData() {
-        return (GenericDao<Organization>) context.getBean("organizationData");
-    }
+            Set<User> users = new HashSet<>();
+            users.add(user);
+            role.setUsers(users);
 
-    public GenericDao<Truck> getTruckData() {
-        return (GenericDao<Truck>) context.getBean("truckData");
-    }
+            Set<GrantedAuthority> set1 = new HashSet<>();
+            set1.add(role);
+            user.setAuthorities(set1);
 
+            c.setUser(user);
 
+            Set<Client> set = new HashSet<>();
+            set.add(c);
+            g.setClients(set);
 
-        public Tented getTentedTruck() {
-            return (Tented) context.getBean("tentedTruck");
-        }
-
-        public Tank getTankTruck() {
-            return (Tank) context.getBean("tankTruck");
-        }
-
-        public Refrigerated getRefrigeratedTruck() {
-            return (Refrigerated) context.getBean("refrigeratedTruck");
-        }
-
-        public Organization getOrganization() {
-            return (Organization) context.getBean("organization");
-        }
-
-        public Box getBox() {
-            return (Box) context.getBean("box");
-        }
-
-        public Oil getOil() {
-            return (Oil) context.getBean("oil");
-        }
-
-        public Product getProduct() {
-            return (Product) context.getBean("product");
-        }
-
-        public Driver getDriver() {
-            return (Driver) context.getBean("driver");
-        }
-
-        public Manager getManager() {
-            return (Manager) context.getBean("Manager");
-        }
-
-        public Client getClient() {
-            return (Client) context.getBean("client");
-        }
+            Factory.getData(User.class).save(user);
+            Factory.getData(Organization.class).save(g);
+            Factory.getData(Client.class).save(c);
 

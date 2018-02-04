@@ -1,8 +1,8 @@
 package project.domain.entity.pojo.truck.tented;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.box.Box;
-import project.domain.entity.pojo.organizations.Organization;
+import project.domain.entity.pojo.organization.Organization;
 import project.domain.entity.pojo.truck.AbstractTruck;
 
 import java.util.List;

@@ -13,7 +13,7 @@
 
         <many-to-one
                 name="owner"
-                class="project.domain.entity.pojo.clients.Client"
+                class="project.domain.entity.pojo.client.Client"
                 column="owner"
                 not-null="true"
                 cascade="save-update"
@@ -34,7 +34,7 @@
     />
 
     <union-subclass
-            name="project.domain.entity.pojo.cargo.products.ProductCargo"
+            name="project.domain.entity.pojo.cargo.product.ProductCargo"
             extends="Cargo"
             table="CargoList"
     />

@@ -1,7 +1,7 @@
-package project.domain.entity.pojo.employees.drivers;
+package project.domain.entity.pojo.employee.drivers;
 
-import project.NotNullByDefault;
-import project.domain.entity.pojo.employees.Employee;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.employee.Employee;
 
 /**
  * Created by klok on 17.10.17.

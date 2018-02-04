@@ -3,9 +3,9 @@ package project.domain.entity.pojo.truck;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
-import project.domain.entity.pojo.organizations.Organization;
+import project.domain.entity.pojo.organization.Organization;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import java.util.List;
  * see https://projectlombok.org or https://habrahabr.ru/post/142356/;
  */
 @NotNullByDefault
+
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargo"})
 public abstract class AbstractTruck<V extends Cargo<V>> {
@@ -37,10 +38,5 @@ public abstract class AbstractTruck<V extends Cargo<V>> {
         this.organization    = organization;
         this.trailer         = trailer;
         this.registerNumber  = registerNumber;
-    }
-
-    @Override
-    public String toString() {
-        return model+" "+registerNumber+" "+trailer+" "+organization.getName();
     }
 }

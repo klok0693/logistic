@@ -1,11 +1,11 @@
-package project.domain.entity.pojo.organizations;
+package project.domain.entity.pojo.organization;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.clients.Client;
-import project.domain.entity.pojo.employees.Employee;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.client.Client;
+import project.domain.entity.pojo.employee.Employee;
 import project.domain.entity.pojo.truck.Truck;
 
 import java.util.Set;
@@ -42,10 +42,5 @@ public class LogisticOrganization implements Organization {
     @Override
     public Organization newInstance() {
         return new LogisticOrganization();
-    }
-
-    @Override
-    public String toString() {
-        return name+" "+owner;
     }
 }

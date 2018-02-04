@@ -1,8 +1,8 @@
-package project.domain.entity.pojo.employees;
+package project.domain.entity.pojo.employee;
 
 import lombok.*;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.organizations.Organization;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 11.10.17.
@@ -22,9 +22,4 @@ public abstract class AbstractEmployee {
     protected String       surname;
     protected String       position;
     protected Organization organization;
-
-    @Override
-    public String toString() {
-        return surname+" "+name+" "+position+" "+organization.getName();
-    }
 }

@@ -1,5 +1,5 @@
 Ext.Loader.setConfig({enabled:true});
-Ext.Loader.setPath('Ext', '/main/webapp/resources');
+Ext.Loader.setPath('Ext', '/main/webapp/resources/extjs');
 Ext.require('app.view.welcome_page.Login');
 
 Ext.application({

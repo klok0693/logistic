@@ -1,5 +1,5 @@
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm"
-                      package="project.domain.entity.pojo.employees">
+                      package="project.domain.entity.pojo.employee">
 
     <class name="Employee" abstract="true" dynamic-update="true">
         <id name="id" column="empl_id" type="java.lang.Integer">
@@ -11,7 +11,7 @@
 
         <many-to-one
                 name="organization"
-                class="project.domain.entity.pojo.organizations.Organization"
+                class="project.domain.entity.pojo.organization.Organization"
                 column="organization"
                 not-null="true"
                 cascade="save-update"
@@ -20,20 +20,20 @@
     </class>
 
     <union-subclass
-            name="project.domain.entity.pojo.employees.drivers.Driver"
+            name="project.domain.entity.pojo.employee.drivers.Driver"
             extends="Employee"
             abstract="true"
     />
 
     <union-subclass
-            name="project.domain.entity.pojo.employees.drivers.TruckDriver"
-            extends="project.domain.entity.pojo.employees.drivers.Driver"
+            name="project.domain.entity.pojo.employee.drivers.TruckDriver"
+            extends="project.domain.entity.pojo.employee.drivers.Driver"
             table="Employees"
     />
 
 
     <union-subclass
-            name="project.domain.entity.pojo.employees.managers.LogisticManager"
+            name="project.domain.entity.pojo.employee.managers.LogisticManager"
             extends="Employee"
             table="Employees"
     />

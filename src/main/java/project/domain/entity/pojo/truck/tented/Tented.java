@@ -1,6 +1,6 @@
 package project.domain.entity.pojo.truck.tented;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.box.Box;
 import project.domain.entity.pojo.truck.Truck;
 

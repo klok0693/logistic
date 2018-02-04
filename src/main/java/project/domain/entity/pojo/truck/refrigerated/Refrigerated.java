@@ -1,7 +1,7 @@
 package project.domain.entity.pojo.truck.refrigerated;
 
-import project.NotNullByDefault;
-import project.domain.entity.pojo.cargo.products.Product;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.cargo.product.Product;
 import project.domain.entity.pojo.truck.Truck;
 
 /**

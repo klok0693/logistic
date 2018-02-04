@@ -1,6 +1,6 @@
 package project.model.logic;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 
 /**
  * Created by klok on 15.1.18.

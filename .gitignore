@@ -3,4 +3,4 @@ target/
 logistic.iml
 .idea/
 *~
-src/main/webapp/resources/
+src/main/webapp/resources/extjs/

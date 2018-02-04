@@ -4,18 +4,21 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.Entity;
 
 import java.util.Set;
 
 /**
  * Created by klok on 10.1.18.
  */
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(of = {"username", "password"})
 @NotNullByDefault
-public class User implements UserDetails {
+
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"username", "password"})
+public class User implements UserDetails, Entity {
     private int id;
     private String username;
     private String password;

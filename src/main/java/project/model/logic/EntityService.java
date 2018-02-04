@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.model.data.DaoException;
 import project.model.data.GenericDao;
@@ -17,6 +17,7 @@ import java.util.Collection;
  */
 @NotNullByDefault
 @Transactional
+
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class EntityService<T extends Entity> implements Service<T> {
 
     @Override
     public void save(T obj) throws ServiceException {
-        try {
+       try{
             data.save(obj);
         }
         catch (DaoException e) {

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.clients.Client;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.client.Client;
 import project.factory.Factory;
 
 import java.util.Collection;
@@ -18,9 +18,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 /**
  * Created by klok on 6.10.17.
  */
+@NotNullByDefault
+
 @Log4j
 @Controller
-@NotNullByDefault
 public class LogisticServlet {
 
     static { Factory.getFactory().setApplicationContext("root-context.xml"); }
@@ -54,11 +55,11 @@ public class LogisticServlet {
         Deque<Client> clientDeque;
         try {
             //get all Client's from bd
-            clientDeque  = new LinkedList<>(getFactory().getData(Client.class).getAll());
-
+            clientDeque  = new LinkedList<>(Factory.getData(Client.class).getAll());
             return clientDeque.isEmpty()? null : clientDeque;
         }
         catch (Exception e) {
+            System.out.println(e.getClass());
             return null;
         }
     }
@@ -69,16 +70,5 @@ public class LogisticServlet {
     @RequestMapping(value = "/grid")
     public ModelAndView getGrid() {
         return new ModelAndView("Catalog");
-    }
-
-
-    private Factory getFactory() throws Exception {
-        try {
-            return Factory.getFactory();
-        }
-        catch (Exception e) {
-            log.error("Can't create beanFactory, throw exception", e);
-            throw e;
-        }
     }
 }

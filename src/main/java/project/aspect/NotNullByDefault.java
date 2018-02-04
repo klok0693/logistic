@@ -1,4 +1,4 @@
-package project;
+package project.aspect;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.TypeQualifierDefault;

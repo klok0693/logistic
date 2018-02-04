@@ -1,10 +1,10 @@
-package project.domain.entity.pojo.clients;
+package project.domain.entity.pojo.client;
 
 import lombok.*;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.cargo.Cargo;
-import project.domain.entity.pojo.organizations.Organization;
+import project.domain.entity.pojo.organization.Organization;
 
 import java.util.Set;
 
@@ -16,6 +16,7 @@ import java.util.Set;
  * see https://projectlombok.org or https://habrahabr.ru/post/142356/;
  */
 @NotNullByDefault
+
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class LogisticClient implements Client {
@@ -37,10 +38,5 @@ public class LogisticClient implements Client {
     @Override
     public Client newInstance() {
         return new LogisticClient();
-    }
-
-    @Override
-    public String toString() {
-        return name+" "+organization.getName();
     }
 }

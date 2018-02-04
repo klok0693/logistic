@@ -1,8 +1,8 @@
 package project.domain.entity.pojo.cargo;
 
 import lombok.*;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.clients.Client;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
 
@@ -26,9 +26,4 @@ public abstract class AbstractCargo {
     protected Client owner;
     protected int    size;
     protected String format;
-
-    @Override
-    public String toString() {
-        return name+" "+size+" "+ format +" "+ owner.getName() +" "+productionDate+" "+shelfLife;
-    }
 }

@@ -1,12 +1,12 @@
-package project.domain.entity.pojo.clients;
+package project.domain.entity.pojo.client;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
 import project.domain.entity.ejb.authentication.Authentication;
 import project.domain.entity.pojo.cargo.Cargo;
-import project.domain.entity.pojo.organizations.Organization;
+import project.domain.entity.pojo.organization.Organization;
 
 import java.util.Set;
 

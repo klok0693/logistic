@@ -1,6 +1,6 @@
 package project.model.data;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 
 import java.util.List;

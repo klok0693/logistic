@@ -1,6 +1,6 @@
 package project.domain;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 
 /**
  * Created by klok on 17.10.17.

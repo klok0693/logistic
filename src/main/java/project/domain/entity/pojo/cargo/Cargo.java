@@ -1,9 +1,9 @@
 package project.domain.entity.pojo.cargo;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
-import project.domain.entity.pojo.clients.Client;
+import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
 

@@ -1,7 +1,8 @@
 package project.model.logic;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
+import project.model.data.GenericDao;
 
 import java.util.Collection;
 
@@ -22,4 +23,5 @@ public interface Service<T extends Entity> {
     Collection<? extends T> getAll()  throws ServiceException;
 
     Service<T> setEntityClass(Class<T> aClass);
+    void setData(GenericDao<T> data);
 }

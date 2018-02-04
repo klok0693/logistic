@@ -1,11 +1,11 @@
-package project.domain.entity.pojo.employees.managers;
+package project.domain.entity.pojo.employee.managers;
 
 import lombok.Getter;
 import lombok.Setter;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.User;
-import project.domain.entity.pojo.employees.AbstractEmployee;
-import project.domain.entity.pojo.organizations.Organization;
+import project.domain.entity.pojo.employee.AbstractEmployee;
+import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 11.10.17.

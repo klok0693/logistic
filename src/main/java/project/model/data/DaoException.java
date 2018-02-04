@@ -1,6 +1,6 @@
 package project.model.data;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 
 /**
  * Created by klok on 27.10.17.

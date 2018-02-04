@@ -1,8 +1,8 @@
-package project.domain.entity.pojo.cargo.products;
+package project.domain.entity.pojo.cargo.product;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.AbstractCargo;
-import project.domain.entity.pojo.clients.Client;
+import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
 

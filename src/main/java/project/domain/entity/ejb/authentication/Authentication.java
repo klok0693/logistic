@@ -1,7 +1,7 @@
 package project.domain.entity.ejb.authentication;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 
 /**
  * Created by klok on 10.1.18.

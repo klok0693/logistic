@@ -9,7 +9,7 @@
         <property name="trailer"         column="trailer"         type="java.lang.String"  />
         <many-to-one
                 name="organization"
-                class="project.domain.entity.pojo.organizations.Organization"
+                class="project.domain.entity.pojo.organization.Organization"
                 column="organization"
                 not-null="true"
                 cascade="save-update"

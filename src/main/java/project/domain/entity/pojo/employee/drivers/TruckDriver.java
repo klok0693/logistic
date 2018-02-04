@@ -1,10 +1,10 @@
-package project.domain.entity.pojo.employees.drivers;
+package project.domain.entity.pojo.employee.drivers;
 
 import lombok.Getter;
 import lombok.Setter;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.employees.AbstractEmployee;
-import project.domain.entity.pojo.organizations.Organization;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.employee.AbstractEmployee;
+import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 11.10.17.

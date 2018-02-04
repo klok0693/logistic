@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!--parent for all exceptions-->
+    <bean name="exception" class="java.lang.Exception" scope="prototype" />
+
+    <bean name="daoException"      parent="exception"  class="project.model.data.DaoException"       />
+    <bean name="serviceException"  parent="exception"  class="project.model.logic.ServiceException"  />
+
+</beans>

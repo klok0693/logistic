@@ -1,10 +1,10 @@
-package project.domain.entity.pojo.employees;
+package project.domain.entity.pojo.employee;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
-import project.domain.entity.pojo.organizations.Organization;
+import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 17.10.17.

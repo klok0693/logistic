@@ -1,6 +1,6 @@
 package project.domain.entity.pojo.truck.tank;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.oil.Oil;
 import project.domain.entity.pojo.truck.Truck;
 

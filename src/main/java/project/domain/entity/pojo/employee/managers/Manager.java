@@ -1,8 +1,8 @@
-package project.domain.entity.pojo.employees.managers;
+package project.domain.entity.pojo.employee.managers;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.Authentication;
-import project.domain.entity.pojo.employees.Employee;
+import project.domain.entity.pojo.employee.Employee;
 
 /**
  * Created by klok on 17.10.17.
