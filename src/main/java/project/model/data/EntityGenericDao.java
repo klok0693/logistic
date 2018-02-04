@@ -27,7 +27,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityGenericDao<T extends Entity> implements GenericDao<T> {
+public class EntityGenericDao<T extends Entity> implements EntityDao<T> {
     private SessionFactory factory;
     private Class<T> entityClass;
 

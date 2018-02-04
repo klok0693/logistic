@@ -10,7 +10,7 @@ import java.util.List;
  * Provides CRUD operation's + getAll() for entity-classes
  */
 @NotNullByDefault
-public interface GenericDao<T extends Entity> {
+public interface EntityDao<T extends Entity> {
 
     void save(T obj)   throws DaoException;
 
@@ -22,5 +22,5 @@ public interface GenericDao<T extends Entity> {
 
     List<T> getAll()   throws DaoException;
 
-    GenericDao<T> setEntityClass(Class<T> aClass);
+    EntityDao<T> setEntityClass(Class<T> aClass);
 }
