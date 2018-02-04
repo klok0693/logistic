@@ -20,8 +20,8 @@ public interface Service<T extends Entity> {
 
     void delete(T obj)                throws ServiceException;
 
-    Collection<? extends T> getAll()  throws ServiceException;
+    Collection<T> getAll()  throws ServiceException;
 
-    Service<T> setEntityClass(Class<T> aClass);
-    void setData(GenericDao<T> data);
+    //Service<T> setEntityClass(Class<T> aClass);
+    Service<T> setData(GenericDao<T> data);
 }

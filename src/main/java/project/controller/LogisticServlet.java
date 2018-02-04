@@ -10,8 +10,6 @@ import project.domain.entity.pojo.client.Client;
 import project.factory.Factory;
 
 import java.util.Collection;
-import java.util.Deque;
-import java.util.LinkedList;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -52,14 +50,14 @@ public class LogisticServlet {
     @RequestMapping(value = "/client", method = GET, produces = "application/json")
     public @ResponseBody Collection<Client> getClients() {
 
-        Deque<Client> clientDeque;
+        Collection<Client> clients;
         try {
             //get all Client's from bd
-            clientDeque  = new LinkedList<>(Factory.getData(Client.class).getAll());
-            return clientDeque.isEmpty()? null : clientDeque;
+            clients = Factory.getService(Client.class).getAll();
+            return clients.isEmpty()? null : clients;
         }
         catch (Exception e) {
-            System.out.println(e.getClass());
+            //System.out.println(e.getClass());
             return null;
         }
     }

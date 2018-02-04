@@ -1,9 +1,7 @@
 package project.model.logic;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
@@ -18,12 +16,13 @@ import java.util.Collection;
 @NotNullByDefault
 @Transactional
 
+@Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class EntityService<T extends Entity> implements Service<T> {
     private GenericDao<T> data;
-    private Class<T> type;
+    //private Class<T> type;
 
 
     @Override
@@ -67,7 +66,7 @@ public class EntityService<T extends Entity> implements Service<T> {
     }
 
     @Override
-    public Collection<? extends T> getAll() throws ServiceException{
+    public Collection<T> getAll() throws ServiceException{
         try {
             return data.getAll();
         }
@@ -76,11 +75,11 @@ public class EntityService<T extends Entity> implements Service<T> {
         }
     }
 
-    @Override
+    /*@Override
     public Service<T> setEntityClass(Class<T> aClass) {
         this.type = aClass;
         return this;
-    }
+    }*/
 
     private ServiceException getException(Exception e) {
         return new ServiceException(e);

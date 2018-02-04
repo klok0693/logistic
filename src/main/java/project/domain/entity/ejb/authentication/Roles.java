@@ -17,9 +17,9 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "name")
 public class Roles implements GrantedAuthority, Entity {
-    private int id;
-    private String name;
-    private Set<User> users;
+    private volatile int id;
+    private volatile String name;
+    private volatile Set<User> users;
 
     @JsonBackReference
     public Set<User> getUsers(){

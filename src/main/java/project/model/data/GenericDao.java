@@ -20,7 +20,7 @@ public interface GenericDao<T extends Entity> {
 
     void delete(T obj) throws DaoException;
 
-    List<? extends T> getAll()   throws DaoException;
+    List<T> getAll()   throws DaoException;
 
     GenericDao<T> setEntityClass(Class<T> aClass);
 }

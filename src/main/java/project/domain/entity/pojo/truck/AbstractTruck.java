@@ -22,11 +22,11 @@ import java.util.List;
 public abstract class AbstractTruck<V extends Cargo<V>> {
     //TODO:id=registerNumber?
     //TODO:remove trailer?
-    protected int          id;
-    protected int          registerNumber;
-    protected String       model;
-    protected String       trailer;
-    protected Organization organization;
+    protected volatile int          id;
+    protected volatile int          registerNumber;
+    protected volatile String       model;
+    protected volatile String       trailer;
+    protected volatile Organization organization;
 
     @Getter @Setter protected List<V>      cargo;
 
