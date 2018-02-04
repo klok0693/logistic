@@ -17,9 +17,9 @@ import project.domain.entity.pojo.organization.Organization;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
 public abstract class AbstractEmployee {
-    protected int          id;
-    protected String       name;
-    protected String       surname;
-    protected String       position;
-    protected Organization organization;
+    protected volatile int          id;
+    protected volatile String       name;
+    protected volatile String       surname;
+    protected volatile String       position;
+    protected volatile Organization organization;
 }

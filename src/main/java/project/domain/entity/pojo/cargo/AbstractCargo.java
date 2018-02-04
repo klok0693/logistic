@@ -19,11 +19,11 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
 public abstract class AbstractCargo {
-    protected int    id;
-    protected String name;
-    protected Date   productionDate;
-    protected Date   shelfLife;
-    protected Client owner;
-    protected int    size;
-    protected String format;
+    protected volatile int    id;
+    protected volatile String name;
+    protected volatile Date   productionDate;
+    protected volatile Date   shelfLife;
+    protected volatile Client owner;
+    protected volatile int    size;
+    protected volatile String format;
 }

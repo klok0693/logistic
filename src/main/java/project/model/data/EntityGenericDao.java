@@ -1,9 +1,7 @@
 package project.model.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -25,10 +23,11 @@ import java.util.List;
 @Transactional(propagation = Propagation.SUPPORTS)
 
 @Log4j
+@Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityGenericDao<T extends Entity> implements GenericDao<T> {
+public class EntityGenericDao<T extends Entity> implements EntityDao<T> {
     private SessionFactory factory;
     private Class<T> entityClass;
 
@@ -49,6 +48,7 @@ public class EntityGenericDao<T extends Entity> implements GenericDao<T> {
 
 
     @Override
+    @Synchronized
     @CatchException(message = "Can't update entity")
     public void update(T obj) throws DaoException {
         getCurrentSession().update(obj);
@@ -56,6 +56,7 @@ public class EntityGenericDao<T extends Entity> implements GenericDao<T> {
 
 
     @Override
+    @Synchronized
     @CatchException(message = "Can't delete entity")
     public void delete(T obj) throws DaoException {
         getCurrentSession().delete(obj);
@@ -64,7 +65,7 @@ public class EntityGenericDao<T extends Entity> implements GenericDao<T> {
 
     @Override
     @CatchException(message = "Can't load entity list")
-    public List<? extends T> getAll() throws DaoException {
+    public List<T> getAll() throws DaoException {
         return getCurrentSession()
                 .createCriteria(entityClass)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
@@ -76,9 +77,9 @@ public class EntityGenericDao<T extends Entity> implements GenericDao<T> {
         return factory.getCurrentSession();
     }
 
-    @Override
+    /*@Override
     public GenericDao<T> setEntityClass(Class<T> aClass){
         this.entityClass=aClass;
         return this;
-    }
+    }*/
 }

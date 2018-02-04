@@ -19,14 +19,14 @@ import java.util.Set;
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"username", "password"})
 public class User implements UserDetails, Entity {
-    private int id;
-    private String username;
-    private String password;
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
-    private boolean isEnabled;
-    private Set<GrantedAuthority> authorities;
+    private volatile int id;
+    private volatile String username;
+    private volatile String password;
+    private volatile boolean isAccountNonExpired;
+    private volatile boolean isAccountNonLocked;
+    private volatile boolean isCredentialsNonExpired;
+    private volatile boolean isEnabled;
+    private volatile Set<GrantedAuthority> authorities;
 
     //getters and setters for hibernate
     public boolean getIsAccountNonExpired(){return this.isAccountNonExpired;}

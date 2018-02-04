@@ -4,7 +4,7 @@
                "http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean name="service" class="project.model.logic.EntityService" scope="prototype"/>
+    <bean name="service" class="project.model.logic.EntityGenericService" scope="prototype"/>
 
     <bean name="data" class="project.model.data.EntityGenericDao" scope="prototype">
         <property name="factory" ref="sessionFactory"/>

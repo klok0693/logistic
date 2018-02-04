@@ -20,10 +20,10 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class LogisticClient implements Client {
-    private int          id;
-    private String       name;
-    private Organization organization;
-    private User         user;
+    private volatile int          id;
+    private volatile String       name;
+    private volatile Organization organization;
+    private volatile User         user;
 
     private Set<Cargo> cargoSet;
 

@@ -23,13 +23,13 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"name", "owner"})
 public class LogisticOrganization implements Organization {
-    private int     id;
-    private String  name;
-    private String  owner;
+    private volatile int     id;
+    private volatile String  name;
+    private volatile String  owner;
 
-    private Set<Truck>    trucks;
-    private Set<Client>   clients;
-    private Set<Employee> employees;
+    private volatile Set<Truck>    trucks;
+    private volatile Set<Client>   clients;
+    private volatile Set<Employee> employees;
 
     public LogisticOrganization() {}
 
