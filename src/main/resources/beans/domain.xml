@@ -5,7 +5,7 @@
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!--paret of all truck's -->
-    <bean name="truck" class="project.domain.entity.pojo.truck.Truck" scope="prototype"/>
+    <bean name="truck" abstract="true" class="project.domain.entity.pojo.truck.Truck" scope="prototype"/>
 
     <bean name="tentedTruck"       parent="truck" class="project.domain.entity.pojo.truck.tented.TentedTruck"              />
     <bean name="tankTruck"         parent="truck" class="project.domain.entity.pojo.truck.tank.TankTruck"                  />

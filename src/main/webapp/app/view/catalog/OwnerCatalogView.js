@@ -1,6 +1,6 @@
 Ext.Loader.setConfig({enabled:true});
 Ext.Loader.setPath('Ext', '/main/webapp/resources/extjs');
-Ext.require('app.view.catalog.GridView');
+Ext.require('app.view.catalog.OwnerGridView');
 
 Ext.application({
     name: 'grid',

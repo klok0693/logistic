@@ -22,12 +22,12 @@ PRIMARY KEY(user_id)
 );
 
 create table UsersRoles(
-user_id    int unsigned NOT NULL,
-role_name  varchar(100),
+user_id  int unsigned NOT NULL,
+role_id  int unsigned NOT NULL,
 
-PRIMARY KEY(user_id, role_name),
+PRIMARY KEY(user_id, role_id),
 FOREIGN KEY(user_id) REFERENCES Users(user_id) ON UPDATE cascade,
-FOREIGN KEY(role_name) REFERENCES Roles(name) ON UPDATE cascade
+FOREIGN KEY(role_id) REFERENCES Roles(role_id) ON UPDATE cascade
 );
 
 create table Organizations(

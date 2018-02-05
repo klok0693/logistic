@@ -31,7 +31,7 @@ var store = Ext.create('Ext.data.Store', {
         }
 });
 
-Ext.define('app.view.catalog.GridView', {
+Ext.define('app.view.catalog.OwnerGridView', {
     extend: 'Ext.grid.Panel',
     alias:  'widget.gridView',
     store: store,

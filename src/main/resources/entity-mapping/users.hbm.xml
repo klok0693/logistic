@@ -13,7 +13,7 @@
 
         <set name="authorities" table="UsersRoles" cascade="save-update" lazy="false">
                 <key column="user_id"/>
-                <many-to-many column="role_name" class="Roles"/>
+                <many-to-many column="role_id" class="Roles"/>
         </set>
     </class>
 

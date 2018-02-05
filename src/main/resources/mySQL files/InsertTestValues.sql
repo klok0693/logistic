@@ -1,6 +1,8 @@
 insert into Roles values
-('1','ROLE_USER'),
-('2','ROLE_ADMIN');
+('1','ROLE_CLIENT'),
+('2','ROLE_MANAGER'),
+('3','ROLE_OWNER'),
+('4','ROLE_ADMIN');
 
 insert into Users values
 ('1','manager1','pass1','0','0','0','1'),
@@ -9,10 +11,10 @@ insert into Users values
 ('4','client2','pass2','0','0','0','1');
 
 insert into UsersRoles values
-('1','ROLE_USER'),
-('2','ROLE_USER'),
-('3','ROLE_USER'),
-('4','ROLE_USER');
+('1','2'),
+('2','2'),
+('3','1'),
+('4','1');
 
 insert into Organizations values ('1','Аврора-Транс','Скородумов');
 
