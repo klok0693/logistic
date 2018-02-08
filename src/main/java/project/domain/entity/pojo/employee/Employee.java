@@ -26,7 +26,7 @@ public interface Employee<V extends Employee<V>> extends Entity, Instance<V> {
     String getPosition();
     void setPosition(String position);
 
-    @JsonBackReference
+    @JsonBackReference(value = "EmployeeOrganization")
     Organization getOrganization();
     void setOrganization(Organization organization);
 }

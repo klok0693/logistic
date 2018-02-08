@@ -1,41 +1,7 @@
- var fields = [
-     {name: 'id',              type: 'int'},
-     {name: 'name'},
-     {name: 'productionDate',  type: 'date'},
-     {name: 'shelfLife',       type: 'date'},
-     {name: 'size',            type: 'int'},
-     {name: 'format'}
- ];
-
-var store = Ext.create('Ext.data.Store', {
-    fields: fields,
-    autoLoad: true,
-    //,autoSync: true
-    proxy: {
-            type: 'ajax',
-            api: {
-                create: 'http://localhost:8082/cargo',
-                read: 'http://localhost:8082/cargo'
-                //destroy: '',
-                //update: ''
-            },
-            reader: {
-                type: 'json',
-                root: '',
-                successProperty: 'success'
-            }
-            /* ,writer: {
-                type: 'json',
-                writeAllFields: true
-            }*/
-
-        }
-});
-
-Ext.define('app.view.catalog.ClientGridView', {
+Ext.define('client.view.ClientGrid', {
     extend: 'Ext.grid.Panel',
-    alias:  'widget.clientGridView',
-    store: store,
+    alias:  'widget.clientGrid',
+    store: 'Clients',
     width: 400,
     height: 300,
     frame: true,
@@ -61,7 +27,7 @@ Ext.define('app.view.catalog.ClientGridView', {
             text: 'Наименование',
             flex: 1,
             sortable: true,
-            dataIndex: 'name',
+            dataIndex: 'type',
             editor: {
                 xtype: 'textfield',
                 allowBlank: false,
@@ -105,13 +71,13 @@ Ext.define('app.view.catalog.ClientGridView', {
             }
         }
     ],
-    plugins: [
+    /*plugins: [
         Ext.create('Ext.grid.plugin.RowEditing', {
         clicksToEdit: 2,
         saveBtnText: 'Сохранить',
         cancelBtnText: 'Отмена'
         })
-    ],
+    ],*/
     selType: 'rowmodel',
     dockedItems: [
         {
@@ -120,7 +86,7 @@ Ext.define('app.view.catalog.ClientGridView', {
                 {
                     text: 'Добавить',
                     action: 'add',
-                    iconCls: 'icon-add'
+                    iconCls: 'icon-add',
                 },
                 '-',
                 {

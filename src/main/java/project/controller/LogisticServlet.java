@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,10 +13,12 @@ import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.truck.Truck;
 import project.factory.Factory;
+import project.model.logic.ServiceException;
 
 import java.util.Collection;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by klok on 6.10.17.
@@ -91,11 +94,30 @@ public class LogisticServlet {
         try {
             //get all cargo from bd
             cargo = Factory.getService(Cargo.class).getAll();
+            System.out.println(cargo);
             return cargo.isEmpty()? null : cargo;
         }
         catch (Exception e) {
             return null;
         }
+    }
+
+
+    //update cargo
+    @RequestMapping(value = "/cargo", method = POST, produces = "application/json")
+    public @ResponseBody Collection<Cargo> getCargo(@RequestBody Cargo cargo) {
+
+        try {
+            System.out.println("this is");
+            System.out.println(cargo);
+            Factory.getService(Cargo.class).update(cargo);
+            return Factory.getService(Cargo.class).getAll();
+        }
+        catch (ServiceException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 

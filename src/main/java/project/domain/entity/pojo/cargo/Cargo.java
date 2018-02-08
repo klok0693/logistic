@@ -1,8 +1,14 @@
 package project.domain.entity.pojo.cargo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
+import project.domain.entity.pojo.cargo.box.BoxCargo;
+import project.domain.entity.pojo.cargo.oil.OilCargo;
+import project.domain.entity.pojo.cargo.product.ProductCargo;
 import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
@@ -13,13 +19,25 @@ import java.util.Date;
  * Hibernate mapped-superclass;
  */
 @NotNullByDefault
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "name"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = BoxCargo.class, name = "BoxCargo"),
+        @JsonSubTypes.Type(value = OilCargo.class, name = "OilCargo"),
+        @JsonSubTypes.Type(value = ProductCargo.class, name = "ProductCargo")
+})
 public interface Cargo<V extends Cargo<V>> extends Entity, Instance<V> {
 
     int getId();
     void setId(int id);
 
-    String getName();
-    void setName(String name);
+    String getType();
+    void setType(String type);
 
     Date getProductionDate();
     void setProductionDate(Date productionDate);
@@ -35,4 +53,7 @@ public interface Cargo<V extends Cargo<V>> extends Entity, Instance<V> {
 
     String getFormat();
     void setFormat(String format);
+
+    String getName();
+    void setName(String name);
 }

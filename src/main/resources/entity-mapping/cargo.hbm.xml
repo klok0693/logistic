@@ -5,7 +5,7 @@
         <id name="id" column="cargo_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
-        <property name="name"            column="name"             type="java.lang.String"  />
+        <property name="type"            column="name"             type="java.lang.String"  />
         <property name="productionDate"  column="production_date"  type="java.util.Date"    />
         <property name="shelfLife"       column="shelf_date"       type="java.util.Date"    />
         <property name="size"            column="size"             type="java.lang.Integer" />

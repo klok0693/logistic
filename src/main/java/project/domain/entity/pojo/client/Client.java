@@ -1,6 +1,9 @@
 package project.domain.entity.pojo.client;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
@@ -16,18 +19,31 @@ import java.util.Set;
  * Hibernate mapped-superclass;
  */
 @NotNullByDefault
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "name"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = LogisticClient.class, name = "LogisticClient")
+})
 public interface Client extends Entity, Instance<Client>, Authentication {
 
     int getId();
     void setId(int id);
 
-    String getName();
-    void setName(String name);
+    String getType();
+    void setType(String type);
 
     Organization getOrganization();
     void setOrganization(Organization organization);
 
-    @JsonBackReference
+    @JsonBackReference(value = "CargoSet")
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
+
+    String getName();
+    void setName(String name);
 }

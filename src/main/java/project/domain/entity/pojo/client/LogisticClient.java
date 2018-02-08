@@ -21,18 +21,22 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class LogisticClient implements Client {
     private volatile int          id;
-    private volatile String       name;
+    private volatile String       type;
     private volatile Organization organization;
     private volatile User         user;
+    private volatile String       name;
 
     private Set<Cargo> cargoSet;
 
-    public LogisticClient() {}
+    public LogisticClient() {
+        this.name = "LogisticClient";
+    }
 
     public LogisticClient(int id, String name, Organization organization) {
         this.id            = id;
         this.name          = name;
         this.organization  = organization;
+        this.name          = "LogisticClient";
     }
 
     @Override

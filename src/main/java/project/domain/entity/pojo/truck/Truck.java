@@ -32,7 +32,7 @@ public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, In
     String getTrailer();
     void setTrailer(String trailer);
 
-    @JsonBackReference
+    @JsonBackReference(value = "TruckOrganization")
     Organization getOrganization();
     void setOrganization(Organization organization);
 }

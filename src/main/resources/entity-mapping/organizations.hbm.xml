@@ -4,7 +4,7 @@
         <id name="id" column="org_id" type="java.lang.Integer" unsaved-value="-1">
             <generator class="increment"/>
         </id>
-        <property name="name"   column="name"  type="java.lang.String" />
+        <property name="type"   column="name"  type="java.lang.String" />
         <property name="owner"  column="owner" type="java.lang.String" />
 
         <set name="trucks" inverse="false" cascade="all" lazy="true">

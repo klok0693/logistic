@@ -13,18 +13,20 @@ import java.util.Date;
 @NotNullByDefault
 public class OilCargo extends AbstractCargo implements Oil {
 
-    public OilCargo() {}
+    public OilCargo() {
+        super("OilCargo");
+    }
 
     public OilCargo(
                     int id,
-                    String name,
+                    String type,
                     Date productionDate,
                     Date shelfLife,
                     Client owner,
                     int size,
                     String format)
     {
-        super(id, name, productionDate, shelfLife, owner, size, format);
+        super(id, type, productionDate, shelfLife, owner, size, format, "OilCargo");
     }
 
     @Override

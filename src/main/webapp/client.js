@@ -1,14 +1,22 @@
 Ext.Loader.setConfig({enabled:true});
 Ext.Loader.setPath('Ext', '/main/webapp/resources/extjs');
-Ext.require('app.view.catalog.ClientGridView');
+Ext.require([
+    'client.controller.Clients',
+    'client.model.Client',
+    'client.store.Clients',
+    'client.view.ClientGrid',
+    'client.view.EditClient'
+]);
 
 Ext.application({
-    name: 'clientGrid',
-    views: 'clientGridView',
-    width: 500,
-    height: 360,
-    padding: 10,
-    launch: function(){
+    name: 'client',
+
+    // automatically create an instance of AM.view.Viewport
+    //autoCreateViewport: true,
+
+    controllers: ['Clients'],
+
+   launch: function(){
             Ext.create('Ext.container.Viewport', {
             layout: 'border',
                 items: [
@@ -32,7 +40,7 @@ Ext.application({
                              }
                         },
                        {
-                         xtype: 'clientGridView',
+                         xtype: 'clientGrid',
                          region: 'center'
                         }
                 ]

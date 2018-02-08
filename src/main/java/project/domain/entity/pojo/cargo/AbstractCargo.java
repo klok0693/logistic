@@ -14,16 +14,22 @@ import java.util.Date;
  */
 @NotNullByDefault
 
+@ToString
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
 public abstract class AbstractCargo {
     protected volatile int    id;
-    protected volatile String name;
+    protected volatile String type;
     protected volatile Date   productionDate;
     protected volatile Date   shelfLife;
     protected volatile Client owner;
     protected volatile int    size;
     protected volatile String format;
+    protected volatile String name;
+
+    public AbstractCargo(String name) {
+        this.name = name;
+    }
 }

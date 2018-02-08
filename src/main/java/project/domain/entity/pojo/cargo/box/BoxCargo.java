@@ -13,18 +13,20 @@ import java.util.Date;
 @NotNullByDefault
 public class BoxCargo extends AbstractCargo implements Box {
 
-    public BoxCargo() {}
+    public BoxCargo() {
+        super("BoxCargo");
+    }
 
     public BoxCargo(
                     int id,
-                    String name,
+                    String type,
                     Date productionDate,
                     Date shelfLife,
                     Client owner,
                     int size,
                     String format)
     {
-        super(id, name, productionDate, shelfLife, owner, size, format);
+        super(id, type, productionDate, shelfLife, owner, size, format, "BoxCargo");
     }
 
     @Override
