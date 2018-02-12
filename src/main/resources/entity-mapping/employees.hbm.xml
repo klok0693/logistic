@@ -14,7 +14,7 @@
                 class="project.domain.entity.pojo.organization.Organization"
                 column="organization"
                 not-null="true"
-                cascade="save-update"
+                cascade="none"
                 lazy="false"
         />
     </class>

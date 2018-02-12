@@ -8,8 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import project.aspect.NotNullByDefault;
 import project.aspect.CatchException;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 
 import java.util.List;

@@ -11,7 +11,7 @@ import java.util.Date;
  * hibernate entity
  */
 @NotNullByDefault
-public class ProductCargo extends AbstractCargo implements Product {
+public class ProductCargo extends AbstractCargo<Product> implements Product {
 
     public ProductCargo() {
         super("ProductCargo");
