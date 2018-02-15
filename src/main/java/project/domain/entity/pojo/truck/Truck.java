@@ -1,11 +1,17 @@
 package project.domain.entity.pojo.truck;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organization.Organization;
+import project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck;
+import project.domain.entity.pojo.truck.tank.TankTruck;
+import project.domain.entity.pojo.truck.tented.TentedTruck;
 
 import java.util.List;
 
@@ -15,6 +21,18 @@ import java.util.List;
  * Hibernate mapped-superclass;
  */
 @NotNullByDefault
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "name"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = RefrigeratedTruck.class,  name = "RefrigeratedTruck"),
+        @JsonSubTypes.Type(value = TankTruck.class,          name = "TankTruck"),
+        @JsonSubTypes.Type(value = TentedTruck.class,        name = "TentedTruck")
+})
 public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, Instance<T> {
 
     void loadCargo(List<V> cargo);
@@ -35,4 +53,7 @@ public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, In
     @JsonBackReference(value = "TruckOrganization")
     Organization getOrganization();
     void setOrganization(Organization organization);
+
+    String getName();
+    void setName(String name);
 }

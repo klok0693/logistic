@@ -2,7 +2,7 @@ Ext.define('client.store.Clients', {
     extend: 'Ext.data.Store',
     model: 'client.model.Client',
     autoLoad: true,
-    //,autoSync: true
+    autoSync: true,
     proxy: {
             type: 'ajax',
             //type: 'rest',

@@ -14,10 +14,12 @@ import java.util.List;
 @NotNullByDefault
 public class RefrigeratedTruck extends AbstractTruck<Product> implements Refrigerated {
 
-    public RefrigeratedTruck() {}
+    public RefrigeratedTruck() {
+        super("RefrigeratedTruck");
+    }
 
-    public RefrigeratedTruck(int id, String model, Organization organization, String trailer, int registerNumber) {
-        super(id, model, organization, trailer, registerNumber);
+    public RefrigeratedTruck(int id, int registerNumber, String model, String trailer, Organization organization) {
+        super(id, registerNumber, "RefrigeratedTruck", model, trailer, organization);
     }
 
     @Override

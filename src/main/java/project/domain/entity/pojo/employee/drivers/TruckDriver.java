@@ -15,15 +15,17 @@ import project.domain.entity.pojo.organization.Organization;
 public class TruckDriver extends AbstractEmployee implements Driver {
     private String driveCard;
 
-    public TruckDriver() {}
+    public TruckDriver() {
+        super("TruckDriver");
+    }
 
     public TruckDriver(int id, String name, String surname, String position , Organization organization) {
-        super(id, name, surname, position, organization);
+        super(id, "TruckDriver", name, surname, position, organization);
     }
 
     @Override
     public String drive() {
-        //will be wrote later
+        //will be written later
         return "wrrr";
     }
 

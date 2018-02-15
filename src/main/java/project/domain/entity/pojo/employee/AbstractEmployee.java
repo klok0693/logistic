@@ -18,8 +18,13 @@ import project.domain.entity.pojo.organization.Organization;
 @EqualsAndHashCode(exclude = "id")
 public abstract class AbstractEmployee {
     protected volatile int          id;
-    protected volatile String       name;
-    protected volatile String       surname;
-    protected volatile String       position;
+    protected volatile String       type,
+                                    name,
+                                    surname,
+                                    position;
     protected volatile Organization organization;
+
+    protected AbstractEmployee(String name) {
+        this.name = name;
+    }
 }

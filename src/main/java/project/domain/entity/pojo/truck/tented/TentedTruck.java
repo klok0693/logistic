@@ -14,10 +14,12 @@ import java.util.List;
 @NotNullByDefault
 public class TentedTruck extends AbstractTruck<Box> implements Tented {
 
-    public TentedTruck() {}
+    public TentedTruck() {
+        super("TentedTruck");
+    }
 
-    public TentedTruck(int id, String model, Organization organization, String trailer, int registerNumber) {
-        super(id, model, organization, trailer, registerNumber);
+    public TentedTruck(int id, int registerNumber, String model, String trailer, Organization organization) {
+        super(id, registerNumber, "TentedTruck", model, trailer, organization);
     }
 
     @Override

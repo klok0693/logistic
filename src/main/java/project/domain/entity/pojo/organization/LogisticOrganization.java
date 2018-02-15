@@ -24,9 +24,9 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"name", "owner"})
 public class LogisticOrganization implements Organization {
     private volatile int     id;
-    private volatile String  type;
-    private volatile String  owner;
-    private volatile String  name;
+    private volatile String  type,
+                             owner,
+                             name;
 
     private volatile Set<Truck>    trucks;
     private volatile Set<Client>   clients;
@@ -36,8 +36,8 @@ public class LogisticOrganization implements Organization {
         this.name = "LogisticOrganization";
     }
 
-    public LogisticOrganization(String name, String owner, int id) {
-        this.name   = name;
+    public LogisticOrganization(String type, String owner, int id) {
+        this.type   = type;
         this.owner  = owner;
         this.id     = id;
         this.name   = "LogisticOrganization";

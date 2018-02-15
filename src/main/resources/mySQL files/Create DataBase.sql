@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS logistic CHARACTER SET utf8;
+DROP DATABASE logistic;
+CREATE DATABASE logistic DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 use logistic;
 SET NAMES utf8 COLLATE utf8_general_ci;
 

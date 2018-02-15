@@ -27,9 +27,9 @@ import java.util.Date;
         property = "name"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BoxCargo.class, name = "BoxCargo"),
-        @JsonSubTypes.Type(value = OilCargo.class, name = "OilCargo"),
-        @JsonSubTypes.Type(value = ProductCargo.class, name = "ProductCargo")
+        @JsonSubTypes.Type(value = BoxCargo.class,      name = "BoxCargo"),
+        @JsonSubTypes.Type(value = OilCargo.class,      name = "OilCargo"),
+        @JsonSubTypes.Type(value = ProductCargo.class,  name = "ProductCargo")
 })
 public interface Cargo<V extends Cargo<V>> extends Entity, Instance<V> {
 

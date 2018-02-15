@@ -12,7 +12,7 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName"  value="com.mysql.jdbc.Driver" />
-        <property name="url"              value="jdbc:mysql://localhost:3306/logistic" />
+        <property name="url"              value="jdbc:mysql://localhost:3306/logistic?characterEncoding=UTF-8" />
         <property name="username"         value="logistic_Manager" />
         <property name="password"         value="l78" />
     </bean>
@@ -23,8 +23,8 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.connection.CharSet">utf8</prop>
-                <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                <prop key="hibernate.connection.CharSet">UTF-8</prop>
+                <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
                 <prop key="hibernate.connection.useUnicode">true</prop>
                 <!--<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.Provider</prop>-->
             </props>

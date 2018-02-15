@@ -26,7 +26,7 @@ public class ProductCargo extends AbstractCargo<Product> implements Product {
                         int size,
                         String format)
     {
-        super(id, type, productionDate, shelfLife, owner, size, format, "ProductCargo");
+        super(id, size, type, format, "ProductCargo", productionDate, shelfLife, owner);
     }
 
     @Override

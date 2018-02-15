@@ -20,12 +20,12 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"username", "password"})
 public class User implements UserDetails, Entity {
     private volatile int id;
-    private volatile String username;
-    private volatile String password;
-    private volatile boolean isAccountNonExpired;
-    private volatile boolean isAccountNonLocked;
-    private volatile boolean isCredentialsNonExpired;
-    private volatile boolean isEnabled;
+    private volatile String username,
+                            password;
+    private volatile boolean isAccountNonExpired,
+                             isAccountNonLocked,
+                             isCredentialsNonExpired,
+                             isEnabled;
     private volatile Set<GrantedAuthority> authorities;
 
     //getters and setters for hibernate
@@ -46,6 +46,6 @@ public class User implements UserDetails, Entity {
     public boolean isAccountNonLocked(){return this.isAccountNonLocked;}
     public boolean isCredentialsNonExpired(){return this.isCredentialsNonExpired;}
     public boolean isEnabled(){return this.isEnabled;}
-    @JsonBackReference
+    @JsonBackReference(value = "UserAuthorities")
     public Set<GrantedAuthority> getAuthorities(){return this.authorities;}
 }

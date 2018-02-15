@@ -16,15 +16,17 @@ import project.domain.entity.pojo.organization.Organization;
 public class LogisticManager extends AbstractEmployee implements Manager{
     private User user;
 
-    public LogisticManager() {}
+    public LogisticManager() {
+        super("LogisticManager");
+    }
 
     public LogisticManager(int id, String name, String surname, String position, Organization organization) {
-        super(id, name, surname, position, organization);
+        super(id, "LogisticManager", name, surname, position, organization);
     }
 
     @Override
     public String manage() {
-        //will be wrote later
+        //will be written later
         return "manage";
     }
 

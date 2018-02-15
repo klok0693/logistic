@@ -26,7 +26,7 @@ public class BoxCargo extends AbstractCargo<Box> implements Box {
                     int size,
                     String format)
     {
-        super(id, type, productionDate, shelfLife, owner, size, format, "BoxCargo");
+        super(id, size, type, format, "BoxCargo", productionDate, shelfLife, owner);
     }
 
     @Override

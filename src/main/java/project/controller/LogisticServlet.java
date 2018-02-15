@@ -65,6 +65,7 @@ public class LogisticServlet {
         }
         catch (Exception e) {
             //System.out.println(e.getClass());
+            e.printStackTrace();
             return null;
         }
     }
@@ -81,12 +82,13 @@ public class LogisticServlet {
             return trucks.isEmpty()? null : trucks;
         }
         catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
 
 
-    //(json) get Trucks
+    //(json) get Cargo
     @RequestMapping(value = "/cargo", method = GET, produces = "application/json")
     public @ResponseBody Collection<Cargo> getCargo() {
 
@@ -94,28 +96,28 @@ public class LogisticServlet {
         try {
             //get all cargo from bd
             cargo = Factory.getService(Cargo.class).getAll();
-            System.out.println(cargo);
             return cargo.isEmpty()? null : cargo;
         }
         catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
 
 
+    //TODO: add return boolean
     //update cargo
-    @RequestMapping(value = "/cargo", method = POST, produces = "application/json")
-    public @ResponseBody Collection<Cargo> getCargo(@RequestBody Cargo cargo) {
+    @RequestMapping(value = "/cargo", method = POST)
+    public void updateCargo(@RequestBody Cargo cargo) {
 
         try {
-            System.out.println("this is");
             System.out.println(cargo);
             Factory.getService(Cargo.class).update(cargo);
-            return Factory.getService(Cargo.class).getAll();
+            //return Factory.getService(Cargo.class).getAll();
         }
         catch (ServiceException e) {
             e.printStackTrace();
-            return null;
+            //return null;
         }
 
     }
@@ -124,13 +126,17 @@ public class LogisticServlet {
     @ResponseBody
     @RequestMapping(value = "/grid")
     public ModelAndView getGrid() {
+        //get users roles
         Collection<? extends GrantedAuthority> roles =
                 SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
+        //return home page according to users role
         String roleName;
         for (GrantedAuthority role : roles) {
+
             roleName = role.getAuthority().trim();
             System.out.println(roleName);
+
             if (roleName.contains("ROLE_CLIENT"))
                 return new ModelAndView("ClientCatalog");
 

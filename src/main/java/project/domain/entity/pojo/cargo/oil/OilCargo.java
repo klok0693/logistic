@@ -26,7 +26,7 @@ public class OilCargo extends AbstractCargo<Oil> implements Oil {
                     int size,
                     String format)
     {
-        super(id, type, productionDate, shelfLife, owner, size, format, "OilCargo");
+        super(id, size, type, format, "OilCargo", productionDate, shelfLife, owner);
     }
 
     @Override

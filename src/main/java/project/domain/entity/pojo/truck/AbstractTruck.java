@@ -1,8 +1,6 @@
 package project.domain.entity.pojo.truck;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organization.Organization;
@@ -18,25 +16,37 @@ import java.util.List;
 @NotNullByDefault
 
 @Getter @Setter
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"id", "cargo"})
 public abstract class AbstractTruck<V extends Cargo<V>> {
     //TODO:id=registerNumber?
     //TODO:remove trailer?
     protected volatile int          id;
     protected volatile int          registerNumber;
-    protected volatile String       model;
-    protected volatile String       trailer;
+    protected volatile String       name,
+                                    model,
+                                    trailer;
     protected volatile Organization organization;
 
     @Getter @Setter protected List<V>      cargo;
 
-    public AbstractTruck() {}
+    protected AbstractTruck(String name) {
+        this.name = name;
+    }
 
-    public AbstractTruck(int id, String model, Organization organization, String trailer, int registerNumber) {
+    protected AbstractTruck(
+                            int id,
+                            int registerNumber,
+                            String name,
+                            String model,
+                            String trailer,
+                            Organization organization)
+    {
         this.id              = id;
-        this.model           = model;
-        this.organization    = organization;
-        this.trailer         = trailer;
         this.registerNumber  = registerNumber;
+        this.name            = name;
+        this.model           = model;
+        this.trailer         = trailer;
+        this.organization    = organization;
     }
 }

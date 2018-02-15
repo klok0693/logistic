@@ -21,10 +21,10 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class LogisticClient implements Client {
     private volatile int          id;
-    private volatile String       type;
+    private volatile String       type,
+                                  name;
     private volatile Organization organization;
     private volatile User         user;
-    private volatile String       name;
 
     private Set<Cargo> cargoSet;
 
@@ -32,9 +32,9 @@ public class LogisticClient implements Client {
         this.name = "LogisticClient";
     }
 
-    public LogisticClient(int id, String name, Organization organization) {
+    public LogisticClient(int id, String type, Organization organization) {
         this.id            = id;
-        this.name          = name;
+        this.type          = type;
         this.organization  = organization;
         this.name          = "LogisticClient";
     }
