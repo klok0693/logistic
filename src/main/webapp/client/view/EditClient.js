@@ -45,6 +45,21 @@ Ext.define('client.view.EditClient', {
                     fieldLabel: 'Ед. изм.',
                     allowBlank: false,
                     blankText: 'Это поле должно быть заполнено'
+                },
+                {
+                    xtype: 'combo',
+                    fieldLabel: 'type',
+                    name: 'name',
+                    store: new Ext.data.Store({
+                        fields: [{name: 'key'},{name: 'value'}],
+                        data: [
+                            {'key':'product', 'value':'ProductCargo'},
+                            {'key':'box', 'value':'BoxCargo'},
+                            {'key':'oil', 'value':'OilCargo'}
+                        ]
+                    }),
+                    displayField: 'key',
+                    valueField: 'value'
                 }
             ]
         }
@@ -61,7 +76,7 @@ Ext.define('client.view.EditClient', {
             handler: function () {
                 this.up('window').close();
             }
-
         }
     ]
 });
+

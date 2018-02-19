@@ -8,10 +8,8 @@ Ext.define('client.controller.Clients', {
     views: ['EditClient', 'ClientGrid'],
 
     refs: [
-        {
-            ref: 'clientsPanel',
-            selector: 'panel'
-        }
+        {ref: 'clientsPanel', selector: 'panel'},
+        {ref: 'clientGrid', selector:'clientGrid'}
     ],
 
     init: function() {
@@ -21,6 +19,9 @@ Ext.define('client.controller.Clients', {
             },
             'editClient button[action=save]': {
                 click: this.updateClient
+            },
+            'clientGrid button[action=add]': {
+                click: this.addClient
             }
         });
     },
@@ -33,12 +34,18 @@ Ext.define('client.controller.Clients', {
 
     updateClient: function(button) {
         var win    = button.up('window'),
+            store  = Ext.create('client.store.Clients'),
             form   = win.down('form'),
             record = form.getRecord(),
             values = form.getValues();
 
-        record.set(values);
-        win.close();
-        this.getClientsStore().sync();
+        store.add(form.getValues());
+        store.sync();
+        //win.close();
+        //this.getClientsStore().sync();
+    },
+
+    addClient: function() {
+        Ext.widget('editClient');
     }
 });
