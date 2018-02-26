@@ -73,7 +73,7 @@ public class EntityGenericDao<T extends Entity> implements EntityDao<T> {
     }
 
 
-    private Session getCurrentSession() {
+    protected Session getCurrentSession() {
         return factory.getCurrentSession();
     }
 

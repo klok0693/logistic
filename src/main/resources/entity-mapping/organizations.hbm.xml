@@ -7,18 +7,18 @@
         <property name="type"   column="name"  type="java.lang.String" />
         <property name="owner"  column="owner" type="java.lang.String" />
 
-        <set name="trucks" inverse="false" cascade="all" lazy="true">
+        <set name="trucks" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.truck.Truck"/>
             <!--<cache usage="read-write"/>-->
         </set>
 
-        <set name="clients" inverse="false" cascade="all" lazy="true">
+        <set name="clients" inverse="false" cascade="all" lazy="true" fetch="select" >
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.client.Client"/>
         </set>
 
-        <set name="employees" inverse="false" cascade="all" lazy="true">
+        <set name="employees" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.employee.Employee"/>
         </set>

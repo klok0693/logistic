@@ -4,8 +4,8 @@ Ext.define('client.store.Clients', {
     autoLoad: true,
     autoSync: true,
     proxy: {
-            type: 'ajax',
-            //type: 'rest',
+            //type: 'ajax',
+            type: 'rest',
             api: {
                 create:  'http://localhost:8082/cargo',
                 read:    'http://localhost:8082/cargo',

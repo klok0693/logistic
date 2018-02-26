@@ -3,22 +3,26 @@ package project.controller;
 import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.aspect.NotNullByDefault;
+import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.truck.Truck;
 import project.factory.Factory;
+import project.model.data.UserDao;
+import project.model.data.UserGenericDao;
+import project.model.logic.EntityService;
 import project.model.logic.ServiceException;
 
 import java.util.Collection;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * Created by klok on 6.10.17.
@@ -105,21 +109,70 @@ public class LogisticServlet {
     }
 
 
-    //TODO: add return boolean
-    //update cargo
-    @RequestMapping(value = "/cargo", method = POST)
-    public void updateCargo(@RequestBody Cargo cargo) {
+    @RequestMapping(value = "/cargo", method = POST, produces = "application/json")
+    public @ResponseBody boolean saveCargo(@RequestBody Cargo cargo) {
 
         try {
+            EntityService<Cargo> service = Factory.getService(Cargo.class);
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDao<Client> userDao = Factory.getUserData(Client.class);
+
+            Client client = userDao.getEntityByUserName(userDetails.getUsername());
+
+
+            System.out.println("\n");
+            System.out.println(client);
+            System.out.println("\n");
+
+            cargo.setOwner(client);
+            //client.addCargo(cargo);
+
+            System.out.println("\n");
             System.out.println(cargo);
-            Factory.getService(Cargo.class).update(cargo);
+            //System.out.println(client.getCargoSet());
+            System.out.println("\n");
+
+            service.save(cargo);
+            //Factory.getService(Client.class).update(client);
+            return true;
+        }
+        catch (ServiceException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    @RequestMapping(value = "/cargo", method = PUT, produces = "application/json")
+    public @ResponseBody boolean updateCargo(@RequestBody Cargo cargo) {
+
+        try {
+            EntityService<Cargo> service = Factory.getService(Cargo.class);
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            System.out.println("\n");
+            System.out.println(user.getId());
+            System.out.println("\n");
+
+            UserDao<Client> userDao = new UserGenericDao<>();
+            Client client = userDao.getEntityByUserId(user.getId());
+
+            cargo.setOwner(client);
+            client.addCargo(cargo);
+
+            System.out.println("\n");
+            System.out.println(cargo);
+            System.out.println("\n");
+
+            service.update(cargo);
+            return true;
+
             //return Factory.getService(Cargo.class).getAll();
         }
         catch (ServiceException e) {
             e.printStackTrace();
-            //return null;
+            return false;
         }
-
     }
 
 

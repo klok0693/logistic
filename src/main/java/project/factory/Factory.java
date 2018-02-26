@@ -5,8 +5,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-import project.model.data.EntityGenericDao;
+import project.domain.entity.ejb.authentication.Authentication;
 import project.model.data.EntityDao;
+import project.model.data.UserDao;
 import project.model.logic.EntityGenericService;
 import project.model.logic.EntityService;
 
@@ -40,7 +41,14 @@ public class Factory implements ApplicationContextAware {
 
     //example: getClass(Client.class) -> return GenericDao<Client>
     public static <T extends Entity> EntityDao<T> getData(Class<T> aClass) {
-        return context.getBean(EntityGenericDao.class).setEntityClass(aClass);
+        return ((EntityDao) context.getBean("data")).setEntityClass(aClass);
+    }
+
+
+    public static <T extends Authentication> UserDao<T> getUserData(Class<T> aClass) {
+        UserDao<T> userData = (UserDao) context.getBean("userData");
+        userData.setEntityClass(aClass);
+        return userData;
     }
 
 

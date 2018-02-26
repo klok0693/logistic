@@ -10,4 +10,6 @@
         <property name="factory" ref="sessionFactory"/>
     </bean>
 
+    <bean name="userData" parent="data" class="project.model.data.UserGenericDao" />
+
 </beans>

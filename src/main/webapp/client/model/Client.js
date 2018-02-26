@@ -10,7 +10,7 @@
      {name: 'orgname',type:'string',mapping:'owner.organization.name'},
      {name: 'orgowner',type:'string',mapping:'owner.organization.owner'},*/
 
-     {name: 'owner', persist:true},
+     //{name: 'owner', persist:true},
 
      {name: 'size',            type: 'int'},
      {name: 'format'},

@@ -26,6 +26,7 @@ public class User implements UserDetails, Entity {
                              isAccountNonLocked,
                              isCredentialsNonExpired,
                              isEnabled;
+    @JsonBackReference(value = "UserAuthorities")
     private volatile Set<GrantedAuthority> authorities;
 
     //getters and setters for hibernate
@@ -46,6 +47,6 @@ public class User implements UserDetails, Entity {
     public boolean isAccountNonLocked(){return this.isAccountNonLocked;}
     public boolean isCredentialsNonExpired(){return this.isCredentialsNonExpired;}
     public boolean isEnabled(){return this.isEnabled;}
-    @JsonBackReference(value = "UserAuthorities")
+
     public Set<GrantedAuthority> getAuthorities(){return this.authorities;}
 }

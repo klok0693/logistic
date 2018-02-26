@@ -1,11 +1,12 @@
 <hibernate-mapping package="project.domain.entity.pojo.client">
 
     <class name="Client" abstract="true" dynamic-update="true" >
+        <!--<cache usage="read-write"/>-->
         <id name="id" column="client_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
         <property name="type" column="name" type="java.lang.String" />
-        <one-to-one name="user" cascade="all-delete-orphan" lazy="proxy" class="project.domain.entity.ejb.authentication.User"/>
+        <one-to-one name="user" cascade="all-delete-orphan" lazy="proxy" class="project.domain.entity.ejb.authentication.User" fetch="select" /> <!--property-ref="id" constrained="true"-->
         <many-to-one
                 name="organization"
                 class="project.domain.entity.pojo.organization.Organization"
@@ -13,9 +14,10 @@
                 not-null="true"
                 cascade="none"
                 lazy="false"
+                fetch="select"
         />
 
-        <set name="cargoSet" inverse="false" cascade="all" lazy="true">
+        <set name="cargoSet" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="owner"/>
             <one-to-many class="project.domain.entity.pojo.cargo.Cargo"/>
         </set>
@@ -23,5 +25,17 @@
     </class>
 
     <union-subclass name="LogisticClient" extends="Client" table="Clients"/>
+
+    <sql-query name="getClientByUserName">
+        <![CDATA[SELECT DISTINCT * FROM Clients c INNER JOIN Users u
+            WHERE c.user=u.user_id AND u.username = :username]]>
+        <return alias="c" class="LogisticClient"/>
+        <return alias="u" class="project.domain.entity.ejb.authentication.User"/>
+    </sql-query>
+
+    <sql-query name="getClientByUserId">
+        <![CDATA[SELECT DISTINCT * FROM Clients WHERE user = :userId]]>
+        <return alias="c" class="LogisticClient"/>
+    </sql-query>
 
 </hibernate-mapping>

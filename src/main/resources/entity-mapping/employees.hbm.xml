@@ -16,6 +16,7 @@
                 not-null="true"
                 cascade="none"
                 lazy="false"
+                fetch="select"
         />
     </class>
 
