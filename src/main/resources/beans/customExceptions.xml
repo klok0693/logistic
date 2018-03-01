@@ -7,7 +7,7 @@
     <!--parent for all exceptions-->
     <bean name="exception" class="java.lang.Exception" scope="prototype" />
 
-    <bean name="daoException"      parent="exception"  class="project.model.data.DaoException"       />
+    <bean name="daoException"      parent="exception"  class="project.model.data.DataException"       />
     <bean name="serviceException"  parent="exception"  class="project.model.logic.ServiceException"  />
 
 </beans>

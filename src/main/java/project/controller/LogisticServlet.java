@@ -1,9 +1,9 @@
 package project.controller;
 
 import lombok.extern.log4j.Log4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +15,8 @@ import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.truck.Truck;
 import project.factory.Factory;
-import project.model.data.UserDao;
-import project.model.data.UserGenericDao;
+import project.model.data.DataException;
+import project.model.data.users.UserData;
 import project.model.logic.EntityService;
 import project.model.logic.ServiceException;
 
@@ -112,31 +112,26 @@ public class LogisticServlet {
     @RequestMapping(value = "/cargo", method = POST, produces = "application/json")
     public @ResponseBody boolean saveCargo(@RequestBody Cargo cargo) {
 
+        Client client;
+        Authentication authentication;
+
+        UserData<Client> clientData;
+        EntityService<Cargo> cargoService;
         try {
-            EntityService<Cargo> service = Factory.getService(Cargo.class);
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            UserDao<Client> userDao = Factory.getUserData(Client.class);
+            //
+            cargoService    = Factory.getService(Cargo.class);
+            clientData      = Factory.getUserData(Client.class);
 
-            Client client = userDao.getEntityByUserName(userDetails.getUsername());
-
-
-            System.out.println("\n");
-            System.out.println(client);
-            System.out.println("\n");
+            //
+            authentication  = SecurityContextHolder.getContext().getAuthentication();
+            client          = clientData.get(authentication.getName());
 
             cargo.setOwner(client);
-            //client.addCargo(cargo);
+            cargoService.save(cargo);
 
-            System.out.println("\n");
-            System.out.println(cargo);
-            //System.out.println(client.getCargoSet());
-            System.out.println("\n");
-
-            service.save(cargo);
-            //Factory.getService(Client.class).update(client);
             return true;
         }
-        catch (ServiceException e) {
+        catch (ServiceException | DataException e) {
             e.printStackTrace();
             return false;
         }
@@ -154,8 +149,8 @@ public class LogisticServlet {
             System.out.println(user.getId());
             System.out.println("\n");
 
-            UserDao<Client> userDao = new UserGenericDao<>();
-            Client client = userDao.getEntityByUserId(user.getId());
+            UserData<Client> userDao = Factory.getUserData(Client.class);
+            Client client = userDao.get(user.getUsername());
 
             cargo.setOwner(client);
             client.addCargo(cargo);
@@ -169,7 +164,7 @@ public class LogisticServlet {
 
             //return Factory.getService(Cargo.class).getAll();
         }
-        catch (ServiceException e) {
+        catch (ServiceException | DataException e) {
             e.printStackTrace();
             return false;
         }

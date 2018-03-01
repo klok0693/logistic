@@ -4,12 +4,14 @@
                "http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean name="service" class="project.model.logic.EntityGenericService" scope="prototype"/>
+    <bean name="entityService" class="project.model.logic.GenericEntityService" scope="prototype"/>
 
-    <bean name="data" class="project.model.data.EntityGenericDao" scope="prototype">
+    <bean name="userService" parent="entityService" class="project.model.logic.users.GenericUserService"/>
+
+    <bean name="entityData" class="project.model.data.GenericEntityData" scope="prototype">
         <property name="factory" ref="sessionFactory"/>
     </bean>
 
-    <bean name="userData" parent="data" class="project.model.data.UserGenericDao" />
+    <bean name="userData" parent="entityData" class="project.model.data.users.GenericUserData" />
 
 </beans>

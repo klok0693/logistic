@@ -6,10 +6,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.domain.entity.ejb.authentication.Authentication;
-import project.model.data.EntityDao;
-import project.model.data.UserDao;
-import project.model.logic.EntityGenericService;
+import project.model.data.EntityData;
+import project.model.data.users.UserData;
 import project.model.logic.EntityService;
+import project.model.logic.GenericEntityService;
+import project.model.logic.users.GenericUserService;
+import project.model.logic.users.UserService;
 
 /**
  * Created by klok on 11.10.17.
@@ -40,13 +42,13 @@ public class Factory implements ApplicationContextAware {
 
 
     //example: getClass(Client.class) -> return GenericDao<Client>
-    public static <T extends Entity> EntityDao<T> getData(Class<T> aClass) {
-        return ((EntityDao) context.getBean("data")).setEntityClass(aClass);
+    public static <T extends Entity> EntityData<T> getData(Class<T> aClass) {
+        return ((EntityData) context.getBean("entityData")).setEntityClass(aClass);
     }
 
 
-    public static <T extends Authentication> UserDao<T> getUserData(Class<T> aClass) {
-        UserDao<T> userData = (UserDao) context.getBean("userData");
+    public static <T extends Authentication> UserData<T> getUserData(Class<T> aClass) {
+        UserData<T> userData = (UserData) context.getBean("userData");
         userData.setEntityClass(aClass);
         return userData;
     }
@@ -60,7 +62,17 @@ public class Factory implements ApplicationContextAware {
 
     //example: getService(Client.class) -> return Service<Client>
     public static <T extends Entity> EntityService<T> getService(Class<T> aClass) {
-        return context.getBean(EntityGenericService.class).setData(getData(aClass));
+        GenericEntityService service = (GenericEntityService) context.getBean("entityService");
+        service.setData(getData(aClass));
+        return service;
+    }
+
+
+    //example: getUserService(Client.class) -> return UserService<Client>
+    public static <T extends Authentication> UserService<T> getUserService(Class<T> aClass) {
+        GenericUserService service = (GenericUserService) context.getBean("userService");
+        service.setData(getUserData(aClass));
+        return service;
     }
 
 

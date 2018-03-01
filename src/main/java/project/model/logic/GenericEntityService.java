@@ -1,12 +1,14 @@
 package project.model.logic;
 
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-import project.model.data.DaoException;
-import project.model.data.EntityDao;
+import project.model.data.DataException;
+import project.model.data.EntityData;
 
 import java.util.Collection;
 
@@ -16,12 +18,13 @@ import java.util.Collection;
 @NotNullByDefault
 @Transactional
 
-@Accessors(chain = true)
+//@Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityGenericService<T extends Entity> implements EntityService<T> {
-    private EntityDao<T> data;
+public class GenericEntityService<T extends Entity, D extends EntityData<T>> implements EntityService<T> {
+    //private EntityData<T> data;
+    protected D data;
     //private Class<T> type;
 
 
@@ -30,7 +33,7 @@ public class EntityGenericService<T extends Entity> implements EntityService<T> 
        try{
             data.save(obj);
         }
-        catch (DaoException e) {
+        catch (DataException e) {
             throw getException(e);
         }
     }
@@ -40,7 +43,7 @@ public class EntityGenericService<T extends Entity> implements EntityService<T> 
         try {
             return data.get(id);
         }
-        catch (DaoException e) {
+        catch (DataException e) {
             throw getException(e);
         }
     }
@@ -50,7 +53,7 @@ public class EntityGenericService<T extends Entity> implements EntityService<T> 
         try {
             data.update(obj);
         }
-        catch (DaoException e) {
+        catch (DataException e) {
             throw getException(e);
         }
     }
@@ -60,7 +63,7 @@ public class EntityGenericService<T extends Entity> implements EntityService<T> 
         try {
             data.delete(obj);
         }
-        catch (DaoException e) {
+        catch (DataException e) {
             throw getException(e);
         }
     }
@@ -70,9 +73,14 @@ public class EntityGenericService<T extends Entity> implements EntityService<T> 
         try {
             return data.getAll();
         }
-        catch (DaoException e) {
+        catch (DataException e) {
             throw getException(e);
         }
+    }
+
+    @Override
+    public <E extends EntityData<T>> void setData(E data) {
+        this.data = (D) data;
     }
 
     /*@Override

@@ -2,7 +2,7 @@ package project.model.logic;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-import project.model.data.EntityDao;
+import project.model.data.EntityData;
 
 import java.util.Collection;
 
@@ -20,8 +20,7 @@ public interface EntityService<T extends Entity> {
 
     void delete(T obj)                throws ServiceException;
 
-    Collection<T> getAll()  throws ServiceException;
+    Collection<T> getAll()            throws ServiceException;
 
-    //Service<T> setEntityClass(Class<T> aClass);
-    EntityService<T> setData(EntityDao<T> data);
+    <D extends EntityData<T>> void setData(D data);
 }

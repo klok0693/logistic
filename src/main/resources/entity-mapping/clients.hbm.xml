@@ -7,7 +7,7 @@
         </id>
         <property name="type" column="name" type="java.lang.String" />
         <one-to-one name="user" cascade="all-delete-orphan" lazy="proxy" class="project.domain.entity.ejb.authentication.User" fetch="select" /> <!--property-ref="id" constrained="true"-->
-        <many-to-one
+        <!-- <many-to-one
                 name="organization"
                 class="project.domain.entity.pojo.organization.Organization"
                 column="organization"
@@ -15,7 +15,7 @@
                 cascade="none"
                 lazy="false"
                 fetch="select"
-        />
+        />-->
 
         <set name="cargoSet" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="owner"/>

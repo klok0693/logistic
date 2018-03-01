@@ -97,6 +97,7 @@ shelf_date       date         NOT NULL,
 owner            int unsigned NOT NULL,
 size             int unsigned NOT NULL,
 format           varchar(30)  NOT NULL,
+type             varchar(30),
 
 PRIMARY KEY(cargo_id),
 FOREIGN KEY(owner) REFERENCES Clients(client_id) ON DELETE cascade ON UPDATE cascade

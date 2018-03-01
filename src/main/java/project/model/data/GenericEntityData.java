@@ -27,22 +27,22 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntityGenericDao<T extends Entity> implements EntityDao<T> {
-    private SessionFactory factory;
-    private Class<T> entityClass;
+public class GenericEntityData<T extends Entity> implements EntityData<T> {
+    protected SessionFactory factory;
+    protected Class<T> entityClass;
 
 
 
     @Override
     @CatchException(message = "Can't save entity")
-    public void save(T obj) throws DaoException{
+    public void save(T obj) throws DataException {
         getCurrentSession().save(obj);
     }
 
 
     @Override
     @CatchException(message = "Can't load entity")
-    public T get(int id) throws DaoException {
+    public T get(int id) throws DataException {
         return getCurrentSession().get(entityClass, id);
     }
 
@@ -50,7 +50,7 @@ public class EntityGenericDao<T extends Entity> implements EntityDao<T> {
     @Override
     @Synchronized
     @CatchException(message = "Can't update entity")
-    public void update(T obj) throws DaoException {
+    public void update(T obj) throws DataException {
         getCurrentSession().update(obj);
     }
 
@@ -58,14 +58,14 @@ public class EntityGenericDao<T extends Entity> implements EntityDao<T> {
     @Override
     @Synchronized
     @CatchException(message = "Can't delete entity")
-    public void delete(T obj) throws DaoException {
+    public void delete(T obj) throws DataException {
         getCurrentSession().delete(obj);
     }
 
 
     @Override
     @CatchException(message = "Can't load entity list")
-    public List<T> getAll() throws DaoException {
+    public List<T> getAll() throws DataException {
         return getCurrentSession()
                 .createCriteria(entityClass)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)

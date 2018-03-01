@@ -1,3 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping package="project.domain.entity.pojo.cargo">
 
     <class name="Cargo" abstract="true" dynamic-update="true">
@@ -11,7 +15,6 @@
         <property name="size"            column="size"             type="java.lang.Integer" />
         <property name="format"          column="format"           type="java.lang.String"  />
 
-
         <many-to-one
                 name="owner"
                 class="project.domain.entity.pojo.client.Client"
@@ -21,24 +24,22 @@
                 lazy="false"
                 fetch="select"
         />
+
+        <union-subclass
+                name="project.domain.entity.pojo.cargo.box.BoxCargo"
+                table="CargoList"
+                extends="Cargo"/>
+
+        <union-subclass
+                name="project.domain.entity.pojo.cargo.oil.OilCargo"
+                table="CargoList"
+                extends="Cargo"/>
+
+        <union-subclass
+                name="project.domain.entity.pojo.cargo.product.ProductCargo"
+                table="CargoList"
+                extends="Cargo"/>
+
     </class>
-
-    <union-subclass
-            name="project.domain.entity.pojo.cargo.box.BoxCargo"
-            extends="Cargo"
-            table="CargoList"
-    />
-
-    <union-subclass
-            name="project.domain.entity.pojo.cargo.oil.OilCargo"
-            extends="Cargo"
-            table="CargoList"
-    />
-
-    <union-subclass
-            name="project.domain.entity.pojo.cargo.product.ProductCargo"
-            extends="Cargo"
-            table="CargoList"
-    />
 
 </hibernate-mapping>
