@@ -40,7 +40,7 @@ Ext.define('client.controller.Clients', {
             values = form.getValues();
 
         store.add(form.getValues());
-        store.sync();
+        //store.sync();
         win.close();
         //this.getClientsStore().sync();
     },
