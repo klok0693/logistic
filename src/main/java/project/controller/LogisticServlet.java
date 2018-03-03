@@ -10,19 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.ejb.authentication.User;
-import project.domain.entity.pojo.cargo.Cargo;
+import project.domain.entity.pojo.cargo.BoxCargo;
 import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.truck.Truck;
 import project.factory.Factory;
+import project.model.data.BoxData;
 import project.model.data.DataException;
 import project.model.data.users.UserData;
-import project.model.logic.EntityService;
-import project.model.logic.ServiceException;
 
 import java.util.Collection;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by klok on 6.10.17.
@@ -94,9 +93,9 @@ public class LogisticServlet {
 
     //(json) get Cargo
     @RequestMapping(value = "/cargo", method = GET, produces = "application/json")
-    public @ResponseBody Collection<Cargo> getCargo() {
+    public @ResponseBody Collection<BoxCargo> getCargo() throws DataException {
 
-        Collection<Cargo> cargo;
+        /*Collection<Cargo> cargo;
         try {
             //get all cargo from bd
             cargo = Factory.getService(Cargo.class).getAll();
@@ -105,40 +104,45 @@ public class LogisticServlet {
         catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
+        }*/
+        BoxData data = (BoxData) Factory.getContext().getBean("boxData");
+        return data.getAll();
     }
 
 
     @RequestMapping(value = "/cargo", method = POST, produces = "application/json")
-    public @ResponseBody boolean saveCargo(@RequestBody Cargo cargo) {
+    public @ResponseBody boolean saveCargo(@RequestBody BoxCargo cargo) {
 
         Client client;
         Authentication authentication;
 
         UserData<Client> clientData;
-        EntityService<Cargo> cargoService;
+        //EntityService<BoxCargo> cargoService;
         try {
             //
-            cargoService    = Factory.getService(Cargo.class);
-            clientData      = Factory.getUserData(Client.class);
+            //cargoService    = Factory.getService(BoxCargo.class);
+            //clientData      = Factory.getUserData(Client.class);
 
             //
-            authentication  = SecurityContextHolder.getContext().getAuthentication();
-            client          = clientData.get(authentication.getName());
+            //authentication  = SecurityContextHolder.getContext().getAuthentication();
+            //client          = clientData.get(authentication.getName());
 
-            cargo.setOwner(client);
-            cargoService.save(cargo);
+            //cargo.setOwner(client);
+            //cargoService.save(cargo);
+            System.out.println(cargo);
+            BoxData data = (BoxData) Factory.getContext().getBean("boxData");
+            data.save(cargo);
 
             return true;
         }
-        catch (ServiceException | DataException e) {
+        catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
 
-    @RequestMapping(value = "/cargo", method = PUT, produces = "application/json")
+    /*@RequestMapping(value = "/cargo", method = PUT, produces = "application/json")
     public @ResponseBody boolean updateCargo(@RequestBody Cargo cargo) {
 
         try {
@@ -149,11 +153,11 @@ public class LogisticServlet {
             System.out.println(user.getId());
             System.out.println("\n");
 
-            UserData<Client> userDao = Factory.getUserData(Client.class);
-            Client client = userDao.get(user.getUsername());
+            //UserData<Client> userDao = Factory.getUserData(Client.class);
+            //Client client = userDao.get(user.getUsername());
 
-            cargo.setOwner(client);
-            client.addCargo(cargo);
+            //cargo.setOwner(client);
+            //client.addCargo(cargo);
 
             System.out.println("\n");
             System.out.println(cargo);
@@ -164,11 +168,11 @@ public class LogisticServlet {
 
             //return Factory.getService(Cargo.class).getAll();
         }
-        catch (ServiceException | DataException e) {
+        catch (ServiceException e) {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 
 
     @ResponseBody

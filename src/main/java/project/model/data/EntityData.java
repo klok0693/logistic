@@ -3,7 +3,7 @@ package project.model.data;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by klok on 27.10.17.
@@ -20,7 +20,7 @@ public interface EntityData<T extends Entity> {
 
     void delete(T obj) throws DataException;
 
-    List<T> getAll()   throws DataException;
+    Collection<T> getAll()   throws DataException;
 
     EntityData<T> setEntityClass(Class<T> aClass);
 }

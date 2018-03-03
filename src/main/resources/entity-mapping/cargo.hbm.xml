@@ -4,18 +4,24 @@
 
 <hibernate-mapping package="project.domain.entity.pojo.cargo">
 
-    <class name="Cargo" abstract="true" dynamic-update="true">
+    <class name="BoxCargo" table="CargoList">
         <!--<cache usage="read-write"/>-->
         <id name="id" column="cargo_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
+
+        <!-- <discriminator>
+            <column name="type"/>
+        </discriminator> -->
+
         <property name="type"            column="name"             type="java.lang.String"  />
         <property name="productionDate"  column="production_date"  type="java.util.Date"    />
         <property name="shelfLife"       column="shelf_date"       type="java.util.Date"    />
         <property name="size"            column="size"             type="java.lang.Integer" />
         <property name="format"          column="format"           type="java.lang.String"  />
 
-        <many-to-one
+        <property name="name" column="type" type="java.lang.String" />
+        <!--<many-to-one
                 name="owner"
                 class="project.domain.entity.pojo.client.Client"
                 column="owner"
@@ -23,22 +29,19 @@
                 cascade="none"
                 lazy="false"
                 fetch="select"
-        />
+        />-->
 
-        <union-subclass
-                name="project.domain.entity.pojo.cargo.box.BoxCargo"
-                table="CargoList"
-                extends="Cargo"/>
+        <!-- <subclass
+                name="BoxCargo"
+                extends="Cargo" discriminator-value="BoxCargo"/>
 
-        <union-subclass
-                name="project.domain.entity.pojo.cargo.oil.OilCargo"
-                table="CargoList"
-                extends="Cargo"/>
+        <subclass
+                name="OilCargo"
+                extends="Cargo" discriminator-value="OilCargo"/>
 
-        <union-subclass
-                name="project.domain.entity.pojo.cargo.product.ProductCargo"
-                table="CargoList"
-                extends="Cargo"/>
+        <subclass
+                name="ProductCargo"
+                extends="Cargo" discriminator-value="ProductCargo"/> -->
 
     </class>
 

@@ -4,30 +4,21 @@
                "http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <!--paret of all truck's -->
-    <bean name="truck" abstract="true" class="project.domain.entity.pojo.truck.Truck" scope="prototype"/>
-
-    <bean name="tentedTruck"       parent="truck" class="project.domain.entity.pojo.truck.tented.TentedTruck"              />
-    <bean name="tankTruck"         parent="truck" class="project.domain.entity.pojo.truck.tank.TankTruck"                  />
-    <bean name="refrigeratedTruck" parent="truck" class="project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck"  />
+    <bean name="tentedTruck"       class="project.domain.entity.pojo.truck.tented.TentedTruck"    scope="prototype"          />
+    <bean name="tankTruck"         class="project.domain.entity.pojo.truck.tank.TankTruck"         scope="prototype"         />
+    <bean name="refrigeratedTruck" class="project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck" scope="prototype" />
 
 
     <bean name="organization" class="project.domain.entity.pojo.organization.LogisticOrganization" scope="prototype"/>
 
 
-    <!--parent of all cargo's-->
-    <bean name="cargo" abstract="true" class="project.domain.entity.pojo.cargo.Cargo" scope="prototype"/>
-
-    <bean name="box"     parent="cargo" class="project.domain.entity.pojo.cargo.box.BoxCargo"      />
-    <bean name="oil"     parent="cargo" class="project.domain.entity.pojo.cargo.oil.OilCargo"      />
-    <bean name="product" parent="cargo" class="project.domain.entity.pojo.cargo.product.ProductCargo"  />
+    <bean name="box"     class="project.domain.entity.pojo.cargo.BoxCargo" scope="prototype" />
+    <bean name="oil"     class="project.domain.entity.pojo.cargo.OilCargo"    scope="prototype"  />
+    <bean name="product" class="project.domain.entity.pojo.cargo.ProductCargo" scope="prototype" />
 
 
-    <!--parent of all employee's-->
-    <bean name="employee" abstract="true" class="project.domain.entity.pojo.employee.Employee" scope="prototype"/>
-
-    <bean name="driver"  parent="employee" class="project.domain.entity.pojo.employee.drivers.TruckDriver"      />
-    <bean name="manager" parent="employee" class="project.domain.entity.pojo.employee.managers.LogisticManager" />
+    <bean name="driver"  class="project.domain.entity.pojo.employee.drivers.TruckDriver"   scope="prototype"   />
+    <bean name="manager" class="project.domain.entity.pojo.employee.managers.LogisticManager" scope="prototype"/>
 
     
     <bean name="client" class="project.domain.entity.pojo.client.LogisticClient" scope="prototype"/>

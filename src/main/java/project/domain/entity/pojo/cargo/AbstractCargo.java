@@ -2,7 +2,6 @@ package project.domain.entity.pojo.cargo;
 
 import lombok.*;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
-public abstract class AbstractCargo<V extends Cargo<V>> implements Cargo<V> {
+public abstract class AbstractCargo {
     protected volatile int    id,
                               size;
     protected volatile String type,
@@ -27,7 +26,7 @@ public abstract class AbstractCargo<V extends Cargo<V>> implements Cargo<V> {
                               name;
     protected volatile Date   productionDate,
                               shelfLife;
-    protected volatile Client owner;
+    //protected volatile Client owner;
 
     public AbstractCargo(String name) {
         this.name = name;

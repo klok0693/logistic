@@ -21,6 +21,8 @@ import project.model.logic.users.UserService;
 public class Factory implements ApplicationContextAware {
     private static ApplicationContext context;
 
+    public static ApplicationContext getContext() { return context; }
+
     private Factory() {}
 
     private Factory(String contextWay) {

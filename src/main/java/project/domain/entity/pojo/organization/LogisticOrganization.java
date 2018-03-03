@@ -4,11 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.client.Client;
-import project.domain.entity.pojo.employee.Employee;
-import project.domain.entity.pojo.truck.Truck;
-
-import java.util.Set;
 
 /**
  * Created by klok on 17.10.17.
@@ -28,9 +23,9 @@ public class LogisticOrganization implements Organization {
                              owner,
                              name;
 
-    private volatile Set<Truck>    trucks;
+    /*private volatile Set<Truck>    trucks;
     private volatile Set<Client>   clients;
-    private volatile Set<Employee> employees;
+    private volatile Set<Employee> employees;*/
 
     public LogisticOrganization() {
         this.name = "LogisticOrganization";

@@ -1,7 +1,6 @@
-package project.domain.entity.pojo.cargo.box;
+package project.domain.entity.pojo.cargo;
 
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.cargo.AbstractCargo;
 import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
@@ -11,13 +10,13 @@ import java.util.Date;
  * hibernate entity
  */
 @NotNullByDefault
-public class BoxCargo extends AbstractCargo<Box> implements Box {
+public class OilCargo extends AbstractCargo implements Cargo {
 
-    public BoxCargo() {
-        super("BoxCargo");
+    public OilCargo() {
+        super("OilCargo");
     }
 
-    public BoxCargo(
+    public OilCargo(
                     int id,
                     String type,
                     Date productionDate,
@@ -26,11 +25,11 @@ public class BoxCargo extends AbstractCargo<Box> implements Box {
                     int size,
                     String format)
     {
-        super(id, size, type, format, "BoxCargo", productionDate, shelfLife, owner);
+        super(id, size, type, format, "OilCargo", productionDate, shelfLife);
     }
 
     @Override
-    public Box newInstance() {
-        return new BoxCargo();
+    public Cargo newInstance() {
+        return new OilCargo();
     }
 }

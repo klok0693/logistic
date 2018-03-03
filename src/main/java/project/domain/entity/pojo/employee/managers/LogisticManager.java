@@ -5,7 +5,6 @@ import lombok.Setter;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.employee.AbstractEmployee;
-import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 11.10.17.
@@ -20,8 +19,8 @@ public class LogisticManager extends AbstractEmployee implements Manager{
         super("LogisticManager");
     }
 
-    public LogisticManager(int id, String name, String surname, String position, Organization organization) {
-        super(id, "LogisticManager", name, surname, position, organization);
+    public LogisticManager(int id, String name, String surname, String position) {
+        super(id, "LogisticManager", name, surname, position);
     }
 
     @Override

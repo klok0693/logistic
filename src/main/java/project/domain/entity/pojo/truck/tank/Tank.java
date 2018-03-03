@@ -1,7 +1,6 @@
 package project.domain.entity.pojo.truck.tank;
 
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.cargo.oil.Oil;
 import project.domain.entity.pojo.truck.Truck;
 
 /**
@@ -9,4 +8,4 @@ import project.domain.entity.pojo.truck.Truck;
  * interface for taf trucks
  */
 @NotNullByDefault
-public interface Tank extends Truck<Oil, Tank> {}
+public interface Tank extends Truck {}

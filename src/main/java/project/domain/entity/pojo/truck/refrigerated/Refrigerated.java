@@ -1,7 +1,6 @@
 package project.domain.entity.pojo.truck.refrigerated;
 
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.cargo.product.Product;
 import project.domain.entity.pojo.truck.Truck;
 
 /**
@@ -9,4 +8,4 @@ import project.domain.entity.pojo.truck.Truck;
  * interface for refrigerated trucks
  */
 @NotNullByDefault
-public interface Refrigerated extends Truck<Product, Refrigerated> {}
+public interface Refrigerated extends Truck {}

@@ -14,9 +14,9 @@ Ext.define('client.controller.Clients', {
 
     init: function() {
         this.control({
-            'viewport > clientGrid dataview': {
+            /*'viewport > clientGrid dataview': {
                 itemdblclick: this.editClient
-            },
+            },*/
             'editClient button[action=save]': {
                 click: this.updateClient
             },
@@ -40,7 +40,7 @@ Ext.define('client.controller.Clients', {
             values = form.getValues();
 
         store.add(form.getValues());
-        store.sync();
+        //store.sync();
         win.close();
         //this.getClientsStore().sync();
     },

@@ -1,36 +1,33 @@
 package project.domain.entity.pojo.truck.tented;
 
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.cargo.box.Box;
-import project.domain.entity.pojo.organization.Organization;
 import project.domain.entity.pojo.truck.AbstractTruck;
-
-import java.util.List;
+import project.domain.entity.pojo.truck.Truck;
 
 /**
  * Created by klok on 11.10.17.
  * hibernate entity
  */
 @NotNullByDefault
-public class TentedTruck extends AbstractTruck<Box> implements Tented {
+public class TentedTruck extends AbstractTruck implements Truck {
 
     public TentedTruck() {
         super("TentedTruck");
     }
 
-    public TentedTruck(int id, int registerNumber, String model, String trailer, Organization organization) {
-        super(id, registerNumber, "TentedTruck", model, trailer, organization);
+    public TentedTruck(int id, int registerNumber, String model, String trailer) {
+        super(id, registerNumber, "TentedTruck", model, trailer);
     }
 
-    @Override
-    public void loadCargo(List<Box> cargo) {
+    /*@Override
+    public void loadCargo(Set<Cargo> cargo) {
         this.cargo = cargo;
     }
 
     @Override
-    public List<Box> takeCargo() {
+    public Set<Cargo> takeCargo() {
         return this.cargo;
-    }
+    }*/
 
     @Override
     public TentedTruck newInstance() {

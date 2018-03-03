@@ -1,6 +1,5 @@
 package project.domain.entity.pojo.employee;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -9,7 +8,6 @@ import project.domain.Instance;
 import project.domain.entity.Entity;
 import project.domain.entity.pojo.employee.drivers.TruckDriver;
 import project.domain.entity.pojo.employee.managers.LogisticManager;
-import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 17.10.17.
@@ -42,9 +40,9 @@ public interface Employee<V extends Employee<V>> extends Entity, Instance<V> {
     String getPosition();
     void setPosition(String position);
 
-    @JsonBackReference(value = "EmployeeOrganization")
+    /*@JsonBackReference(value = "EmployeeOrganization")
     Organization getOrganization();
-    void setOrganization(Organization organization);
+    void setOrganization(Organization organization);*/
 
     String getName();
     void setName(String name);

@@ -1,13 +1,8 @@
 package project.domain.entity.ejb.authentication;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-
-import java.util.Set;
 
 /**
  * Created by klok on 10.1.18.
@@ -18,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"username", "password"})
-public class User implements UserDetails, Entity {
+public class User implements Entity {
     private volatile int id;
     private volatile String username,
                             password;
@@ -26,8 +21,8 @@ public class User implements UserDetails, Entity {
                              isAccountNonLocked,
                              isCredentialsNonExpired,
                              isEnabled;
-    @JsonBackReference(value = "UserAuthorities")
-    private volatile Set<GrantedAuthority> authorities;
+    /*@JsonBackReference(value = "UserAuthorities")
+    private volatile Set<GrantedAuthority> authorities;*/
 
     //getters and setters for hibernate
     public boolean getIsAccountNonExpired(){return this.isAccountNonExpired;}
@@ -48,5 +43,5 @@ public class User implements UserDetails, Entity {
     public boolean isCredentialsNonExpired(){return this.isCredentialsNonExpired;}
     public boolean isEnabled(){return this.isEnabled;}
 
-    public Set<GrantedAuthority> getAuthorities(){return this.authorities;}
+    //public Set<GrantedAuthority> getAuthorities(){return this.authorities;}
 }

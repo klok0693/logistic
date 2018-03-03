@@ -6,9 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.User;
-import project.domain.entity.pojo.cargo.Cargo;
-
-import java.util.Set;
 
 /**
  * Created by klok on 18.10.17.
@@ -19,16 +16,16 @@ import java.util.Set;
  */
 @NotNullByDefault
 
-@ToString(of = {"id","type", /*"organization"*/})
+@ToString(of = {"id","type" /*"organization"*/})
 @Getter @Setter
-@EqualsAndHashCode(exclude = {"id", "cargoSet"})
+@EqualsAndHashCode(exclude = {"id" /*"cargoSet"*/})
 public class LogisticClient implements Client {
     private volatile int          id;
     private volatile String       type;
     //private volatile Organization organization;
     private volatile User user;
 
-    private Set<Cargo> cargoSet;
+    //private Set<Cargo> cargoSet;
 
     private final String name = "LogisticClient";
 
@@ -42,10 +39,10 @@ public class LogisticClient implements Client {
         //this.organization  = organization;
     }
 
-    @Override
+    /*@Override
     public void addCargo(Cargo cargo) {
         cargoSet.add(cargo);
-    }
+    }*/
 
     @Override
     public Client newInstance() {

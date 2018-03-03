@@ -12,7 +12,7 @@ import project.aspect.CatchException;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by klok on 11.10.17.
@@ -65,7 +65,7 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
 
     @Override
     @CatchException(message = "Can't load entity list")
-    public List<T> getAll() throws DataException {
+    public Collection<T> getAll() throws DataException {
         return getCurrentSession()
                 .createCriteria(entityClass)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)

@@ -2,7 +2,6 @@ package project.domain.entity.pojo.employee;
 
 import lombok.*;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.organization.Organization;
 
 /**
  * Created by klok on 11.10.17.
@@ -22,7 +21,7 @@ public abstract class AbstractEmployee {
                                     name,
                                     surname,
                                     position;
-    protected volatile Organization organization;
+    //protected volatile Organization organization;
 
     protected AbstractEmployee(String name) {
         this.name = name;

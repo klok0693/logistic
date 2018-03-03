@@ -1,19 +1,14 @@
 package project.domain.entity.pojo.truck;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
-import project.domain.entity.pojo.cargo.Cargo;
-import project.domain.entity.pojo.organization.Organization;
 import project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck;
 import project.domain.entity.pojo.truck.tank.TankTruck;
 import project.domain.entity.pojo.truck.tented.TentedTruck;
-
-import java.util.List;
 
 /**
  * Created by klok on 17.10.17.
@@ -33,10 +28,10 @@ import java.util.List;
         @JsonSubTypes.Type(value = TankTruck.class,          name = "TankTruck"),
         @JsonSubTypes.Type(value = TentedTruck.class,        name = "TentedTruck")
 })
-public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, Instance<T> {
+public interface Truck extends Entity, Instance<Truck> {
 
-    void loadCargo(List<V> cargo);
-    List<V> takeCargo();
+    /*void loadCargo(Set<Cargo> cargo);
+    Set<Cargo> takeCargo();*/
 
     int getId();
     void setId(int id);
@@ -50,9 +45,9 @@ public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, In
     String getTrailer();
     void setTrailer(String trailer);
 
-    @JsonBackReference(value = "TruckOrganization")
+    /*@JsonBackReference(value = "TruckOrganization")
     Organization getOrganization();
-    void setOrganization(Organization organization);
+    void setOrganization(Organization organization);*/
 
     String getName();
     void setName(String name);

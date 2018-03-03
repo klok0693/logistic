@@ -1,15 +1,11 @@
 package project.domain.entity.pojo.client;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.ejb.authentication.Authentication;
-import project.domain.entity.pojo.cargo.Cargo;
-
-import java.util.Set;
 
 /**
  * Created by klok on 18.10.17.
@@ -38,10 +34,10 @@ public interface Client extends Instance<Client>, Authentication {
     //Organization getOrganization();
     //void setOrganization(Organization organization);
 
-    @JsonBackReference(value = "CargoSet")
+    /*@JsonBackReference(value = "CargoSet")
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
-    void addCargo(Cargo cargo);
+    void addCargo(Cargo cargo);*/
 
     String getName();
     //void setName(String name);

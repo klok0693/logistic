@@ -1,7 +1,6 @@
 package project.domain.entity.pojo.truck.tented;
 
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.cargo.box.Box;
 import project.domain.entity.pojo.truck.Truck;
 
 /**
@@ -9,4 +8,4 @@ import project.domain.entity.pojo.truck.Truck;
  * interface for tented trucks
  */
 @NotNullByDefault
-public interface Tented extends Truck<Box, Tented> {}
+public interface Tented extends Truck {}

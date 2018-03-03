@@ -36,14 +36,18 @@
             data-source-ref            = "dataSource"
             users-by-username-query      = "SELECT username, password, isEnabled FROM Users WHERE username=?"
             authorities-by-username-query  = "
-            SELECT u.user_id, r.name
-                FROM Users u, UsersRoles ur JOIN Roles r
-                    WHERE ur.role_id = r.role_id
-        	        AND   u.user_id  = ur.user_id
-        	        AND   u.username = ? "/>
+            SELECT username, role FROM Users WHERE username = ?"/>
 
-    <authentication-manager alias= "authenticationManager">
+   <!-- <authentication-manager alias= "authenticationManager">
         <authentication-provider user-service-ref= "jdbcUserService"/>
+    </authentication-manager> -->
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service >
+                <user name="user" password="pass" authorities="ROLE_CLIENT" />
+            </user-service>
+        </authentication-provider>
     </authentication-manager>
 
 </beans:beans>
