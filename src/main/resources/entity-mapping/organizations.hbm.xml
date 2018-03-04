@@ -1,11 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping package="project.domain.entity.pojo.organization">
 
-    <class name="Organization" abstract="true" dynamic-update="true">
+    <class name="Organization" abstract="true" table="Organizations" dynamic-update="true">
         <id name="id" column="org_id" type="java.lang.Integer" unsaved-value="-1">
             <generator class="increment"/>
         </id>
-        <property name="type"   column="name"  type="java.lang.String" />
+
+        <discriminator>
+            <column name="name"/>
+        </discriminator>
+
+        <property name="type"   column="type"  type="java.lang.String" />
         <property name="owner"  column="owner" type="java.lang.String" />
+        <property name="name"   column="name"  insert="false" update="false" />
 
         <set name="trucks" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="organization"/>
@@ -23,8 +34,8 @@
             <one-to-many class="project.domain.entity.pojo.employee.Employee"/>
         </set>
 
-    </class>
+        <subclass name="LogisticOrganization" discriminator-value="LogisticOrganization" extends="Organization"/>
 
-    <union-subclass name="LogisticOrganization" extends="Organization" table="Organizations"/>
+    </class>
 
 </hibernate-mapping>

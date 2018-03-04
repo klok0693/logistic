@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
-public abstract class AbstractCargo<V extends Cargo<V>> implements Cargo<V> {
+public abstract class AbstractCargo implements Cargo {
     protected volatile int    id,
                               size;
     protected volatile String type,

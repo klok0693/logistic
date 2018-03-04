@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.truck.Truck;
@@ -19,6 +18,7 @@ import project.model.data.DataException;
 import project.model.data.users.UserData;
 import project.model.logic.EntityService;
 import project.model.logic.ServiceException;
+import project.model.logic.users.UserService;
 
 import java.util.Collection;
 
@@ -115,16 +115,16 @@ public class LogisticServlet {
         Client client;
         Authentication authentication;
 
-        UserData<Client> clientData;
+        UserData<Client> clientService;
         EntityService<Cargo> cargoService;
         try {
             //
             cargoService    = Factory.getService(Cargo.class);
-            clientData      = Factory.getUserData(Client.class);
+            clientService   = Factory.getUserData(Client.class);
 
             //
             authentication  = SecurityContextHolder.getContext().getAuthentication();
-            client          = clientData.get(authentication.getName());
+            client          = clientService.get(authentication.getName());
 
             cargo.setOwner(client);
             cargoService.save(cargo);
@@ -132,7 +132,6 @@ public class LogisticServlet {
             return true;
         }
         catch (ServiceException | DataException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -141,31 +140,25 @@ public class LogisticServlet {
     @RequestMapping(value = "/cargo", method = PUT, produces = "application/json")
     public @ResponseBody boolean updateCargo(@RequestBody Cargo cargo) {
 
+        Client client;
+        Authentication authentication;
+
+        UserService<Client> clientService;
+        EntityService<Cargo> cargoService;
         try {
-            EntityService<Cargo> service = Factory.getService(Cargo.class);
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            //
+            cargoService    = Factory.getService(Cargo.class);
+            clientService      = Factory.getUserService(Client.class);
 
-            System.out.println("\n");
-            System.out.println(user.getId());
-            System.out.println("\n");
-
-            UserData<Client> userDao = Factory.getUserData(Client.class);
-            Client client = userDao.get(user.getUsername());
+            //
+            authentication  = SecurityContextHolder.getContext().getAuthentication();
+            client          = clientService.get(authentication.getName());
 
             cargo.setOwner(client);
-            client.addCargo(cargo);
-
-            System.out.println("\n");
-            System.out.println(cargo);
-            System.out.println("\n");
-
-            service.update(cargo);
+            cargoService.update(cargo);
             return true;
-
-            //return Factory.getService(Cargo.class).getAll();
         }
-        catch (ServiceException | DataException e) {
-            e.printStackTrace();
+        catch (ServiceException e) {
             return false;
         }
     }

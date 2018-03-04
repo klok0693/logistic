@@ -10,8 +10,9 @@ import project.domain.entity.pojo.organization.Organization;
  * Created by klok on 11.10.17.
  * hibernate entity
  */
-@Getter @Setter
 @NotNullByDefault
+
+@Getter @Setter
 public class TruckDriver extends AbstractEmployee implements Driver {
     private String driveCard;
 

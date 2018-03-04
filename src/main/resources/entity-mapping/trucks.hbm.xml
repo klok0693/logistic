@@ -1,12 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping package="project.domain.entity.pojo.truck">
 
-    <class name="Truck" abstract="true" dynamic-update="true">
+    <class name="Truck" abstract="true" table="Trucks" dynamic-update="true">
         <id name="id" column="truck_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
+
+        <discriminator>
+            <column name="name"/>
+        </discriminator>
+
         <property name="model"           column="model"           type="java.lang.String"  />
         <property name="registerNumber"  column="registerNumber"  type="java.lang.Integer" />
         <property name="trailer"         column="trailer"         type="java.lang.String"  />
+        <property name="name"            column="name"            insert="false" update="false"  />
+
         <many-to-one
                 name="organization"
                 class="project.domain.entity.pojo.organization.Organization"
@@ -16,24 +28,26 @@
                 lazy="false"
                 fetch="select"
         />
+
+
+        <subclass
+                name="project.domain.entity.pojo.truck.trucks.TentedTruck"
+                discriminator-value="TentedTruck"
+                extends="Truck"
+        />
+
+        <subclass
+                name="project.domain.entity.pojo.truck.trucks.TankTruck"
+                discriminator-value="TankTruck"
+                extends="Truck"
+        />
+
+        <subclass
+                name="project.domain.entity.pojo.truck.trucks.RefrigeratedTruck"
+                discriminator-value="RefrigeratedTruck"
+                extends="Truck"
+        />
+
     </class>
-
-    <union-subclass
-            name="project.domain.entity.pojo.truck.tented.TentedTruck"
-            extends="Truck"
-            table="Trucks"
-    />
-
-    <union-subclass
-            name="project.domain.entity.pojo.truck.tank.TankTruck"
-            extends="Truck"
-            table="Trucks"
-    />
-
-    <union-subclass
-            name="project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck"
-            extends="Truck"
-            table="Trucks"
-    />
 
 </hibernate-mapping>

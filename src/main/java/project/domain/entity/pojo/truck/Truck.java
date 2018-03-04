@@ -9,11 +9,11 @@ import project.domain.Instance;
 import project.domain.entity.Entity;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organization.Organization;
-import project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck;
-import project.domain.entity.pojo.truck.tank.TankTruck;
-import project.domain.entity.pojo.truck.tented.TentedTruck;
+import project.domain.entity.pojo.truck.trucks.RefrigeratedTruck;
+import project.domain.entity.pojo.truck.trucks.TankTruck;
+import project.domain.entity.pojo.truck.trucks.TentedTruck;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by klok on 17.10.17.
@@ -33,10 +33,10 @@ import java.util.List;
         @JsonSubTypes.Type(value = TankTruck.class,          name = "TankTruck"),
         @JsonSubTypes.Type(value = TentedTruck.class,        name = "TentedTruck")
 })
-public interface Truck<V extends Cargo,T extends Truck<V, T>> extends Entity, Instance<T> {
+public interface Truck<V extends Cargo> extends Entity, Instance<Truck<V>> {
 
-    void loadCargo(List<V> cargo);
-    List<V> takeCargo();
+    void setCargo(Set<V> cargo);
+    Set<V> getCargo();
 
     int getId();
     void setId(int id);

@@ -1,18 +1,17 @@
-package project.domain.entity.pojo.truck.refrigerated;
+package project.domain.entity.pojo.truck.trucks;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.product.Product;
 import project.domain.entity.pojo.organization.Organization;
 import project.domain.entity.pojo.truck.AbstractTruck;
-
-import java.util.List;
+import project.domain.entity.pojo.truck.Truck;
 
 /**
  * Created by klok on 17.10.17.
  * hibernate entity
  */
 @NotNullByDefault
-public class RefrigeratedTruck extends AbstractTruck<Product> implements Refrigerated {
+public class RefrigeratedTruck extends AbstractTruck<Product> {
 
     public RefrigeratedTruck() {
         super("RefrigeratedTruck");
@@ -23,17 +22,7 @@ public class RefrigeratedTruck extends AbstractTruck<Product> implements Refrige
     }
 
     @Override
-    public void loadCargo(List<Product> cargo) {
-        this.cargo = cargo;
-    }
-
-    @Override
-    public List<Product> takeCargo() {
-        return cargo;
-    }
-
-    @Override
-    public Refrigerated newInstance() {
+    public Truck<Product> newInstance() {
         return new RefrigeratedTruck();
     }
 }

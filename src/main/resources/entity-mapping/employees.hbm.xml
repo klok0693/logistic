@@ -1,13 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm"
                       package="project.domain.entity.pojo.employee">
 
-    <class name="Employee" abstract="true" dynamic-update="true">
+    <class name="Employee" abstract="true" table="Employees" dynamic-update="true">
         <id name="id" column="empl_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
-        <property name="name"          column="name"     type="java.lang.String" />
-        <property name="surname"       column="surname"  type="java.lang.String" />
-        <property name="position"      column="position" type="java.lang.String" />
+
+        <property name="type"      column="type"     type="java.lang.String" />
+        <property name="surname"   column="surname"  type="java.lang.String" />
+        <property name="position"  column="position" type="java.lang.String" />
+        <property name="name"      column="name"     type="java.lang.String" />
 
         <many-to-one
                 name="organization"
@@ -18,25 +25,53 @@
                 lazy="false"
                 fetch="select"
         />
+
+
+        <joined-subclass
+                name="project.domain.entity.pojo.employee.drivers.Driver"
+                extends="Employee"
+                table="Drivers"
+        >
+            <key column="empl_id"/>
+
+            <property name="driveCard" column="driveCard"/>
+
+
+            <!-- <joined-subclass
+                    name="project.domain.entity.pojo.employee.drivers.TruckDriver"
+                    extends="project.domain.entity.pojo.employee.drivers.Driver"
+                    table="Drivers"
+            >
+                <key column="empl_id"/>
+            </joined-subclass> -->
+
+        </joined-subclass>
+
+
+        <joined-subclass
+                name="project.domain.entity.pojo.employee.managers.Manager"
+                extends="Employee"
+                table="Managers"
+        >
+            <key column="empl_id"/>
+
+            <one-to-one name="user"
+                        cascade="all-delete-orphan"
+                        lazy="proxy"
+                        class="project.domain.entity.ejb.authentication.User"
+                        fetch="select"
+            />
+
+            <!-- <joined-subclass
+                    name="project.domain.entity.pojo.employee.managers.LogisticManager"
+                    extends="project.domain.entity.pojo.employee.managers.Manager"
+                    table="Managers"
+            >
+                <key column="empl_id"/>
+            </joined-subclass> -->
+
+        </joined-subclass>
+
     </class>
-
-    <union-subclass
-            name="project.domain.entity.pojo.employee.drivers.Driver"
-            extends="Employee"
-            abstract="true"
-    />
-
-    <union-subclass
-            name="project.domain.entity.pojo.employee.drivers.TruckDriver"
-            extends="project.domain.entity.pojo.employee.drivers.Driver"
-            table="Employees"
-    />
-
-
-    <union-subclass
-            name="project.domain.entity.pojo.employee.managers.LogisticManager"
-            extends="Employee"
-            table="Employees"
-    />
 
 </hibernate-mapping>

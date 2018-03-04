@@ -31,7 +31,7 @@ import java.util.Date;
         @JsonSubTypes.Type(value = OilCargo.class,      name = "OilCargo"),
         @JsonSubTypes.Type(value = ProductCargo.class,  name = "ProductCargo")
 })
-public interface Cargo<V extends Cargo<V>> extends Entity, Instance<V> {
+public interface Cargo extends Entity, Instance<Cargo> {
 
     int getId();
     void setId(int id);

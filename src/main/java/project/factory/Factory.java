@@ -35,11 +35,6 @@ public class Factory implements ApplicationContextAware {
         private static final Factory factory = new Factory();
     }
 
-    public static Factory getFactory() {
-        return FactoryHolder.factory;
-    }
-
-
 
     //example: getClass(Client.class) -> return GenericDao<Client>
     public static <T extends Entity> EntityData<T> getData(Class<T> aClass) {
@@ -90,4 +85,6 @@ public class Factory implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext context){
         FactoryHolder.factory.context = context;
     }
+
+    public static Factory getFactory() { return FactoryHolder.factory; }
 }

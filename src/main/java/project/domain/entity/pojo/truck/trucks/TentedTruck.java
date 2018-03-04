@@ -1,18 +1,17 @@
-package project.domain.entity.pojo.truck.tented;
+package project.domain.entity.pojo.truck.trucks;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.box.Box;
 import project.domain.entity.pojo.organization.Organization;
 import project.domain.entity.pojo.truck.AbstractTruck;
-
-import java.util.List;
+import project.domain.entity.pojo.truck.Truck;
 
 /**
  * Created by klok on 11.10.17.
  * hibernate entity
  */
 @NotNullByDefault
-public class TentedTruck extends AbstractTruck<Box> implements Tented {
+public class TentedTruck extends AbstractTruck<Box> {
 
     public TentedTruck() {
         super("TentedTruck");
@@ -23,17 +22,7 @@ public class TentedTruck extends AbstractTruck<Box> implements Tented {
     }
 
     @Override
-    public void loadCargo(List<Box> cargo) {
-        this.cargo = cargo;
-    }
-
-    @Override
-    public List<Box> takeCargo() {
-        return this.cargo;
-    }
-
-    @Override
-    public TentedTruck newInstance() {
+    public Truck<Box> newInstance() {
         return new TentedTruck();
     }
 }

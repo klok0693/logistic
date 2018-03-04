@@ -7,9 +7,9 @@
     <!--paret of all truck's -->
     <bean name="truck" abstract="true" class="project.domain.entity.pojo.truck.Truck" scope="prototype"/>
 
-    <bean name="tentedTruck"       parent="truck" class="project.domain.entity.pojo.truck.tented.TentedTruck"              />
-    <bean name="tankTruck"         parent="truck" class="project.domain.entity.pojo.truck.tank.TankTruck"                  />
-    <bean name="refrigeratedTruck" parent="truck" class="project.domain.entity.pojo.truck.refrigerated.RefrigeratedTruck"  />
+    <bean name="tentedTruck"       parent="truck" class="project.domain.entity.pojo.truck.trucks.TentedTruck"        />
+    <bean name="tankTruck"         parent="truck" class="project.domain.entity.pojo.truck.trucks.TankTruck"          />
+    <bean name="refrigeratedTruck" parent="truck" class="project.domain.entity.pojo.truck.trucks.RefrigeratedTruck"  />
 
 
     <bean name="organization" class="project.domain.entity.pojo.organization.LogisticOrganization" scope="prototype"/>
@@ -18,8 +18,8 @@
     <!--parent of all cargo's-->
     <bean name="cargo" abstract="true" class="project.domain.entity.pojo.cargo.Cargo" scope="prototype"/>
 
-    <bean name="box"     parent="cargo" class="project.domain.entity.pojo.cargo.box.BoxCargo"      />
-    <bean name="oil"     parent="cargo" class="project.domain.entity.pojo.cargo.oil.OilCargo"      />
+    <bean name="box"     parent="cargo" class="project.domain.entity.pojo.cargo.box.BoxCargo"          />
+    <bean name="oil"     parent="cargo" class="project.domain.entity.pojo.cargo.oil.OilCargo"          />
     <bean name="product" parent="cargo" class="project.domain.entity.pojo.cargo.product.ProductCargo"  />
 
 

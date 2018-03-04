@@ -11,6 +11,4 @@ import project.domain.entity.pojo.employee.Employee;
 public interface Manager extends Employee<Manager>, Authentication {
 
     String manage();
-
-
 }

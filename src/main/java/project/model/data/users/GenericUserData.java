@@ -1,12 +1,10 @@
 package project.model.data.users;
 
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.CatchException;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.Authentication;
-import project.domain.entity.ejb.authentication.User;
 import project.model.data.DataException;
 import project.model.data.GenericEntityData;
 
@@ -27,15 +25,11 @@ public class GenericUserData<V extends Authentication> extends GenericEntityData
     @CatchException(message = "can't load entity")
     public V get(String userName) throws DataException {
 
-        User user = (User) getCurrentSession()
-                               .createCriteria(User.class)
-                               .add(Restrictions.eq("username", userName))
-                               .uniqueResult();
+        String queryName = "get"+entityClass.getSimpleName()+"ByUserName";
 
-        String queryName = "get"+entityClass.getSimpleName()+"ByUserId";
         Query<V> query = getCurrentSession()
-                             .getNamedSQLQuery(queryName)
-                             .setInteger("userId", user.getId());
+                            .createNamedQuery(queryName)
+                            .setString("username", userName);
 
         return query.uniqueResult();
     }

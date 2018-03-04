@@ -7,5 +7,5 @@ import project.domain.entity.pojo.cargo.Cargo;
  * Created by klok on 4.2.18.
  */
 @NotNullByDefault
-public interface Product extends Cargo<Product> {
+public interface Product extends Cargo {
 }

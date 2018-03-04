@@ -11,7 +11,7 @@ import java.util.Date;
  * hibernate entity
  */
 @NotNullByDefault
-public class BoxCargo extends AbstractCargo<Box> implements Box {
+public class BoxCargo extends AbstractCargo implements Box {
 
     public BoxCargo() {
         super("BoxCargo");

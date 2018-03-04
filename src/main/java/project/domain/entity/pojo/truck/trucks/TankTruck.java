@@ -1,18 +1,17 @@
-package project.domain.entity.pojo.truck.tank;
+package project.domain.entity.pojo.truck.trucks;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.oil.Oil;
 import project.domain.entity.pojo.organization.Organization;
 import project.domain.entity.pojo.truck.AbstractTruck;
-
-import java.util.List;
+import project.domain.entity.pojo.truck.Truck;
 
 /**
  * Created by klok on 17.10.17.
  * hibernate entity
  */
 @NotNullByDefault
-public class TankTruck extends AbstractTruck<Oil> implements Tank {
+public class TankTruck extends AbstractTruck<Oil> {
 
     public TankTruck() {
         super("TankTruck");
@@ -23,17 +22,7 @@ public class TankTruck extends AbstractTruck<Oil> implements Tank {
     }
 
     @Override
-    public void loadCargo(List<Oil> cargo) {
-        this.cargo = cargo;
-    }
-
-    @Override
-    public List<Oil> takeCargo() {
-        return cargo;
-    }
-
-    @Override
-    public Tank newInstance() {
+    public Truck<Oil> newInstance() {
         return new TankTruck();
     }
 }

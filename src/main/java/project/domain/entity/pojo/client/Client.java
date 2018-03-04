@@ -8,6 +8,7 @@ import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.ejb.authentication.Authentication;
 import project.domain.entity.pojo.cargo.Cargo;
+import project.domain.entity.pojo.organization.Organization;
 
 import java.util.Set;
 
@@ -35,8 +36,8 @@ public interface Client extends Instance<Client>, Authentication {
     String getType();
     void setType(String type);
 
-    //Organization getOrganization();
-    //void setOrganization(Organization organization);
+    Organization getOrganization();
+    void setOrganization(Organization organization);
 
     @JsonBackReference(value = "CargoSet")
     Set<Cargo> getCargoSet();
@@ -44,5 +45,5 @@ public interface Client extends Instance<Client>, Authentication {
     void addCargo(Cargo cargo);
 
     String getName();
-    //void setName(String name);
+    void setName(String name);
 }
