@@ -94,6 +94,16 @@ Ext.define('client.view.ClientGrid', {
                     action: 'delete',
                     iconCls: 'icon-delete'
                 }
+                /*{
+                    text: 'Удалить',
+                    iconCls: 'icon-delete ',
+                    handler: function () {
+                        var selection = this.getView().getSelectionModel().getSelection()[0];
+                        if (selection) {
+                            store.remove(selection);
+                         }
+                    }
+                }*/
             ]
         }
     ]

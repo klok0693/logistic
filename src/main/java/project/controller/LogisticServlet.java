@@ -4,10 +4,10 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
@@ -18,7 +18,6 @@ import project.model.data.DataException;
 import project.model.data.users.UserData;
 import project.model.logic.EntityService;
 import project.model.logic.ServiceException;
-import project.model.logic.users.UserService;
 
 import java.util.Collection;
 
@@ -30,7 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @NotNullByDefault
 
 @Log4j
-@Controller
+@RestController
 public class LogisticServlet {
 
     static { Factory.getFactory().setApplicationContext("root-context.xml"); }
@@ -112,6 +111,8 @@ public class LogisticServlet {
     @RequestMapping(value = "/cargo", method = POST, produces = "application/json")
     public @ResponseBody boolean saveCargo(@RequestBody Cargo cargo) {
 
+        System.out.println(cargo);
+
         Client client;
         Authentication authentication;
 
@@ -137,18 +138,20 @@ public class LogisticServlet {
     }
 
 
-    @RequestMapping(value = "/cargo", method = PUT, produces = "application/json")
+    @RequestMapping(value = "/cargo/*", method = PUT, produces = "application/json")
     public @ResponseBody boolean updateCargo(@RequestBody Cargo cargo) {
+
+        System.out.println(cargo);
 
         Client client;
         Authentication authentication;
 
-        UserService<Client> clientService;
+        UserData<Client> clientService;
         EntityService<Cargo> cargoService;
         try {
             //
             cargoService    = Factory.getService(Cargo.class);
-            clientService      = Factory.getUserService(Client.class);
+            clientService      = Factory.getUserData(Client.class);
 
             //
             authentication  = SecurityContextHolder.getContext().getAuthentication();
@@ -158,7 +161,7 @@ public class LogisticServlet {
             cargoService.update(cargo);
             return true;
         }
-        catch (ServiceException e) {
+        catch (ServiceException | DataException e) {
             return false;
         }
     }

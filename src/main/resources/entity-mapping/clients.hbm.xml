@@ -20,7 +20,7 @@
 
         <one-to-one name="user"
                     cascade="all-delete-orphan"
-                    lazy="proxy"
+                    lazy="false"
                     class="project.domain.entity.ejb.authentication.User"
                     fetch="select"
         /> <!--property-ref="id" constrained="true"-->
@@ -30,7 +30,7 @@
                 class="project.domain.entity.pojo.organization.Organization"
                 column="organization"
                 not-null="true"
-                cascade="none"
+                cascade="save-update"
                 lazy="false"
                 fetch="select"
         />

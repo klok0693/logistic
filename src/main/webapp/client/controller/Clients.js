@@ -22,30 +22,45 @@ Ext.define('client.controller.Clients', {
             },
             'clientGrid button[action=add]': {
                 click: this.addClient
+            },
+            'clientGrid button[action=delete]': {
+                click: this.deleteClient
             }
         });
     },
 
     editClient: function(grid, record) {
-        var edit = Ext.create('client.view.EditClient').show();
 
+        var edit = Ext.create('client.view.EditClient').show();
         edit.down('form').loadRecord(record);
     },
 
     updateClient: function(button) {
+
         var win    = button.up('window'),
-            store  = Ext.create('client.store.Clients'),
             form   = win.down('form'),
-            record = form.getRecord(),
             values = form.getValues();
 
-        store.add(form.getValues());
-        //store.sync();
+         var record = form.getRecord();
+          if(record !== undefined) {
+              record.set(values);
+          }
+          else {
+              Ext.create('client.store.Clients').add(form.getValues());
+          }
         win.close();
-        //this.getClientsStore().sync();
     },
 
     addClient: function() {
         Ext.widget('editClient');
+    },
+
+    deleteClient: function() {
+        var sm = this.getClientGrid().getSelectionModel();
+        var rs = sm.getSelection();
+
+        this.getClientGrid().store.remove(rs[0]);
+        this.getClientGrid().store.commitChanges();
+
     }
 });
