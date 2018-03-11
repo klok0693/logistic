@@ -166,6 +166,34 @@ public class LogisticServlet {
         }
     }
 
+    @RequestMapping(value = "/cargo/*", method = DELETE, produces = "application/json")
+    public @ResponseBody boolean deleteCargo(@RequestBody Cargo cargo) {
+
+        System.out.println(cargo);
+
+        Client client;
+        Authentication authentication;
+
+        UserData<Client> clientService;
+        EntityService<Cargo> cargoService;
+        try {
+            //
+            cargoService    = Factory.getService(Cargo.class);
+            clientService      = Factory.getUserData(Client.class);
+
+            //
+            authentication  = SecurityContextHolder.getContext().getAuthentication();
+            client          = clientService.get(authentication.getName());
+
+            cargo.setOwner(client);
+            cargoService.delete(cargo);
+            return true;
+        }
+        catch (ServiceException | DataException e) {
+            return false;
+        }
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/grid")
