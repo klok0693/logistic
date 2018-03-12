@@ -69,6 +69,16 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
     }
 
     @Override
+    public void delete(int id) throws ServiceException {
+        try {
+            data.delete(id);
+        }
+        catch (DataException e) {
+            throw getException(e);
+        }
+    }
+
+    @Override
     public Collection<T> getAll() throws ServiceException{
         try {
             return data.getAll();

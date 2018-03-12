@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.CatchException;
@@ -55,11 +56,23 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
     }
 
 
+    //delete object
     @Override
     @Synchronized
     @CatchException(message = "Can't delete entity")
     public void delete(T obj) throws DataException {
         getCurrentSession().delete(obj);
+    }
+
+
+    //delete by id
+    @Override
+    @Synchronized
+    @CatchException(message = "Can't delete entity")
+    public void delete(int id) throws DataException {
+        String hql = "delete " + entityClass.getSimpleName() + " where id = :id";
+        Query q = getCurrentSession().createQuery(hql).setParameter("id", id);
+        q.executeUpdate();
     }
 
 

@@ -171,25 +171,15 @@ public class LogisticServlet {
 
         System.out.println(cargo);
 
-        Client client;
-        Authentication authentication;
-
-        UserData<Client> clientService;
         EntityService<Cargo> cargoService;
         try {
             //
-            cargoService    = Factory.getService(Cargo.class);
-            clientService      = Factory.getUserData(Client.class);
-
-            //
-            authentication  = SecurityContextHolder.getContext().getAuthentication();
-            client          = clientService.get(authentication.getName());
-
-            cargo.setOwner(client);
-            cargoService.delete(cargo);
+            cargoService = Factory.getService(Cargo.class);
+            
+            cargoService.delete(cargo.getId());
             return true;
         }
-        catch (ServiceException | DataException e) {
+        catch (ServiceException e) {
             return false;
         }
     }
