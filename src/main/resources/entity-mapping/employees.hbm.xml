@@ -6,7 +6,7 @@
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm"
                       package="project.domain.entity.pojo.employee">
 
-    <class name="Employee" abstract="true" table="Employees" dynamic-update="true">
+    <class name="Employee" abstract="true" table="Employees" dynamic-insert="true" dynamic-update="true">
         <id name="id" column="empl_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
@@ -24,6 +24,8 @@
                 cascade="none"
                 lazy="false"
                 fetch="select"
+                insert="true"
+                update="false"
         />
 
 

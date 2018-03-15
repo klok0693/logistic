@@ -5,7 +5,9 @@
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!-- service's beans -->
-    <bean name="entityService" class="project.model.logic.GenericEntityService" scope="prototype"/>
+    <bean name="entityService" class="project.model.logic.GenericEntityService" scope="prototype">
+        <property name="data" ref="entityData"/>
+    </bean>
     <bean name="userService" parent="entityService" class="project.model.logic.users.GenericUserService"/>
 
 

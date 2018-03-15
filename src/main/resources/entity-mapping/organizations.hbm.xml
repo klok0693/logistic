@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="project.domain.entity.pojo.organization">
 
-    <class name="Organization" abstract="true" table="Organizations" dynamic-update="true">
+    <class name="Organization" abstract="true" table="Organizations" dynamic-insert="true" dynamic-update="true">
         <id name="id" column="org_id" type="java.lang.Integer" unsaved-value="-1">
             <generator class="increment"/>
         </id>

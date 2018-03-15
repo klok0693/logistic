@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="project.domain.entity.pojo.cargo">
 
-    <class name="Cargo" abstract="true" table="CargoList" dynamic-update="true">
+    <class name="Cargo" abstract="true" table="CargoList" dynamic-insert="true" dynamic-update="true">
         <!--<cache usage="read-write"/>-->
         <id name="id" column="cargo_id" type="java.lang.Integer">
             <generator class="increment"/>
@@ -31,6 +31,8 @@
                 cascade="save-update"
                 lazy="false"
                 fetch="select"
+                insert="true"
+                update="false"
         />
 
         <subclass

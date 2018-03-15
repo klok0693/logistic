@@ -7,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.CatchException;
 import project.aspect.NotNullByDefault;
@@ -15,13 +14,15 @@ import project.domain.entity.Entity;
 
 import java.util.List;
 
+import static org.springframework.transaction.annotation.Propagation.REQUIRED;
+
 /**
  * Created by klok on 11.10.17.
  * Provides CRUD operation's + getAll() for Entity-classes;
  * Here I have been used Lombok, the annotation preprocessor;
  */
 @NotNullByDefault
-@Transactional(propagation = Propagation.SUPPORTS)
+@Transactional(propagation = REQUIRED, rollbackFor = DataException.class)
 
 @Log4j
 @Accessors(chain = true)
@@ -31,8 +32,6 @@ import java.util.List;
 public class GenericEntityData<T extends Entity> implements EntityData<T> {
     protected SessionFactory factory;
     protected Class<T> entityClass;
-
-
 
     @Override
     @CatchException(message = "Can't save entity")

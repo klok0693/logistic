@@ -12,11 +12,13 @@ import project.model.data.EntityData;
 
 import java.util.Collection;
 
+import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
+
 /**
  * Created by klok on 11.10.17.
  */
 @NotNullByDefault
-@Transactional
+@Transactional(isolation = REPEATABLE_READ, timeout = 60)
 
 //@Accessors(chain = true)
 @Getter @Setter
