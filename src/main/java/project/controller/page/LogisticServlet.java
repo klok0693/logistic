@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.client.Client;
-import project.domain.entity.pojo.truck.Truck;
 import project.factory.Factory;
 
 import java.util.Collection;
@@ -78,7 +76,7 @@ public class LogisticServlet {
 
 
     //(json) get Clients
-    @RequestMapping(value = "/clients", method = GET, produces = "application/json")
+    /*@RequestMapping(value = "/clients", method = GET, produces = "application/json")
     public @ResponseBody Collection<Client> getClients() {
 
         Collection<Client> clients;
@@ -109,5 +107,5 @@ public class LogisticServlet {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 }

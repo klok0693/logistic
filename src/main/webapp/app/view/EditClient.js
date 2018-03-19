@@ -1,4 +1,4 @@
-Ext.define('client.view.EditClient', {
+Ext.define('app.view.EditClient', {
     extend: 'Ext.window.Window',
     alias: 'widget.editClient',
     autoShow: true,
@@ -79,3 +79,4 @@ Ext.define('client.view.EditClient', {
         }
     ]
 });
+

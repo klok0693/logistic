@@ -28,7 +28,8 @@ Ext.define('app.view.welcome_page.Login', {
     ],
     buttons: [{
             text: 'login',
-            handler: function() {
+            action: 'login'
+            /*handler: function() {
                 this.up('form').getForm().submit({
                     url: 'http://localhost:8082/j_spring_security_check',
                     success: function(form, action){
@@ -40,7 +41,7 @@ Ext.define('app.view.welcome_page.Login', {
                                 Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
                             }
                 });
-            }
+            }*/
         },
         {
         text: 'reset',

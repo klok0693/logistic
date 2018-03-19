@@ -17,16 +17,16 @@
      {name: 'name'}
  ];
 
-Ext.define('client.model.Client', {
+Ext.define('app.model.Client', {
     extend: 'Ext.data.Model',
     fields: fields,
     hasMany:[{
-        model:'client.model.Owner', name:'owner'
+        model:'app.model.Owner', name:'owner'
     }]
 });
 
 
-Ext.define('client.model.Owner', {
+Ext.define('app.model.Owner', {
     extend: 'Ext.data.Model',
     fields: {
         name:'id', type:'int',
@@ -34,18 +34,18 @@ Ext.define('client.model.Owner', {
         name:'organization', persist:true
         },
         hasMany:[{
-            model:'client.model.Organization', name:'organization'
+            model:'app.model.Organization', name:'organization'
         }]
     ,
-    belongsTo:'client.model.Client'
+    belongsTo:'app.model.Client'
 });
 
-Ext.define('client.model.Organization', {
+Ext.define('app.model.Organization', {
     extend: 'Ext.data.Model',
     fields: {
         name:'id', type:'int',
         name:'name', type:'string',
         name:'owner', type:'string'
     },
-    belongsTo:'client.model.Owner'
+    belongsTo:'app.model.Owner'
 });

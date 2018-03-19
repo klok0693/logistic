@@ -1,4 +1,4 @@
-Ext.define('client.view.ClientGrid', {
+Ext.define('app.view.ClientGrid', {
     extend: 'Ext.grid.Panel',
     alias:  'widget.clientGrid',
     store: 'Clients',

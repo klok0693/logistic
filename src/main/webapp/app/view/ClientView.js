@@ -1,25 +1,11 @@
-Ext.Loader.setConfig({enabled:true});
-Ext.Loader.setPath('Ext', '/main/webapp/resources/extjs');
-Ext.require([
-    'client.controller.Clients',
-    'client.model.Client',
-    'client.store.Clients',
-    'client.view.ClientGrid',
-    'client.view.EditClient'
-]);
-
-Ext.application({
-    name: 'client',
-
-    // automatically create an instance of AM.view.Viewport
-    //autoCreateViewport: true,
-
-    controllers: ['Clients'],
-
-   launch: function(){
-            Ext.create('Ext.container.Viewport', {
-            layout: 'border',
-                items: [
+Ext.define('app.view.ClientView', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.clientView',
+    width: 500,
+    height: 360,
+    padding: 10,
+    layout: 'border',
+    items: [
                         {
                          xtype: 'panel',
                          region: 'north',
@@ -44,6 +30,4 @@ Ext.application({
                          region: 'center'
                         }
                 ]
-            });
-    }
 });

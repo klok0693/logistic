@@ -22,7 +22,7 @@ public interface EntityService<T extends Entity> {
 
     void delete(int id)     throws ServiceException;
 
-    Collection<T> getAll()  throws ServiceException;
+    Collection<T> getAll(String username)  throws ServiceException;
 
     <D extends EntityData<T>> void setData(D data);
     <D extends EntityData<T>> D getData();

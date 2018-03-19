@@ -12,17 +12,17 @@ import java.util.List;
 @NotNullByDefault
 public interface EntityData<T extends Entity> {
 
-    void save(T obj)     throws DataException;
+    void save(T obj)                throws DataException;
 
-    T get(int id)        throws DataException;
+    T get(int id)                   throws DataException;
 
-    void update(T obj)   throws DataException;
+    void update(T obj)              throws DataException;
 
-    void delete(T obj)   throws DataException;
+    void delete(T obj)              throws DataException;
 
-    void delete(int id)  throws DataException;
+    void delete(int id)             throws DataException;
 
-    List<T> getAll()     throws DataException;
+    List<T> getAll(String username) throws DataException;
 
     EntityData<T> setEntityClass(Class<T> aClass);
 }

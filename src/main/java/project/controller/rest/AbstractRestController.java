@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +57,8 @@ public abstract class AbstractRestController<T extends Entity> {
     @RequestMapping(method = GET, produces = "application/json")
     public @ResponseBody Collection<T> getAll() {
         try {
-            return service.getAll();
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            return service.getAll(username);
         }
         catch (ServiceException e) {
             return null;

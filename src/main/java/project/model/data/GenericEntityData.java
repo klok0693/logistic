@@ -3,7 +3,6 @@ package project.model.data;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.extern.log4j.Log4j;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -43,6 +42,9 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
     @Override
     @CatchException(message = "Can't load entity")
     public T get(int id) throws DataException {
+        /*String s1 = "client1";
+        getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("user", s1));*/
+
         return getCurrentSession().get(entityClass, id);
     }
 
@@ -77,11 +79,14 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
 
     @Override
     @CatchException(message = "Can't load entity list")
-    public List<T> getAll() throws DataException {
-        return getCurrentSession()
-                .createCriteria(entityClass)
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-                .list();
+    public List<T> getAll(String username) throws DataException {
+
+        String query = "get"+entityClass.getSimpleName()+"ListByUserName";
+        Query<T> q = getCurrentSession()
+                        .createNamedQuery(query)
+                        .setString("username", username);
+
+        return q.list();
     }
 
 
