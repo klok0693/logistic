@@ -6,12 +6,7 @@ Ext.define('app.store.Clients', {
     proxy: {
             //type: 'ajax',
             type: 'rest',
-            api: {
-                create:  'http://localhost:8082/cargo',
-                read:    'http://localhost:8082/cargo',
-                destroy: 'http://localhost:8082/cargo',
-                update:  'http://localhost:8082/cargo'
-            },
+            url: 'http://localhost:8082/cargo',
             reader: {
                 type: 'json',
                 root: '',

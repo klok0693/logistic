@@ -3,15 +3,6 @@
      {name: 'type'},
      {name: 'productionDate',  type: 'date'},
      {name: 'shelfLife',       type: 'date'},
-
-     /*{name: 'ownerid', type: 'int',mapping:'owner.id'},
-     {name: 'ownername',type:'string',mapping:'owner.name'},
-     {name: 'orgid', type:'int', mapping:'owner.organization.id'},
-     {name: 'orgname',type:'string',mapping:'owner.organization.name'},
-     {name: 'orgowner',type:'string',mapping:'owner.organization.owner'},*/
-
-     //{name: 'owner', persist:true},
-
      {name: 'size',            type: 'int'},
      {name: 'format'},
      {name: 'name'}

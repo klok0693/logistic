@@ -9,36 +9,137 @@ add security annotations ?; information for INFO logger level;
     <welcome-file>Catalog.html</welcome-file>
   </welcome-file-list>
 
+    /*launch: function(){
+                Ext.create('Ext.container.Viewport', {
+                alias: 'widget.viewport',
+                layout: 'card',
+                items: [
+                     {
+                        xtype: 'panel',
+                        html: '<div style="font: normal 18px cursive"><center><font size = "10">Logistic</font></center></div>',
+                        region: 'north',
+                         //flex: 1,
+                        height: 150,
+                        layout: 'border',
+                        items: [
+                            {
+                             xtype: 'login',
+                             region: 'east',
+                            height: 150
+                              }]
+                     },
+                    {
+                        xtype: 'panel',
+                        html: '<div style="font: normal 18px cursive"><center><font size = "3">Welcome Page</font></center></div>',
+                        region: 'center',
+                        //flex: 1,
+                        height: 300
+                    },
+                       {
+                         xtype: 'WelcomePage',
+                         region: 'center'
+                        }
+        ]
+    });
+    }*/
 
-            Organization g = new LogisticOrganization();
-            g.setName("Мигом-Транс");
-            g.setOwner("Черепахов");
 
-            Client c = new LogisticClient();
-            c.setName("Весёлый");
-            c.setOrganization(g);
 
-            User user = new User();
-            user.setUsername("client3");
-            user.setPassword("pass3");
+            /*'viewport > clientGrid dataview': {
+                itemdblclick: this.editClient
+            },*/
 
-            Roles role = Factory.getData(Roles.class).get(1);
 
-            Set<User> users = new HashSet<>();
-            users.add(user);
-            role.setUsers(users);
+     /*{name: 'ownerid', type: 'int',mapping:'owner.id'},
+     {name: 'ownername',type:'string',mapping:'owner.name'},
+     {name: 'orgid', type:'int', mapping:'owner.organization.id'},
+     {name: 'orgname',type:'string',mapping:'owner.organization.name'},
+     {name: 'orgowner',type:'string',mapping:'owner.organization.owner'},*/
 
-            Set<GrantedAuthority> set1 = new HashSet<>();
-            set1.add(role);
-            user.setAuthorities(set1);
+     //{name: 'owner', persist:true},
 
-            c.setUser(user);
 
-            Set<Client> set = new HashSet<>();
-            set.add(c);
-            g.setClients(set);
+            /*api: {
+                create:  url,
+                read:    url,
+                destroy: 'http://localhost:8082/cargo',
+                update:  'http://localhost:8082/cargo'
+            },*/
 
-            Factory.getData(User.class).save(user);
-            Factory.getData(Organization.class).save(g);
-            Factory.getData(Client.class).save(c);
 
+             /*handler: function() {
+                 this.up('form').getForm().submit({
+                     url: 'http://localhost:8082/j_spring_security_check',
+                     success: function(form, action){
+                                 //Ext.MessageBox.alert('Авторизация пройдена.');
+                                 var redirect = 'http://localhost:8082/grid';
+                                 window.location = redirect;
+                     },
+                     failure: function(form, action){
+                                 Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
+                             }
+                 });
+             }*/
+
+
+
+     @ResponseBody
+     @RequestMapping(value = "/grid")
+     public ModelAndView getGrid() {
+         //get user's roles
+         Collection<? extends GrantedAuthority> roles =
+                 SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+         //return home page according to user's role
+         String roleName;
+         for (GrantedAuthority role : roles) {
+
+             roleName = role.getAuthority().trim();
+             System.out.println(roleName);
+
+             if (roleName.contains("ROLE_CLIENT"))
+                 return new ModelAndView("ClientCatalog");
+
+             if(roleName.contains("ROLE_MANAGER"))
+                 return new ModelAndView("ManagerCatalog");
+
+             if(roleName.contains("ROLE_OWNER"))
+                 return new ModelAndView("OwnerCatalog");
+         }
+         return new ModelAndView("Index");
+     }
+
+
+     //(json) get Clients
+     /*@RequestMapping(value = "/clients", method = GET, produces = "application/json")
+     public @ResponseBody Collection<Client> getClients() {
+
+         Collection<Client> clients;
+         try {
+             //get all Client's from bd
+             clients = Factory.getService(Client.class).getAll();
+             return clients.isEmpty()? null : clients;
+         }
+         catch (Exception e) {
+             //System.out.println(e.getClass());
+             e.printStackTrace();
+             return null;
+         }
+     }
+
+
+     //(json) get Trucks
+     @RequestMapping(value = "/trucks", method = GET, produces = "application/json")
+     public @ResponseBody Collection<Truck> getTrucks() {
+
+         Collection<Truck> trucks;
+         try {
+             //get all trucks from bd
+             trucks = Factory.getService(Truck.class).getAll();
+             return trucks.isEmpty()? null : trucks;
+         }
+         catch (Exception e) {
+             e.printStackTrace();
+             return null;
+         }
+     }*/

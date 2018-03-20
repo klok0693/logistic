@@ -26,9 +26,9 @@
   </context-param>
 
 
-  <!-- <welcome-file-list>
+  <!--<welcome-file-list>
     <welcome-file>Index.html</welcome-file>
-  </welcome-file-list> -->
+  </welcome-file-list>-->
 
 
   <filter>
