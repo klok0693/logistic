@@ -1,8 +1,8 @@
 package project.domain.entity.pojo.cargo;
 
 import lombok.*;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.clients.Client;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
 
@@ -14,21 +14,22 @@ import java.util.Date;
  */
 @NotNullByDefault
 
+@ToString
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "id")
-public abstract class AbstractCargo {
-    protected int    id;
-    protected String name;
-    protected Date   productionDate;
-    protected Date   shelfLife;
-    protected Client owner;
-    protected int    size;
-    protected String format;
+public abstract class AbstractCargo implements Cargo {
+    protected volatile int    id,
+                              size;
+    protected volatile String type,
+                              format,
+                              name;
+    protected volatile Date   productionDate,
+                              shelfLife;
+    protected volatile Client owner;
 
-    @Override
-    public String toString() {
-        return name+" "+size+" "+ format +" "+ owner.getName() +" "+productionDate+" "+shelfLife;
+    public AbstractCargo(String name) {
+        this.name = name;
     }
 }

@@ -1,41 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping package="project.domain.entity.pojo.cargo">
 
-    <class name="Cargo" abstract="true">
+    <class name="Cargo" abstract="true" table="CargoList" dynamic-insert="true" dynamic-update="true">
+        <!--<cache usage="read-write"/>-->
         <id name="id" column="cargo_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
-        <property name="name"            column="name"             type="java.lang.String"  />
+
+        <discriminator>
+            <column name="name"/>
+        </discriminator>
+
+        <property name="type"            column="type"             type="java.lang.String"  />
         <property name="productionDate"  column="production_date"  type="java.util.Date"    />
         <property name="shelfLife"       column="shelf_date"       type="java.util.Date"    />
         <property name="size"            column="size"             type="java.lang.Integer" />
         <property name="format"          column="format"           type="java.lang.String"  />
 
+        <property name="name"            column="name"             insert="false" update="false"/>
+
         <many-to-one
                 name="owner"
-                class="project.domain.entity.pojo.clients.Client"
+                class="project.domain.entity.pojo.client.Client"
                 column="owner"
                 not-null="true"
                 cascade="save-update"
                 lazy="false"
+                fetch="select"
+                insert="true"
+                update="false"
         />
+
+        <subclass
+                name="project.domain.entity.pojo.cargo.box.BoxCargo"
+                discriminator-value="BoxCargo"
+                extends="Cargo"
+        />
+
+        <subclass
+                name="project.domain.entity.pojo.cargo.oil.OilCargo"
+                discriminator-value="OilCargo"
+                extends="Cargo"/>
+
+        <subclass
+                name="project.domain.entity.pojo.cargo.product.ProductCargo"
+                discriminator-value="ProductCargo"
+                extends="Cargo"/>
+
     </class>
 
-    <union-subclass
-            name="project.domain.entity.pojo.cargo.box.BoxCargo"
-            extends="Cargo"
-            table="CargoList"
-    />
 
-    <union-subclass
-            name="project.domain.entity.pojo.cargo.oil.OilCargo"
-            extends="Cargo"
-            table="CargoList"
-    />
-
-    <union-subclass
-            name="project.domain.entity.pojo.cargo.products.ProductCargo"
-            extends="Cargo"
-            table="CargoList"
-    />
+    <sql-query name="getCargoListByUserName">
+        <![CDATA[SELECT * FROM CargoList c INNER JOIN (SELECT * FROM Clients cl INNER JOIN Users u WHERE cl.user = u.user_id) au
+            WHERE c.owner=au.client_id AND au.username = :username]]>
+        <return alias="c" class="Cargo"/>
+    </sql-query>
 
 </hibernate-mapping>

@@ -1,16 +1,11 @@
-Ext.Loader.setConfig({enabled:true});
-Ext.Loader.setPath('Ext', '/main/webapp/resources');
-Ext.require('app.view.welcome_page.Login');
-
-Ext.application({
-    name: 'app',
+Ext.define('app.view.welcome_page.WelcomePage', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.welcomePage',
     width: 500,
     height: 360,
     padding: 10,
-    launch: function(){
-                Ext.create('Ext.container.Viewport', {
-    layout: 'border',
-    items: [
+            layout: 'border',
+            items: [
                {
                 xtype: 'panel',
                 html: '<div style="font: normal 18px cursive"><center><font size = "10">Logistic</font></center></div>',
@@ -33,7 +28,5 @@ Ext.application({
                 height: 300
                 }
         ]
-    });
-    }
 });
 

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns      ="http://www.springframework.org/schema/beans"
-       xmlns:xsi  ="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation=
                "http://www.springframework.org/schema/beans
-                http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+                http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--config beans-->
     <import resource="hibernate-context.xml"/>
-
-    <import resource="domain-beans.xml"/>
-    <import resource="data-beans.xml"/>
-
     <import resource="security-config.xml"/>
+
+    <!--application beans-->
+    <import resource="beans/domain.xml"/>
+    <import resource="beans/model.xml"/>
+    <import resource="beans/aspects.xml"/>
+    <import resource="beans/customExceptions.xml"/>
 
 </beans>

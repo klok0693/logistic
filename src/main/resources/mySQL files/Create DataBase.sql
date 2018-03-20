@@ -1,8 +1,7 @@
-CREATE DATABASE IF NOT EXISTS logistic;
+DROP DATABASE logistic;
+CREATE DATABASE logistic DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 use logistic;
-alter database `logistic` character set utf8;
-set names utf8;
-set collation_connection = utf8_general_ci;
+SET NAMES utf8 COLLATE utf8_general_ci;
 
 create table Roles(
 role_id int unsigned NOT NULL AUTO_INCREMENT,
@@ -25,27 +24,29 @@ PRIMARY KEY(user_id)
 
 create table UsersRoles(
 user_id  int unsigned NOT NULL,
-role_name varchar(100),
+role_id  int unsigned NOT NULL,
 
-PRIMARY KEY(user_id, role_name),
+PRIMARY KEY(user_id, role_id),
 FOREIGN KEY(user_id) REFERENCES Users(user_id) ON UPDATE cascade,
-FOREIGN KEY(role_name) REFERENCES Roles(name) ON UPDATE cascade
+FOREIGN KEY(role_id) REFERENCES Roles(role_id) ON UPDATE cascade
 );
 
 create table Organizations(
 org_id int unsigned NOT NULL AUTO_INCREMENT,
-name   varchar(70)  NOT NULL,
+type   varchar(70)  NOT NULL,
 owner  varchar(70)  NOT NULL,
+name   varchar(30)  NOT NULL,
 
 PRIMARY KEY(org_id)
 );
 
 create table Employees(
 empl_id       int unsigned NOT NULL AUTO_INCREMENT,
-name          varchar(40)  NOT NULL,
+type          varchar(40)  NOT NULL,
 surname       varchar(40)  NOT NULL,
 position      varchar(40)  NOT NULL,
 organization  int unsigned NOT NULL,
+name          varchar(30)  NOT NULL,
 
 PRIMARY KEY(empl_id),
 FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade
@@ -74,6 +75,7 @@ model           varchar(100) NOT NULL,
 registerNumber  int unsigned NOT NULL,
 trailer         varchar(30)  NOT NULL,
 organization    int unsigned NOT NULL,
+name            varchar(30)  NOT NULL,
 
 PRIMARY KEY(truck_id),
 FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade
@@ -81,9 +83,10 @@ FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON 
 
 create table Clients(
 client_id     int unsigned NOT NULL AUTO_INCREMENT,
-name          varchar(100) NOT NULL,
+type          varchar(100) NOT NULL,
 organization  int unsigned NOT NULL,
 user          int unsigned NOT NULL UNIQUE,
+name          varchar(30)  NOT NULL,
 
 PRIMARY KEY(client_id),
 FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade,
@@ -92,12 +95,13 @@ FOREIGN KEY(user)         REFERENCES Users(user_id)        ON DELETE cascade ON 
 
 create table CargoList(
 cargo_id         int unsigned NOT NULL AUTO_INCREMENT,
-name             varchar(70)  NOT NULL,
+type             varchar(70)  NOT NULL,
 production_date  date         NOT NULL,
 shelf_date       date         NOT NULL,
 owner            int unsigned NOT NULL,
 size             int unsigned NOT NULL,
 format           varchar(30)  NOT NULL,
+name             varchar(30)  NOT NULL,
 
 PRIMARY KEY(cargo_id),
 FOREIGN KEY(owner) REFERENCES Clients(client_id) ON DELETE cascade ON UPDATE cascade

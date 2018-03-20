@@ -1,0 +1,24 @@
+1.Basic Information
+2.Notes
+3.Contacts
+
+
+1.BASIC INFORMATION
+
+    It's simple web-application with CRUD operations and authentication.
+    Backend has builded on Spring(core, mvc, security, aop) and Hibernate(MySQL).
+    Frontend - on Extjs-4.1.1-gpl. Also, I have been using Log4j, Lombok, Git, Maven
+    and FindBugs here.
+
+
+2.NOTES
+
+    Application has been created only like a education project.
+
+
+3.CONTACTS
+
+    +375447334889 Yurchanka Filip
+    klok0693@gmail.com
+
+    You can find source code of this application on https://github.com/klok0693/logistic

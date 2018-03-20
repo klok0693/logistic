@@ -4,26 +4,30 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.Entity;
 
 import java.util.Set;
 
 /**
  * Created by klok on 10.1.18.
  */
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(of = {"username", "password"})
 @NotNullByDefault
-public class User implements UserDetails {
-    private int id;
-    private String username;
-    private String password;
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
-    private boolean isEnabled;
-    private Set<GrantedAuthority> authorities;
+
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"username", "password"})
+public class User implements UserDetails, Entity {
+    private volatile int id;
+    private volatile String username,
+                            password;
+    private volatile boolean isAccountNonExpired,
+                             isAccountNonLocked,
+                             isCredentialsNonExpired,
+                             isEnabled;
+    @JsonBackReference(value = "UserAuthorities")
+    private volatile Set<GrantedAuthority> authorities;
 
     //getters and setters for hibernate
     public boolean getIsAccountNonExpired(){return this.isAccountNonExpired;}
@@ -43,6 +47,6 @@ public class User implements UserDetails {
     public boolean isAccountNonLocked(){return this.isAccountNonLocked;}
     public boolean isCredentialsNonExpired(){return this.isCredentialsNonExpired;}
     public boolean isEnabled(){return this.isEnabled;}
-    @JsonBackReference
+
     public Set<GrantedAuthority> getAuthorities(){return this.authorities;}
 }

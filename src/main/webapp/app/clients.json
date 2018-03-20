@@ -1,7 +1,0 @@
-{
-  success: true,
-  clients: [
-    {id: 1, name: 'Tom', organization: null},
-    {id: 2, name: 'Ted', organization: null}
-    ]
-}

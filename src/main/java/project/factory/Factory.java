@@ -1,124 +1,90 @@
 package project.factory;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import project.NotNullByDefault;
-import project.domain.entity.pojo.cargo.Cargo;
-import project.domain.entity.pojo.cargo.box.Box;
-import project.domain.entity.pojo.cargo.oil.Oil;
-import project.domain.entity.pojo.cargo.products.Product;
-import project.domain.entity.pojo.clients.Client;
-import project.domain.entity.pojo.employees.Employee;
-import project.domain.entity.pojo.employees.drivers.Driver;
-import project.domain.entity.pojo.employees.managers.Manager;
-import project.domain.entity.pojo.organizations.Organization;
-import project.domain.entity.pojo.truck.Truck;
-import project.domain.entity.pojo.truck.refrigerated.Refrigerated;
-import project.domain.entity.pojo.truck.tank.Tank;
-import project.domain.entity.pojo.truck.tented.Tented;
-import project.model.data.GenericDao;
+import project.aspect.NotNullByDefault;
+import project.domain.entity.Entity;
+import project.domain.entity.ejb.authentication.Authentication;
+import project.model.data.EntityData;
+import project.model.data.users.UserData;
+import project.model.logic.EntityService;
+import project.model.logic.GenericEntityService;
+import project.model.logic.users.GenericUserService;
+import project.model.logic.users.UserService;
 
 /**
  * Created by klok on 11.10.17.
  * Singleton-class, generated Spring bean's, accessed by static method's get factory()
  */
 @NotNullByDefault
-public class Factory {
-    private ApplicationContext context;
+public class Factory implements ApplicationContextAware {
+    private static ApplicationContext context;
+
+    private Factory() {}
 
     private Factory(String contextWay) {
-        setContext(contextWay);
+        setApplicationContext(contextWay);
     }
 
     private Factory(ApplicationContext context) {
         this.context = context;
     }
 
-    private Factory() {}
-
     private static class FactoryHolder{
         private static final Factory factory = new Factory();
     }
 
-    public static Factory getFactory(String contextWay) {
-        Factory factory = FactoryHolder.factory;
-        factory.setContext(contextWay);
-        return factory;
-    }
 
-    public static Factory getFactory(ApplicationContext context) {
-        Factory factory = FactoryHolder.factory;
-        factory.context = context;
-        return factory;
+    //example: getClass(Client.class) -> return GenericDao<Client>
+    public static <T extends Entity> EntityData<T> getData(Class<T> aClass) {
+        return ((EntityData) context.getBean("entityData")).setEntityClass(aClass);
     }
 
 
-
-    public Tented getTentedTruck() {
-        return (Tented) context.getBean("tentedTruck");
+    public static <T extends Authentication> UserData<T> getUserData(Class<T> aClass) {
+        UserData<T> userData = (UserData) context.getBean("userData");
+        userData.setEntityClass(aClass);
+        return userData;
     }
 
-    public Tank getTankTruck() {
-        return (Tank) context.getBean("tankTruck");
+
+    //example: getEntity(TruckDriver.class) -> return TruckDriver
+    public static <T extends Entity> T getEntity(Class<T> aClass) {
+        return context.getBean(aClass);
     }
 
-    public Refrigerated getRefrigeratedTruck() {
-        return (Refrigerated) context.getBean("refrigeratedTruck");
+
+    //example: getService(Client.class) -> return Service<Client>
+    public static <T extends Entity> EntityService<T> getService(Class<T> aClass) {
+        GenericEntityService service = (GenericEntityService) context.getBean("entityService");
+        service.setData(getData(aClass));
+        return service;
     }
 
-    public Organization getOrganization() {
-        return (Organization) context.getBean("organization");
+
+    //example: getUserService(Client.class) -> return UserService<Client>
+    public static <T extends Authentication> UserService<T> getUserService(Class<T> aClass) {
+        GenericUserService service = (GenericUserService) context.getBean("userService");
+        service.setData(getUserData(aClass));
+        return service;
     }
 
-    public Box getBox() {
-        return (Box) context.getBean("box");
-    }
 
-    public Oil getOil() {
-        return (Oil) context.getBean("oil");
-    }
-
-    public Product getProduct() {
-        return (Product) context.getBean("product");
-    }
-
-    public Driver getDriver() {
-        return (Driver) context.getBean("driver");
-    }
-
-    public Manager getManager() {
-        return (Manager) context.getBean("Manager");
-    }
-
-    public Client getClient() {
-        return (Client) context.getBean("client");
+    //return's custom exception
+    public static <T extends Exception> T getException(Class<T> tClass) {
+        return context.getBean(tClass);
     }
 
 
 
-    public GenericDao<Cargo> getCargoData() {
-        return (GenericDao<Cargo>) context.getBean("cargoData");
+    public void setApplicationContext(String contextWay){
+        FactoryHolder.factory.context = new ClassPathXmlApplicationContext(contextWay);
     }
 
-    public GenericDao<Client> getClientData() {
-        return (GenericDao<Client>) context.getBean("clientData");
+    public void setApplicationContext(ApplicationContext context){
+        FactoryHolder.factory.context = context;
     }
 
-    public GenericDao<Employee> getEmployeeData() {
-        return (GenericDao<Employee>) context.getBean("employeeData");
-    }
-
-    public GenericDao<Organization> getOrganizationData() {
-        return (GenericDao<Organization>) context.getBean("organizationData");
-    }
-
-    public GenericDao<Truck> getTruckData() {
-        return (GenericDao<Truck>) context.getBean("truckData");
-    }
-
-
-
-    private void setContext(String context) {
-        this.context = new ClassPathXmlApplicationContext(context);
-    }
+    public static Factory getFactory() { return FactoryHolder.factory; }
 }

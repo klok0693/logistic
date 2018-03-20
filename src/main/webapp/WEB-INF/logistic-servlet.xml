@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns           ="http://www.springframework.org/schema/beans"
-       xmlns:xsi       ="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:mvc       ="http://www.springframework.org/schema/mvc"
-       xmlns:context   ="http://www.springframework.org/schema/context"
-       xmlns:security  = "http://www.springframework.org/schema/security"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
                 http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -13,13 +14,16 @@
                 http://www.springframework.org/schema/context/spring-context.xsd
                 http://www.springframework.org/schema/security
                 http://www.springframework.org/schema/security/spring-security.xsd
-">
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
     <context:annotation-config/>
     <context:component-scan base-package="project.controller"/>
-    <mvc:annotation-driven />
 
+    <mvc:annotation-driven />
     <mvc:default-servlet-handler/>
+
+    <tx:annotation-driven/>
 
     <!--Spring security enabled annotations-->
     <security:global-method-security pre-post-annotations= "enabled" secured-annotations= "enabled"/>
@@ -28,6 +32,21 @@
         <property name="viewClass">  <value>org.springframework.web.servlet.view.JstlView</value></property>
         <property name="prefix">     <value>/</value></property>
         <property name="suffix">     <value>.html</value></property>
+    </bean>
+
+
+    <bean id="cargoController" class="project.controller.rest.CargoController">
+        <!-- <property name="aClass" ref="cargo"/> -->
+        <property name="service">
+            <bean class="project.model.logic.GenericEntityService">
+                <property name="data">
+                    <bean class="project.model.data.GenericEntityData">
+                        <property name="factory" ref="sessionFactory"/>
+                        <property name="entityClass" value="project.domain.entity.pojo.cargo.Cargo"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
     </bean>
 
 </beans>

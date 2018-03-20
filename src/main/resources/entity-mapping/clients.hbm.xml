@@ -1,28 +1,62 @@
-<hibernate-mapping package="project.domain.entity.pojo.clients">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-    <class name="Client" abstract="true">
+<hibernate-mapping package="project.domain.entity.pojo.client">
+
+    <class name="Client" abstract="true" table="Clients" dynamic-insert="true" dynamic-update="true" >
+        <!--<cache usage="read-write"/>-->
         <id name="id" column="client_id" type="java.lang.Integer">
             <generator class="increment"/>
         </id>
-        <property name="name" column="name" type="java.lang.String"  />
-        <!--<property name="user" column="user" type="project.domain.entity.ejb.authentication.User"/>-->
-        <one-to-one name="user" cascade="all-delete-orphan" lazy="false" class="project.domain.entity.ejb.authentication.User"/>
+
+        <discriminator>
+            <column name="name"/>
+        </discriminator>
+
+        <property name="type" column="type" type="java.lang.String" />
+        <property name="name" column="name" insert="false" update="false"/>
+
+        <one-to-one name="user"
+                    cascade="all-delete-orphan"
+                    lazy="false"
+                    class="project.domain.entity.ejb.authentication.User"
+                    fetch="select"
+        /> <!--property-ref="id" constrained="true"-->
+
         <many-to-one
                 name="organization"
-                class="project.domain.entity.pojo.organizations.Organization"
+                class="project.domain.entity.pojo.organization.Organization"
                 column="organization"
                 not-null="true"
                 cascade="save-update"
                 lazy="false"
+                fetch="select"
+                insert="true"
+                update="false"
         />
 
-        <set name="cargoSet" inverse="false" cascade="all" lazy="false">
+        <set name="cargoSet" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="owner"/>
             <one-to-many class="project.domain.entity.pojo.cargo.Cargo"/>
         </set>
 
+        <subclass name="LogisticClient" discriminator-value="LogisticClient" extends="Client" />
+
     </class>
 
-    <union-subclass name="LogisticClient" extends="Client" table="Clients"/>
+
+
+    <sql-query name="getClientByUserName">
+        <![CDATA[SELECT DISTINCT * FROM Clients c INNER JOIN Users u
+            WHERE c.user=u.user_id AND u.username = :username]]>
+        <return alias="c" class="LogisticClient"/>
+    </sql-query>
+
+    <sql-query name="getClientByUserId">
+        <![CDATA[SELECT DISTINCT * FROM Clients WHERE user = :userId]]>
+        <return alias="c" class="LogisticClient"/>
+    </sql-query>
 
 </hibernate-mapping>

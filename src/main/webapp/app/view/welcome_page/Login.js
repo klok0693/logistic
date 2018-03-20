@@ -28,19 +28,7 @@ Ext.define('app.view.welcome_page.Login', {
     ],
     buttons: [{
             text: 'login',
-            handler: function() {
-                this.up('form').getForm().submit({
-                    url: 'http://localhost:8082/j_spring_security_check',
-                    success: function(form, action){
-                                //Ext.MessageBox.alert('Авторизация пройдена.');
-                                var redirect = 'http://localhost:8082/grid';
-                                window.location = redirect;
-                    },
-                    failure: function(form, action){
-                                Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
-                            }
-                });
-            }
+            action: 'login'
         },
         {
         text: 'reset',

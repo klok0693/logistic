@@ -1,8 +1,8 @@
 package project.domain.entity.pojo.cargo.oil;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.AbstractCargo;
-import project.domain.entity.pojo.clients.Client;
+import project.domain.entity.pojo.client.Client;
 
 import java.util.Date;
 
@@ -11,20 +11,22 @@ import java.util.Date;
  * hibernate entity
  */
 @NotNullByDefault
-class OilCargo extends AbstractCargo implements Oil {
+public class OilCargo extends AbstractCargo implements Oil {
 
-    public OilCargo() {}
+    public OilCargo() {
+        super("OilCargo");
+    }
 
     public OilCargo(
                     int id,
-                    String name,
+                    String type,
                     Date productionDate,
                     Date shelfLife,
                     Client owner,
                     int size,
                     String format)
     {
-        super(id, name, productionDate, shelfLife, owner, size, format);
+        super(id, size, type, format, "OilCargo", productionDate, shelfLife, owner);
     }
 
     @Override

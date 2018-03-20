@@ -1,0 +1,20 @@
+<beans xmlns      ="http://www.springframework.org/schema/beans"
+       xmlns:xsi  ="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <!-- service's beans -->
+    <bean name="entityService" class="project.model.logic.GenericEntityService" scope="prototype">
+        <property name="data" ref="entityData"/>
+    </bean>
+    <bean name="userService" parent="entityService" class="project.model.logic.users.GenericUserService"/>
+
+
+    <!-- data's beans-->
+    <bean name="entityData" class="project.model.data.GenericEntityData" scope="prototype">
+        <property name="factory" ref="sessionFactory"/>
+    </bean>
+    <bean name="userData" parent="entityData" class="project.model.data.users.GenericUserData" />
+
+</beans>

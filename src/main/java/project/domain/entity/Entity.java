@@ -1,6 +1,6 @@
 package project.domain.entity;
 
-import project.NotNullByDefault;
+import project.aspect.NotNullByDefault;
 
 /**
  * Created by klok on 25.10.17.

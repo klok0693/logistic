@@ -1,29 +1,41 @@
-<hibernate-mapping package="project.domain.entity.pojo.organizations">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-    <class name="Organization" abstract="true">
-        <id name="id" column="org_id" type="java.lang.Integer">
+<hibernate-mapping package="project.domain.entity.pojo.organization">
+
+    <class name="Organization" abstract="true" table="Organizations" dynamic-insert="true" dynamic-update="true">
+        <id name="id" column="org_id" type="java.lang.Integer" unsaved-value="-1">
             <generator class="increment"/>
         </id>
-        <property name="name"   column="name"   type="java.lang.String" />
-        <property name="owner"  column="owner"  type="java.lang.String" />
 
-        <set name="trucks" inverse="false" cascade="all" lazy="false">
+        <discriminator>
+            <column name="name"/>
+        </discriminator>
+
+        <property name="type"   column="type"  type="java.lang.String" />
+        <property name="owner"  column="owner" type="java.lang.String" />
+        <property name="name"   column="name"  insert="false" update="false" />
+
+        <set name="trucks" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="organization"/>
             <one-to-many class="project.domain.entity.pojo.truck.Truck"/>
+            <!--<cache usage="read-write"/>-->
         </set>
 
-        <set name="clients" inverse="false" cascade="all" lazy="false">
+        <set name="clients" inverse="false" cascade="all" lazy="true" fetch="select" >
             <key column="organization"/>
-            <one-to-many class="project.domain.entity.pojo.clients.Client"/>
+            <one-to-many class="project.domain.entity.pojo.client.Client"/>
         </set>
 
-        <set name="employees" inverse="false" cascade="all" lazy="false">
+        <set name="employees" inverse="false" cascade="all" lazy="true" fetch="select">
             <key column="organization"/>
-            <one-to-many class="project.domain.entity.pojo.employees.Employee"/>
+            <one-to-many class="project.domain.entity.pojo.employee.Employee"/>
         </set>
+
+        <subclass name="LogisticOrganization" discriminator-value="LogisticOrganization" extends="Organization"/>
 
     </class>
-
-    <union-subclass name="LogisticOrganization" extends="Organization" table="Organizations"/>
 
 </hibernate-mapping>

@@ -1,25 +1,145 @@
-all people(associates, clients, owners) in own table; enum's; archive;
-add comments in xml-files; add @JsonIgnore and @JsonBackReference
-
-
-
-
-    @RequestMapping(value = "/getTrucks", method = GET)
-    public ModelAndView getTrucks() {
-
-        try {
-            Factory factory = getFactory();
-            Map<String, String> model = new HashMap<>();
-            model.put("trucks", factory.getTruckData().getAll().toString());
-
-            return new ModelAndView("trucks", model);
-        }
-        catch (Exception e) {
-            return new ModelAndView("error");
-        }
-    }
+all people(associates, clients, owners) in one table; enum's; archive;
+add comments in xml-files; add @JsonIgnore and @JsonBackReference;
+add second-level cache to hibernate; add @CatchExceptions to Factory;
+add Factory to Spring; setters has returning this ?; add prefix to security-context;
+add security annotations ?; information for INFO logger level;
 
 
   <welcome-file-list>
     <welcome-file>Catalog.html</welcome-file>
   </welcome-file-list>
+
+    /*launch: function(){
+                Ext.create('Ext.container.Viewport', {
+                alias: 'widget.viewport',
+                layout: 'card',
+                items: [
+                     {
+                        xtype: 'panel',
+                        html: '<div style="font: normal 18px cursive"><center><font size = "10">Logistic</font></center></div>',
+                        region: 'north',
+                         //flex: 1,
+                        height: 150,
+                        layout: 'border',
+                        items: [
+                            {
+                             xtype: 'login',
+                             region: 'east',
+                            height: 150
+                              }]
+                     },
+                    {
+                        xtype: 'panel',
+                        html: '<div style="font: normal 18px cursive"><center><font size = "3">Welcome Page</font></center></div>',
+                        region: 'center',
+                        //flex: 1,
+                        height: 300
+                    },
+                       {
+                         xtype: 'WelcomePage',
+                         region: 'center'
+                        }
+        ]
+    });
+    }*/
+
+
+
+            /*'viewport > clientGrid dataview': {
+                itemdblclick: this.editClient
+            },*/
+
+
+     /*{name: 'ownerid', type: 'int',mapping:'owner.id'},
+     {name: 'ownername',type:'string',mapping:'owner.name'},
+     {name: 'orgid', type:'int', mapping:'owner.organization.id'},
+     {name: 'orgname',type:'string',mapping:'owner.organization.name'},
+     {name: 'orgowner',type:'string',mapping:'owner.organization.owner'},*/
+
+     //{name: 'owner', persist:true},
+
+
+            /*api: {
+                create:  url,
+                read:    url,
+                destroy: 'http://localhost:8082/cargo',
+                update:  'http://localhost:8082/cargo'
+            },*/
+
+
+             /*handler: function() {
+                 this.up('form').getForm().submit({
+                     url: 'http://localhost:8082/j_spring_security_check',
+                     success: function(form, action){
+                                 //Ext.MessageBox.alert('Авторизация пройдена.');
+                                 var redirect = 'http://localhost:8082/grid';
+                                 window.location = redirect;
+                     },
+                     failure: function(form, action){
+                                 Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
+                             }
+                 });
+             }*/
+
+
+
+     @ResponseBody
+     @RequestMapping(value = "/grid")
+     public ModelAndView getGrid() {
+         //get user's roles
+         Collection<? extends GrantedAuthority> roles =
+                 SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+         //return home page according to user's role
+         String roleName;
+         for (GrantedAuthority role : roles) {
+
+             roleName = role.getAuthority().trim();
+             System.out.println(roleName);
+
+             if (roleName.contains("ROLE_CLIENT"))
+                 return new ModelAndView("ClientCatalog");
+
+             if(roleName.contains("ROLE_MANAGER"))
+                 return new ModelAndView("ManagerCatalog");
+
+             if(roleName.contains("ROLE_OWNER"))
+                 return new ModelAndView("OwnerCatalog");
+         }
+         return new ModelAndView("Index");
+     }
+
+
+     //(json) get Clients
+     /*@RequestMapping(value = "/clients", method = GET, produces = "application/json")
+     public @ResponseBody Collection<Client> getClients() {
+
+         Collection<Client> clients;
+         try {
+             //get all Client's from bd
+             clients = Factory.getService(Client.class).getAll();
+             return clients.isEmpty()? null : clients;
+         }
+         catch (Exception e) {
+             //System.out.println(e.getClass());
+             e.printStackTrace();
+             return null;
+         }
+     }
+
+
+     //(json) get Trucks
+     @RequestMapping(value = "/trucks", method = GET, produces = "application/json")
+     public @ResponseBody Collection<Truck> getTrucks() {
+
+         Collection<Truck> trucks;
+         try {
+             //get all trucks from bd
+             trucks = Factory.getService(Truck.class).getAll();
+             return trucks.isEmpty()? null : trucks;
+         }
+         catch (Exception e) {
+             e.printStackTrace();
+             return null;
+         }
+     }*/
