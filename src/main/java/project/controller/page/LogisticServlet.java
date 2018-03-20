@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import project.aspect.NotNullByDefault;
+import project.factory.Factory;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -17,6 +18,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Log4j
 @Controller
 public class LogisticServlet {
+
+    static { Factory.getFactory().setApplicationContext("root-context.xml"); }
 
     //welcome page
     @RequestMapping(value = "/")
