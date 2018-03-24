@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="project.domain.entity.pojo.storehouse">
+
+    <class name="StoreHouse" abstract="true" table="StoreHouses" dynamic-insert="true" dynamic-update="true">
+        <!--<cache usage="read-write"/>-->
+        <id name="id" column="store_id" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+
+        <discriminator>
+            <column name="name"/>
+        </discriminator>
+
+        <property name="address"  column="address" type="java.lang.String" />
+        <property name="name"     column="name" insert="false" update="false"/>
+
+        <!--<one-to-one name="user"
+                    cascade="all-delete-orphan"
+                    lazy="false"
+                    class="project.domain.entity.ejb.authentication.User"
+                    fetch="select"
+        />--> <!--property-ref="id" constrained="true"-->
+
+        <set name="cargoSet" inverse="false" cascade="all" lazy="true" fetch="select">
+            <key column="store"/>
+            <one-to-many class="project.domain.entity.pojo.cargo.Cargo"/>
+        </set>
+
+        <subclass name="CargoStore" discriminator-value="CargoStoreHouse" extends="StoreHouse" />
+
+    </class>
+
+</hibernate-mapping>

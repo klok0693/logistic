@@ -4,6 +4,11 @@ Ext.define('app.view.ClientView', {
     width: 500,
     height: 360,
     padding: 10,
+    style: {
+            'background': 'url(resources/image/truck.jpg) !important',
+            'background-size': 'cover !important'
+    },
+    bodyStyle: 'opacity:0.91;',
     layout: 'border',
     items: [
                         {
@@ -17,6 +22,7 @@ Ext.define('app.view.ClientView', {
                          xtype: 'panel',
                          region: 'west',
                          title: 'Наименивание',
+                         //flex: 0.5,
                          width: 150,
                          items: {
                                  xtype: 'textfield',

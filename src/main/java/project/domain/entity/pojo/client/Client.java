@@ -39,7 +39,7 @@ public interface Client extends Instance<Client>, Authentication {
     Organization getOrganization();
     void setOrganization(Organization organization);
 
-    @JsonBackReference(value = "CargoSet")
+    @JsonBackReference(value = "ClientCargoSet")
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
     void addCargo(Cargo cargo);

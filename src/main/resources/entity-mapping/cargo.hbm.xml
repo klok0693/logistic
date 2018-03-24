@@ -35,6 +35,18 @@
                 update="false"
         />
 
+        <many-to-one
+                name="store"
+                class="project.domain.entity.pojo.storehouse.StoreHouse"
+                column="store"
+                not-null="true"
+                cascade="save-update"
+                lazy="false"
+                fetch="select"
+                insert="true"
+                update="false"
+        />
+
         <subclass
                 name="project.domain.entity.pojo.cargo.box.BoxCargo"
                 discriminator-value="BoxCargo"

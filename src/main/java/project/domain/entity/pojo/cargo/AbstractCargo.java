@@ -3,6 +3,7 @@ package project.domain.entity.pojo.cargo;
 import lombok.*;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.client.Client;
+import project.domain.entity.pojo.storehouse.StoreHouse;
 
 import java.util.Date;
 
@@ -27,7 +28,9 @@ public abstract class AbstractCargo implements Cargo {
                               name;
     protected volatile Date   productionDate,
                               shelfLife;
+
     protected volatile Client owner;
+    protected volatile StoreHouse store;
 
     public AbstractCargo(String name) {
         this.name = name;

@@ -10,6 +10,7 @@ import project.domain.entity.pojo.cargo.box.BoxCargo;
 import project.domain.entity.pojo.cargo.oil.OilCargo;
 import project.domain.entity.pojo.cargo.product.ProductCargo;
 import project.domain.entity.pojo.client.Client;
+import project.domain.entity.pojo.storehouse.StoreHouse;
 
 import java.util.Date;
 
@@ -47,6 +48,9 @@ public interface Cargo extends Entity, Instance<Cargo> {
 
     Client getOwner();
     void setOwner(Client owner);
+
+    StoreHouse getStore();
+    void setStore(StoreHouse store);
 
     int getSize();
     void setSize(int size);

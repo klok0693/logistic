@@ -3,6 +3,7 @@ package project.domain.entity.pojo.cargo.box;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.AbstractCargo;
 import project.domain.entity.pojo.client.Client;
+import project.domain.entity.pojo.storehouse.StoreHouse;
 
 import java.util.Date;
 
@@ -23,10 +24,11 @@ public class BoxCargo extends AbstractCargo implements Box {
                     Date productionDate,
                     Date shelfLife,
                     Client owner,
+                    StoreHouse store,
                     int size,
                     String format)
     {
-        super(id, size, type, format, "BoxCargo", productionDate, shelfLife, owner);
+        super(id, size, type, format, "BoxCargo", productionDate, shelfLife, owner, store);
     }
 
     @Override

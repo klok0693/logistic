@@ -4,6 +4,8 @@ Ext.define('app.view.welcome_page.Login', {
     title: 'авторизация',
     wight: 300,
     height: 150,
+    //style:{'background-color':'white'},
+    //bodyStyle: 'opacity:1.0;',
     layout: 'anchor',
      defaults: {
         anchor: '80%'

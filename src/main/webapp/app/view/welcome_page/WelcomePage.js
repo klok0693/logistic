@@ -4,7 +4,7 @@ Ext.define('app.view.welcome_page.WelcomePage', {
     width: 500,
     height: 360,
     padding: 10,
-            layout: 'border',
+    layout: 'border',
             items: [
                {
                 xtype: 'panel',
@@ -13,17 +13,33 @@ Ext.define('app.view.welcome_page.WelcomePage', {
                 //flex: 1,
                 height: 150,
                 layout: 'border',
+                //bodyStyle: 'opacity:0.75;',
+                //bodyStyle: 'background:none; background-color:none;',
                 items: [
                      {
                      xtype: 'login',
                      region: 'east',
+                     //bodyStyle: 'opacity:1.0; background:white !important;',
                      height: 150
-                     }]
+                     }
+                ],
                 },
                 {
                 xtype: 'panel',
                 html: '<div style="font: normal 18px cursive"><center><font size = "3">Welcome Page</font></center></div>',
                 region: 'center',
+                style: {
+                        'background': 'url(resources/image/truck.jpg) !important',
+                        'background-size': 'cover !important'
+                },
+                bodyStyle: 'opacity:0.35;',
+                //bodyStyle: 'opacity:0.5;',
+                //frame:false,
+                //border: false,
+                /*bodyStyle: {
+                    background:'transparent'
+                },*/
+                //bodyStyle: 'background:transparent !important;',
                 //flex: 1,
                 height: 300
                 }

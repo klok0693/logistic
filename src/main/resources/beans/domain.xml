@@ -32,4 +32,6 @@
     
     <bean name="client" class="project.domain.entity.pojo.client.LogisticClient" scope="prototype"/>
 
+    <bean name="storeHouse" class="project.domain.entity.pojo.storehouse.CargoStoreHouse" scope="prototype"/>
+
 </beans>

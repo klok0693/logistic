@@ -37,8 +37,11 @@ insert into Trucks values
 ('1','Маз 21-107','53087','тентованый','1','TentedTruck'),
 ('2','Рено 307','44023','автоцистерна','1','OilTruck');
 
-insert into CargoList values
-('1','Пиво','30.09.17','12.01.18','1','15','ящик','ProductCargo'),
-('2','ps4','20.01.17','01.01.24','1','1','шт','BoxCargo');
+insert into StoreHouses values
+('1','Гомель, Чонгарской дивизии 5','500','CargoStoreHouse'),
+('2','Минск, Промышленная 19','500','CargoStoreHouse');
 
+insert into CargoList values
+('1','Пиво','30.09.17','12.01.18','1','1', '15','ящик','ProductCargo'),
+('2','ps4','20.01.17','01.01.24','1', '2', '1','шт','BoxCargo');
 

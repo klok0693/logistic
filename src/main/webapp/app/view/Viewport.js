@@ -10,7 +10,7 @@ Ext.define('app.view.Viewport',{
         items: [
                {
                xtype: 'welcomePage',
-               region: 'center'
+               region:'center'
                }
         ]
         /*});

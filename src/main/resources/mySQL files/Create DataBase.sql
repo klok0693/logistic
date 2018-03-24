@@ -99,6 +99,7 @@ type             varchar(70)  NOT NULL,
 production_date  date         NOT NULL,
 shelf_date       date         NOT NULL,
 owner            int unsigned NOT NULL,
+store            int unsigned NOT NULL,
 size             int unsigned NOT NULL,
 format           varchar(30)  NOT NULL,
 name             varchar(30)  NOT NULL,
@@ -137,4 +138,13 @@ arrive_date   date         NOT NULL,
 PRIMARY KEY(route_id),
 FOREIGN KEY(ttn)    REFERENCES TTN(ttn_id) ON UPDATE cascade,
 FOREIGN KEY(truck)  REFERENCES Trucks(truck_id) ON UPDATE cascade
+);
+
+CREATE TABLE StoreHouses(
+store_id    int unsigned NOT NULL AUTO_INCREMENT,
+address     varchar(200) NOT NULL,
+size        int unsigned,
+name        varchar(40)  NOT NULL,
+
+PRIMARY KEY(store_id)
 );
