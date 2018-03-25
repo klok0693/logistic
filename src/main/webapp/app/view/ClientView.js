@@ -10,30 +10,45 @@ Ext.define('app.view.ClientView', {
     },
     bodyStyle: 'opacity:0.91;',
     layout: 'border',
+    defaults: {
+        //collapsible: true
+        split: true
+    },
     items: [
-                        {
-                         xtype: 'panel',
-                         region: 'north',
-                         html: '<div style="font: normal 18px cursive"><center><font size = "10">Grid</font></center></div>',
-                         height: 130
-                        },
-                        {
-                         //TODO: text in textfield
-                         xtype: 'panel',
-                         region: 'west',
-                         title: 'Наименивание',
-                         //flex: 0.5,
-                         width: 150,
-                         items: {
-                                 xtype: 'textfield',
-                                 name: 'Наименование',
-                                 //fieldLabel: '',
-                                 maxLength: 50
-                             }
-                        },
-                       {
-                         xtype: 'clientGrid',
-                         region: 'center'
-                        }
-                ]
+            {
+             xtype: 'panel',
+             region: 'north',
+             html: '<div style="font: normal 18px cursive"><center><font size = "10">Grid</font></center></div>',
+             height: 130
+            },
+            {
+             xtype: 'panel',
+             region: 'west',
+             title: 'Cклад',
+             width: 200,
+             //height: 100,
+             items:[{
+                     xtype: 'selectStoreHouse',
+                     region: 'north'
+             }]
+             },
+            /*{
+            //TODO: text in textfield
+            xtype: 'panel',
+            region: 'west',
+            title: 'Наименивание',
+            //flex: 0.5,
+            width: 150,
+            items: {
+                    xtype: 'textfield',
+                    name: 'Наименование',
+                    //fieldLabel: '',
+                    maxLength: 50
+                    }
+            },*/
+            {
+             xtype: 'clientGrid',
+             region: 'center'
+             }
+    ]
 });

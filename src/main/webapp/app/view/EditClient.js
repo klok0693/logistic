@@ -60,6 +60,20 @@ Ext.define('app.view.EditClient', {
                     }),
                     displayField: 'key',
                     valueField: 'value'
+                },
+                {
+                    xtype: 'combo',
+                    fieldLabel: 'store',
+                    name: 'store',
+                    store: new Ext.data.Store({
+                        fields: [{name: 'key'},{name: 'value'}],
+                        data: [
+                            {'key':'gomel', 'value':'1'},
+                            {'key':'minsk', 'value':'2'}
+                        ]
+                    }),
+                    displayField: 'key',
+                    valueField: 'value'
                 }
             ]
         }

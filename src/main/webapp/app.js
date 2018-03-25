@@ -8,7 +8,8 @@ Ext.require([
              'app.model.Client',
              'app.store.Clients',
              'app.view.ClientGrid',
-             'app.view.EditClient'
+             'app.view.EditClient',
+             'app.view.SelectStoreHouse'
 ]);
 
 Ext.application({

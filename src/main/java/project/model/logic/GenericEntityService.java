@@ -81,9 +81,9 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
     }
 
     @Override
-    public Collection<T> getAll(String username) throws ServiceException{
+    public Collection<T> getAll(String username, int store) throws ServiceException{
         try {
-            return data.getAll(username);
+            return data.getAll(username, store);
         }
         catch (DataException e) {
             throw getException(e);

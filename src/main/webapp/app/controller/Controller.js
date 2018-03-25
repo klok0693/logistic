@@ -11,17 +11,19 @@ Ext.define('app.controller.Controller', {
             'ClientGrid',
             'welcome_page.Login',
             'Viewport',
-            'welcome_page.WelcomePage'
+            'welcome_page.WelcomePage',
+            'SelectStoreHouse'
     ],
 
     refs: [
-        {ref:'welcomePage',    selector:'welcomePage'},
-        {ref: 'viewport',      selector: 'viewport'},
-        {ref: 'clientView',    selector: 'clientView'},
-        {ref: 'clientsPanel',  selector: 'panel'},
-        {ref: 'clientGrid',    selector:'clientGrid'},
-        {ref: 'login',         selector:'login'},
-        {ref: 'editClient',    selector: 'editClient'}
+        {ref:'welcomePage',       selector:'welcomePage'},
+        {ref: 'viewport',         selector: 'viewport'},
+        {ref: 'clientView',       selector: 'clientView'},
+        {ref: 'clientsPanel',     selector: 'panel'},
+        {ref: 'clientGrid',       selector:'clientGrid'},
+        {ref: 'login',            selector:'login'},
+        {ref: 'editClient',       selector: 'editClient'},
+        {ref: 'selectStoreHouse', selector: 'selectStoreHouse'}
     ],
 
     init: function() {
@@ -40,6 +42,9 @@ Ext.define('app.controller.Controller', {
             },
             'login button[action=login]': {
                 click: this.loginUser
+            },
+            'selectStoreHouse button[action=go]': {
+                click: this.changeStore
             }
         });
     },
@@ -91,5 +96,13 @@ Ext.define('app.controller.Controller', {
                                     Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
                                 }
                     });
+    },
+
+    changeStore: function(button) {
+        var store = this.getClientGrid().store,
+            store_id = button.up('form').down('combo').getValue();
+
+        //
+        store.load({params:{store:store_id}});
     }
 });

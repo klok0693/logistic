@@ -5,6 +5,10 @@ Ext.define('app.view.welcome_page.WelcomePage', {
     height: 360,
     padding: 10,
     layout: 'border',
+    defaults: {
+        //collapsible: true
+        //split: true
+    },
             items: [
                {
                 xtype: 'panel',

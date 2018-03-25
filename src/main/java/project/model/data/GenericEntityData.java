@@ -79,12 +79,13 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
 
     @Override
     @CatchException(message = "Can't load entity list")
-    public List<T> getAll(String username) throws DataException {
+    public List<T> getAll(String username, int store) throws DataException {
 
         String query = "get"+entityClass.getSimpleName()+"ListByUserName";
         Query<T> q = getCurrentSession()
                         .createNamedQuery(query)
-                        .setString("username", username);
+                        .setString("username", username)
+                        .setInteger("store", store);
 
         return q.list();
     }

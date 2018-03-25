@@ -68,7 +68,7 @@
 
     <sql-query name="getCargoListByUserName">
         <![CDATA[SELECT * FROM CargoList c INNER JOIN (SELECT * FROM Clients cl INNER JOIN Users u WHERE cl.user = u.user_id) au
-            WHERE c.owner=au.client_id AND au.username = :username]]>
+            WHERE c.owner=au.client_id AND au.username = :username AND c.store = :store]]>
         <return alias="c" class="Cargo"/>
     </sql-query>
 

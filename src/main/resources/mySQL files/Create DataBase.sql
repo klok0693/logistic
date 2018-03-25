@@ -105,7 +105,8 @@ format           varchar(30)  NOT NULL,
 name             varchar(30)  NOT NULL,
 
 PRIMARY KEY(cargo_id),
-FOREIGN KEY(owner) REFERENCES Clients(client_id) ON DELETE cascade ON UPDATE cascade
+FOREIGN KEY(owner) REFERENCES Clients(client_id)    ON DELETE cascade ON UPDATE cascade,
+FOREIGN KEY(store) REFERENCES StoreHouses(store_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table TTN(

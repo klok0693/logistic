@@ -2,7 +2,7 @@ all people(associates, clients, owners) in one table; enum's; archive;
 add comments in xml-files; add @JsonIgnore and @JsonBackReference;
 add second-level cache to hibernate; add @CatchExceptions to Factory;
 add Factory to Spring; setters has returning this ?; add prefix to security-context;
-add security annotations ?; information for INFO logger level;
+add security annotations ?; information for INFO logger level; split page in %, not in pixels;
 
 
   <welcome-file-list>

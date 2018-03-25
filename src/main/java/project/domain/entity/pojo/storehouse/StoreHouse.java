@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
+import project.domain.Instance;
+import project.domain.entity.Entity;
 import project.domain.entity.pojo.cargo.Cargo;
 
 import java.util.Set;
@@ -23,7 +25,7 @@ import java.util.Set;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CargoStoreHouse.class, name = "CargoStoreHouse")
 })
-public interface StoreHouse {
+public interface StoreHouse extends Entity, Instance<StoreHouse> {
 
     int getId();
     void setId(int id);
