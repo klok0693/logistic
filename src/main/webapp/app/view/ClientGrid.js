@@ -1,7 +1,7 @@
 Ext.define('app.view.ClientGrid', {
     extend: 'Ext.grid.Panel',
     alias:  'widget.clientGrid',
-    store: 'Clients',
+    store: 'Cargos',
     width: 400,
     height: 300,
     frame: true,
@@ -11,7 +11,7 @@ Ext.define('app.view.ClientGrid', {
     },
     columns: [
         {
-            text: '№',
+            text: 'id',
             flex: 1,
             sortable: true,
             dataIndex: 'id',
@@ -24,7 +24,7 @@ Ext.define('app.view.ClientGrid', {
             }
         },
         {
-            text: 'Наименование',
+            text: 'name',
             flex: 1,
             sortable: true,
             dataIndex: 'type',
@@ -35,19 +35,19 @@ Ext.define('app.view.ClientGrid', {
             }
         },
         {
-            text: 'Дата производства',
+            text: 'production date',
             flex: 1,
             sortable: true,
             dataIndex: 'productionDate'
         },
         {
-            text: 'Годен до',
+            text: 'shelf life',
             flex: 1,
             sortable: true,
             dataIndex: 'shelfLife'
         },
         {
-            text: 'Кол-во',
+            text: 'amount',
             flex: 1,
             sortable: true,
             dataIndex: 'size',
@@ -60,7 +60,7 @@ Ext.define('app.view.ClientGrid', {
             }
         },
         {
-            text: 'Ед. измерени',
+            text: 'format',
             flex: 1,
             sortable: true,
             dataIndex: 'format',
@@ -84,13 +84,13 @@ Ext.define('app.view.ClientGrid', {
             xtype: 'toolbar',
             items: [
                 {
-                    text: 'Добавить',
+                    text: 'add',
                     action: 'add',
                     iconCls: 'icon-add',
                 },
                 '-',
                 {
-                    text: 'Удалить',
+                    text: 'delete',
                     action: 'delete',
                     iconCls: 'icon-delete'
                 }

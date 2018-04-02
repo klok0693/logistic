@@ -1,9 +1,9 @@
 Ext.define('app.controller.Controller', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Clients'],
+    stores: ['Cargos'],
 
-    models: ['Client'],
+    models: ['Cargo'],
 
     views: [
             'ClientView',
@@ -12,7 +12,8 @@ Ext.define('app.controller.Controller', {
             'welcome_page.Login',
             'Viewport',
             'welcome_page.WelcomePage',
-            'SelectStoreHouse'
+            'SelectStoreHouse',
+            'SearchCargo'
     ],
 
     refs: [
@@ -23,7 +24,8 @@ Ext.define('app.controller.Controller', {
         {ref: 'clientGrid',       selector:'clientGrid'},
         {ref: 'login',            selector:'login'},
         {ref: 'editClient',       selector: 'editClient'},
-        {ref: 'selectStoreHouse', selector: 'selectStoreHouse'}
+        {ref: 'selectStoreHouse', selector: 'selectStoreHouse'},
+        {ref: 'searchCargo',      selector: 'searchCargo'}
     ],
 
     init: function() {
@@ -45,6 +47,9 @@ Ext.define('app.controller.Controller', {
             },
             'selectStoreHouse button[action=go]': {
                 click: this.changeStore
+            },
+            'searchCargo button[action=search]': {
+                click: this.findCargo
             }
         });
     },
@@ -93,7 +98,7 @@ Ext.define('app.controller.Controller', {
                                    viewport.getLayout().setActiveItem(view)
                         },
                         failure: function(form, action){
-                                    Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
+                                    Ext.MessageBox.alert('Authoriation failed');//,action.result.message
                                 }
                     });
     },
@@ -104,5 +109,18 @@ Ext.define('app.controller.Controller', {
 
         //
         store.load({params:{store:store_id}});
+    },
+
+    findCargo: function(button) {
+        var store = this.getClientGrid().store,
+            name = button.up('form').down('textfield').getValue(),
+            cargo = store.findRecord('type', name);
+
+        if (cargo !== null) {
+
+            var edit = Ext.create('app.view.EditClient').show();
+            edit.down('form').loadRecord(cargo);
+        }
+        else Ext.MessageBox.alert('Cant find Cargo');
     }
 });

@@ -8,11 +8,12 @@
      {name: 'name'}
  ];
 
-Ext.define('app.model.Client', {
+Ext.define('app.model.Cargo', {
     extend: 'Ext.data.Model',
     fields: fields,
     hasMany:[{
-        model:'app.model.Owner', name:'owner'
+        model:'app.model.Owner', name:'owner',
+        model:'app.model.StoreHouse', name:'store'
     }]
 });
 
@@ -28,7 +29,17 @@ Ext.define('app.model.Owner', {
             model:'app.model.Organization', name:'organization'
         }]
     ,
-    belongsTo:'app.model.Client'
+    belongsTo:'app.model.Cargo'
+});
+
+Ext.define('app.model.StoreHouse', {
+    extend: 'Ext.data.Model',
+    fields: {
+        name: 'id', type: 'int',
+        name: 'address',
+        name: 'name'
+    },
+    belongsTo:'app.model.Cargo'
 });
 
 Ext.define('app.model.Organization', {

@@ -1,7 +1,7 @@
 Ext.define('app.view.welcome_page.Login', {
     extend: 'Ext.form.Panel',
     alias: 'widget.login',
-    title: 'авторизация',
+    title: 'Account',
     wight: 300,
     height: 150,
     //style:{'background-color':'white'},

@@ -24,13 +24,19 @@ Ext.define('app.view.ClientView', {
             {
              xtype: 'panel',
              region: 'west',
-             title: 'Cклад',
+             title: 'StoreHouse',
              width: 200,
              //height: 100,
-             items:[{
+             items:[
+                    {
                      xtype: 'selectStoreHouse',
                      region: 'north'
-             }]
+                    },
+                    {
+                     xtype: 'searchCargo',
+                     region: 'center'
+                    }
+                    ]
              },
             /*{
             //TODO: text in textfield
