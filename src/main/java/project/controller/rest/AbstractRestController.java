@@ -71,7 +71,7 @@ public abstract class AbstractRestController<T extends Entity> {
     }
 
 
-    @RequestMapping(value = "/*", method = PUT, produces = "application/json")
+    @RequestMapping(value = "/*", method = PUT, produces = "application/json")//application/x-www-form-urlencoded;charset=UTF-8
     public @ResponseBody boolean update(@RequestBody T obj) {
         try {
             service.update(obj);

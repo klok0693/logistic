@@ -2,7 +2,6 @@ package project.controller.rest;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
+import project.domain.entity.pojo.cargo.box.BoxCargo;
 import project.domain.entity.pojo.client.Client;
+import project.domain.entity.pojo.storehouse.StoreHouse;
 import project.factory.Factory;
 import project.model.data.DataException;
-import project.model.data.users.UserData;
 import project.model.logic.EntityService;
-import project.model.logic.ServiceException;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -38,7 +38,7 @@ public class CargoController extends AbstractRestController<Cargo> {
     @RequestMapping(method = POST, produces = "application/json")
     public @ResponseBody boolean save(@RequestBody Cargo cargo) {
 
-        Client client;
+        /*Client client;
         Authentication authentication;
 
         UserData<Client> clientService;
@@ -57,6 +57,39 @@ public class CargoController extends AbstractRestController<Cargo> {
         }
         catch (ServiceException | DataException e) {
             return false;
+        }*/
+        try {
+            cargo.setStore(Factory.getData(StoreHouse.class).get(1));
+
+            System.out.println();
+            System.out.println(cargo);
+            System.out.println();
+
+            Factory.getData(Cargo.class).save(cargo);
+            return true;
+        }
+        catch (DataException e) {
+            return false;
+        }
+    }
+
+    @RequestMapping(method = GET, value = "/single", produces = "application/json")
+    public @ResponseBody Cargo load() {
+        Cargo cargo = Factory.getEntity(BoxCargo.class);
+
+        try {
+            Client client = Factory.getUserData(Client.class).get(
+                    SecurityContextHolder
+                    .getContext()
+                    .getAuthentication()
+                    .getName()
+            );
+
+            cargo.setOwner(client);
+            return cargo;
+        }
+        catch (DataException e) {
+            return null;
         }
     }
 }

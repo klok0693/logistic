@@ -1,7 +1,7 @@
 Ext.define('app.controller.Controller', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Cargos'],
+    stores: ['Cargos', 'Cr'],
 
     models: ['Cargo'],
 
@@ -70,7 +70,27 @@ Ext.define('app.controller.Controller', {
               record.set(values);
           }
           else {
-              Ext.create('app.store.Clients').add(form.getValues());
+              //var obj = Ext.getStore('Cr').load().getAt(0);
+              var obj = Ext.create(Ext.getStore('Cr').model);
+              var object = Ext.getStore('Cr').load().getAt(0);
+
+              console.log('loaded obj', object.getData().owner);
+              console.log('form',form.getValues());
+
+              var frm = form.getForm();
+
+              obj.set('format',           frm.findField('format').getValue());
+              //obj.set('id', form.getForm().findField('id').getValue());
+              obj.set('name',             frm.findField('name').getValue());
+              obj.set('owner',            object.getData().owner);
+              obj.set('productionDate',   frm.findField('productionDate').getValue());
+              obj.set('shelfLife',        frm.findField('shelfLife').getValue());
+              obj.set('size',             frm.findField('size').getValue());
+              obj.set('type',             frm.findField('type').getValue());
+
+              console.log('obj after', obj);
+
+              this.getClientGrid().store.add(obj);
           }
         win.close();
     },

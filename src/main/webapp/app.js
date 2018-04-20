@@ -10,7 +10,8 @@ Ext.require([
              'app.view.ClientGrid',
              'app.view.EditClient',
              'app.view.SelectStoreHouse',
-             'app.view.SearchCargo'
+             'app.view.SearchCargo',
+             'app.store.Cr'
 ]);
 
 Ext.application({

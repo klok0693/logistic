@@ -75,6 +75,10 @@ Ext.define('app.view.EditClient', {
                     displayField: 'key',
                     valueField: 'value'
                 }
+                /*{
+                xtype:'hidden',
+                name: 'owner'
+                }*/
             ]
         }
     ],
