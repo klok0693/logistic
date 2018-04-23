@@ -1,6 +1,6 @@
 Ext.define('app.store.Cr', {
     extend: 'Ext.data.Store',
-    model: 'app.model.Cargo',
+    model: 'app.model.Owner',
     autoLoad: true,
     autoSync: false,
     proxy: {

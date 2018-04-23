@@ -1,7 +1,7 @@
 package project.domain.entity.pojo.storehouse;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
@@ -39,7 +39,7 @@ public interface StoreHouse extends Entity, Instance<StoreHouse> {
     Integer getSize();
     void setSize(Integer size);
 
-    @JsonBackReference(value = "StoreCargoSet")
+    @JsonManagedReference(value = "StoreCargoSet")
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
 }

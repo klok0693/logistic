@@ -10,6 +10,11 @@ Ext.define('app.view.EditClient', {
             xtype: 'form',
             items: [
                 {
+                    xtype: 'hidden',
+                    name: 'id',
+                    fieldLabel: 'id'
+                },
+                {
                     xtype: 'textfield',
                     name: 'type',
                     fieldLabel: 'name',

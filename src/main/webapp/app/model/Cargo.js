@@ -15,17 +15,6 @@ Ext.define('app.model.Cargo', {
     belongsTo: 'app.model.Owner'
 });
 
-
-Ext.define('app.model.Owner', {
-    extend: 'Ext.data.Model',
-    fields: [
-        {name:'id', type:'int'},
-        {name:'name', type:'string'},
-        {name:'organization', model: 'app.model.Organization'} //persist:true
-        ],
-    belongsTo:'app.model.Organization'
-});
-
 Ext.define('app.model.StoreHouse', {
     extend: 'Ext.data.Model',
     fields: {
@@ -34,14 +23,4 @@ Ext.define('app.model.StoreHouse', {
         name: 'name'
     },
     belongsTo:'app.model.Cargo'
-});
-
-Ext.define('app.model.Organization', {
-    extend: 'Ext.data.Model',
-    fields: {
-        name:'id', type:'int',
-        name:'name', type:'string',
-        name:'owner', type:'string'
-    },
-    belongsTo:'app.model.Owner'
 });

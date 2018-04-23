@@ -1,8 +1,6 @@
 package project.domain.entity.pojo.cargo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
@@ -46,9 +44,11 @@ public interface Cargo extends Entity, Instance<Cargo> {
     Date getShelfLife();
     void setShelfLife(Date shelfLife);
 
+    @JsonBackReference(value = "CargoSet")
     Client getOwner();
     void setOwner(Client owner);
 
+    @JsonBackReference(value = "StoreCargoSet")
     StoreHouse getStore();
     void setStore(StoreHouse store);
 

@@ -50,7 +50,7 @@ public interface Truck<V extends Cargo> extends Entity, Instance<Truck<V>> {
     String getTrailer();
     void setTrailer(String trailer);
 
-    @JsonBackReference(value = "TruckOrganization")
+    @JsonBackReference(value = "TrucksSet")
     Organization getOrganization();
     void setOrganization(Organization organization);
 

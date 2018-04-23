@@ -65,33 +65,37 @@ Ext.define('app.controller.Controller', {
             form   = win.down('form'),
             values = form.getValues();
 
+        var obj     = Ext.create(Ext.getStore('Cargos').model);
+        var object  = Ext.getStore('Cr').load().getAt(0);
+
          var record = form.getRecord();
           if(record !== undefined) {
               record.set(values);
+              Ext.getStore('Cargos').findRecord('id', form.getForm().findField('id').getValue())
+                                         .set('owner', object.getData());
+
+              console.log('record', record);
           }
           else {
-              //var obj = Ext.getStore('Cr').load().getAt(0);
-              var obj = Ext.create(Ext.getStore('Cr').model);
-              var object = Ext.getStore('Cr').load().getAt(0);
-
-              console.log('loaded obj', object.getData().owner);
-              console.log('form',form.getValues());
-
               var frm = form.getForm();
 
               obj.set('format',           frm.findField('format').getValue());
               //obj.set('id', form.getForm().findField('id').getValue());
               obj.set('name',             frm.findField('name').getValue());
-              obj.set('owner',            object.getData().owner);
+              obj.set('owner',            object.getData());
               obj.set('productionDate',   frm.findField('productionDate').getValue());
               obj.set('shelfLife',        frm.findField('shelfLife').getValue());
               obj.set('size',             frm.findField('size').getValue());
               obj.set('type',             frm.findField('type').getValue());
 
-              console.log('obj after', obj);
+              console.log('loaded obj', object.getData());
+              console.log('form',form.getValues());
 
               this.getClientGrid().store.add(obj);
+
+              console.log('obj after', obj);
           }
+
         win.close();
     },
 
@@ -102,6 +106,11 @@ Ext.define('app.controller.Controller', {
     deleteClient: function() {
         var grid       = this.getClientGrid(),
             selection  = grid.getSelectionModel().getSelection();
+
+        Ext.getStore('Cargos').findRecord('id', selection[0].getData().id)
+                       .set('owner', Ext.getStore('Cr').load().getAt(0).getData());
+
+        console.log('selection', selection[[0]]);
 
         grid.store.remove(selection[0]);
         grid.store.commitChanges();

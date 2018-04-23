@@ -35,10 +35,6 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
     @Override
     @CatchException(message = "Can't save entity")
     public void save(T obj) throws DataException {
-        System.out.println();
-        System.out.println(obj);
-        System.out.println();
-        
         getCurrentSession().save(obj);
     }
 

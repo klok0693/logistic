@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
-import project.domain.entity.pojo.cargo.box.BoxCargo;
 import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.storehouse.StoreHouse;
 import project.factory.Factory;
@@ -74,19 +73,15 @@ public class CargoController extends AbstractRestController<Cargo> {
     }
 
     @RequestMapping(method = GET, value = "/single", produces = "application/json")
-    public @ResponseBody Cargo load() {
-        Cargo cargo = Factory.getEntity(BoxCargo.class);
+    public @ResponseBody Client load() {
 
         try {
-            Client client = Factory.getUserData(Client.class).get(
+            return Factory.getUserData(Client.class).get(
                     SecurityContextHolder
-                    .getContext()
-                    .getAuthentication()
-                    .getName()
+                            .getContext()
+                            .getAuthentication()
+                            .getName()
             );
-
-            cargo.setOwner(client);
-            return cargo;
         }
         catch (DataException e) {
             return null;
