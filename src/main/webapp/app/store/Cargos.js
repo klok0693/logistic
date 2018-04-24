@@ -1,6 +1,6 @@
-Ext.define('app.store.Clients', {
+Ext.define('app.store.Cargos', {
     extend: 'Ext.data.Store',
-    model: 'app.model.Client',
+    model: 'app.model.Cargo',
     autoLoad: true,
     autoSync: true,
     proxy: {

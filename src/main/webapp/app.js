@@ -5,10 +5,13 @@ Ext.require([
              'app.view.welcome_page.WelcomePage',
              'app.view.welcome_page.Login',
              'app.controller.Controller',
-             'app.model.Client',
-             'app.store.Clients',
+             'app.model.Cargo',
+             'app.store.Cargos',
              'app.view.ClientGrid',
-             'app.view.EditClient'
+             'app.view.EditClient',
+             'app.view.SelectStoreHouse',
+             'app.view.SearchCargo',
+             'app.store.Cr'
 ]);
 
 Ext.application({

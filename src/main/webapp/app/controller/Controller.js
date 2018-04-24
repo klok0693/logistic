@@ -1,9 +1,9 @@
 Ext.define('app.controller.Controller', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Clients'],
+    stores: ['Cargos', 'Cr'],
 
-    models: ['Client'],
+    models: ['Cargo'],
 
     views: [
             'ClientView',
@@ -11,17 +11,21 @@ Ext.define('app.controller.Controller', {
             'ClientGrid',
             'welcome_page.Login',
             'Viewport',
-            'welcome_page.WelcomePage'
+            'welcome_page.WelcomePage',
+            'SelectStoreHouse',
+            'SearchCargo'
     ],
 
     refs: [
-        {ref:'welcomePage',    selector:'welcomePage'},
-        {ref: 'viewport',      selector: 'viewport'},
-        {ref: 'clientView',    selector: 'clientView'},
-        {ref: 'clientsPanel',  selector: 'panel'},
-        {ref: 'clientGrid',    selector:'clientGrid'},
-        {ref: 'login',         selector:'login'},
-        {ref: 'editClient',    selector: 'editClient'}
+        {ref:'welcomePage',       selector:'welcomePage'},
+        {ref: 'viewport',         selector: 'viewport'},
+        {ref: 'clientView',       selector: 'clientView'},
+        {ref: 'clientsPanel',     selector: 'panel'},
+        {ref: 'clientGrid',       selector:'clientGrid'},
+        {ref: 'login',            selector:'login'},
+        {ref: 'editClient',       selector: 'editClient'},
+        {ref: 'selectStoreHouse', selector: 'selectStoreHouse'},
+        {ref: 'searchCargo',      selector: 'searchCargo'}
     ],
 
     init: function() {
@@ -40,6 +44,12 @@ Ext.define('app.controller.Controller', {
             },
             'login button[action=login]': {
                 click: this.loginUser
+            },
+            'selectStoreHouse button[action=go]': {
+                click: this.changeStore
+            },
+            'searchCargo button[action=search]': {
+                click: this.findCargo
             }
         });
     },
@@ -55,13 +65,37 @@ Ext.define('app.controller.Controller', {
             form   = win.down('form'),
             values = form.getValues();
 
+        var obj     = Ext.create(Ext.getStore('Cargos').model);
+        var object  = Ext.getStore('Cr').load().getAt(0);
+
          var record = form.getRecord();
           if(record !== undefined) {
               record.set(values);
+              Ext.getStore('Cargos').findRecord('id', form.getForm().findField('id').getValue())
+                                         .set('owner', object.getData());
+
+              console.log('record', record);
           }
           else {
-              Ext.create('app.store.Clients').add(form.getValues());
+              var frm = form.getForm();
+
+              obj.set('format',           frm.findField('format').getValue());
+              //obj.set('id', form.getForm().findField('id').getValue());
+              obj.set('name',             frm.findField('name').getValue());
+              obj.set('owner',            object.getData());
+              obj.set('productionDate',   frm.findField('productionDate').getValue());
+              obj.set('shelfLife',        frm.findField('shelfLife').getValue());
+              obj.set('size',             frm.findField('size').getValue());
+              obj.set('type',             frm.findField('type').getValue());
+
+              console.log('loaded obj', object.getData());
+              console.log('form',form.getValues());
+
+              this.getClientGrid().store.add(obj);
+
+              console.log('obj after', obj);
           }
+
         win.close();
     },
 
@@ -72,6 +106,11 @@ Ext.define('app.controller.Controller', {
     deleteClient: function() {
         var grid       = this.getClientGrid(),
             selection  = grid.getSelectionModel().getSelection();
+
+        Ext.getStore('Cargos').findRecord('id', selection[0].getData().id)
+                       .set('owner', Ext.getStore('Cr').load().getAt(0).getData());
+
+        console.log('selection', selection[[0]]);
 
         grid.store.remove(selection[0]);
         grid.store.commitChanges();
@@ -88,8 +127,29 @@ Ext.define('app.controller.Controller', {
                                    viewport.getLayout().setActiveItem(view)
                         },
                         failure: function(form, action){
-                                    Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
+                                    Ext.MessageBox.alert('Authoriation failed');//,action.result.message
                                 }
                     });
+    },
+
+    changeStore: function(button) {
+        var store = this.getClientGrid().store,
+            store_id = button.up('form').down('combo').getValue();
+
+        //
+        store.load({params:{store:store_id}});
+    },
+
+    findCargo: function(button) {
+        var store = this.getClientGrid().store,
+            name = button.up('form').down('textfield').getValue(),
+            cargo = store.findRecord('type', name);
+
+        if (cargo !== null) {
+
+            var edit = Ext.create('app.view.EditClient').show();
+            edit.down('form').loadRecord(cargo);
+        }
+        else Ext.MessageBox.alert('Cant find Cargo');
     }
 });

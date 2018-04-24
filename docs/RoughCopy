@@ -2,7 +2,12 @@ all people(associates, clients, owners) in one table; enum's; archive;
 add comments in xml-files; add @JsonIgnore and @JsonBackReference;
 add second-level cache to hibernate; add @CatchExceptions to Factory;
 add Factory to Spring; setters has returning this ?; add prefix to security-context;
-add security annotations ?; information for INFO logger level;
+add security annotations ?; information for INFO logger level; split page in %, not in pixels;
+
+
+fill store(frontend) with autoload nested object
+fix no Session bug
+
 
 
   <welcome-file-list>
@@ -43,46 +48,6 @@ add security annotations ?; information for INFO logger level;
     });
     }*/
 
-
-
-            /*'viewport > clientGrid dataview': {
-                itemdblclick: this.editClient
-            },*/
-
-
-     /*{name: 'ownerid', type: 'int',mapping:'owner.id'},
-     {name: 'ownername',type:'string',mapping:'owner.name'},
-     {name: 'orgid', type:'int', mapping:'owner.organization.id'},
-     {name: 'orgname',type:'string',mapping:'owner.organization.name'},
-     {name: 'orgowner',type:'string',mapping:'owner.organization.owner'},*/
-
-     //{name: 'owner', persist:true},
-
-
-            /*api: {
-                create:  url,
-                read:    url,
-                destroy: 'http://localhost:8082/cargo',
-                update:  'http://localhost:8082/cargo'
-            },*/
-
-
-             /*handler: function() {
-                 this.up('form').getForm().submit({
-                     url: 'http://localhost:8082/j_spring_security_check',
-                     success: function(form, action){
-                                 //Ext.MessageBox.alert('Авторизация пройдена.');
-                                 var redirect = 'http://localhost:8082/grid';
-                                 window.location = redirect;
-                     },
-                     failure: function(form, action){
-                                 Ext.MessageBox.alert('Ошибка авторизации. ');//,action.result.message
-                             }
-                 });
-             }*/
-
-
-
      @ResponseBody
      @RequestMapping(value = "/grid")
      public ModelAndView getGrid() {
@@ -122,7 +87,6 @@ add security annotations ?; information for INFO logger level;
          }
          catch (Exception e) {
              //System.out.println(e.getClass());
-             e.printStackTrace();
              return null;
          }
      }
@@ -139,7 +103,6 @@ add security annotations ?; information for INFO logger level;
              return trucks.isEmpty()? null : trucks;
          }
          catch (Exception e) {
-             e.printStackTrace();
              return null;
          }
      }*/

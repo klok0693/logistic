@@ -15,11 +15,11 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class CargoStoreHouse implements StoreHouse{
-    private int id;
-    private String address, name;
-    private Integer size;
+    private volatile int id;
+    private volatile String address, name;
+    private volatile Integer size;
 
-    Set<Cargo> cargoSet;
+    private volatile Set<Cargo> cargoSet;
 
     public CargoStoreHouse() {
         this.name = "CargoStoreHouse";
@@ -30,5 +30,10 @@ public class CargoStoreHouse implements StoreHouse{
         this.address  = address;
         this.name     = "CargoStoreHouse";
         this.size     = size;
+    }
+
+    @Override
+    public StoreHouse newInstance() {
+        return new CargoStoreHouse();
     }
 }

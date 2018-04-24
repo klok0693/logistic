@@ -14,6 +14,7 @@ import project.domain.entity.Entity;
 import project.model.logic.EntityService;
 import project.model.logic.ServiceException;
 
+import javax.ws.rs.PathParam;
 import java.util.Collection;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -55,10 +56,14 @@ public abstract class AbstractRestController<T extends Entity> {
 
 
     @RequestMapping(method = GET, produces = "application/json")
-    public @ResponseBody Collection<T> getAll() {
+    public @ResponseBody Collection<T> getAll(@PathParam("store") Integer store) {
+
+        //
+        if (store == null) store = 0;
+
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            return service.getAll(username);
+            return service.getAll(username, store);
         }
         catch (ServiceException e) {
             return null;
@@ -66,7 +71,7 @@ public abstract class AbstractRestController<T extends Entity> {
     }
 
 
-    @RequestMapping(value = "/*", method = PUT, produces = "application/json")
+    @RequestMapping(value = "/*", method = PUT, produces = "application/json")//application/x-www-form-urlencoded;charset=UTF-8
     public @ResponseBody boolean update(@RequestBody T obj) {
         try {
             service.update(obj);

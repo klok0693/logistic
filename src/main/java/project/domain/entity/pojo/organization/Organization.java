@@ -1,9 +1,6 @@
 package project.domain.entity.pojo.organization;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import project.aspect.NotNullByDefault;
 import project.domain.Instance;
 import project.domain.entity.Entity;
@@ -39,15 +36,15 @@ public interface Organization extends Entity, Instance<Organization> {
     String getOwner();
     void setOwner(String owner);
 
-    @JsonBackReference(value = "TrucksSet")
+    @JsonManagedReference(value= "TrucksSet")
     Set<Truck> getTrucks();
     void setTrucks(Set<Truck> trucks);
 
-    @JsonBackReference(value = "ClientsSet")
+    @JsonManagedReference(value = "ClientsSet")
     Set<Client> getClients();
     void setClients(Set<Client> clients);
 
-    @JsonBackReference(value = "EmployeesSet")
+    @JsonManagedReference(value = "EmployeesSet")
     Set<Employee> getEmployees();
     void setEmployees(Set<Employee> employees);
 

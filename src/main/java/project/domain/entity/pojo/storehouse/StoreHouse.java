@@ -1,10 +1,12 @@
 package project.domain.entity.pojo.storehouse;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import project.aspect.NotNullByDefault;
+import project.domain.Instance;
+import project.domain.entity.Entity;
 import project.domain.entity.pojo.cargo.Cargo;
 
 import java.util.Set;
@@ -23,7 +25,7 @@ import java.util.Set;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CargoStoreHouse.class, name = "CargoStoreHouse")
 })
-public interface StoreHouse {
+public interface StoreHouse extends Entity, Instance<StoreHouse> {
 
     int getId();
     void setId(int id);
@@ -37,7 +39,7 @@ public interface StoreHouse {
     Integer getSize();
     void setSize(Integer size);
 
-    @JsonBackReference(value = "StoreCargoSet")
+    @JsonManagedReference(value = "StoreCargoSet")
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
 }

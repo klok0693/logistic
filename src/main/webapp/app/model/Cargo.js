@@ -1,0 +1,26 @@
+ var fields = [
+     {name: 'id',              type: 'int'},
+     {name: 'type'},
+     {name: 'productionDate',  type: 'date'},
+     {name: 'shelfLife',       type: 'date'},
+     {name: 'size',            type: 'int'},
+     {name: 'format'},
+     {name: 'name'},
+     {name: 'owner', model: 'app.model.Owner'}
+ ];
+
+Ext.define('app.model.Cargo', {
+    extend: 'Ext.data.Model',
+    fields: fields,
+    belongsTo: 'app.model.Owner'
+});
+
+Ext.define('app.model.StoreHouse', {
+    extend: 'Ext.data.Model',
+    fields: {
+        name: 'id', type: 'int',
+        name: 'address',
+        name: 'name'
+    },
+    belongsTo:'app.model.Cargo'
+});

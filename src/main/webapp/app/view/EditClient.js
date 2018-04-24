@@ -10,23 +10,28 @@ Ext.define('app.view.EditClient', {
             xtype: 'form',
             items: [
                 {
+                    xtype: 'hidden',
+                    name: 'id',
+                    fieldLabel: 'id'
+                },
+                {
                     xtype: 'textfield',
                     name: 'type',
-                    fieldLabel: 'Наименование',
+                    fieldLabel: 'name',
                     allowBlank: false,
                     blankText: 'Это поле должно быть заполнено'
                 },
                 {
                     xtype: 'datefield',
                     name: 'productionDate',
-                    fieldLabel: 'Дата производства',
+                    fieldLabel: 'production date',
                     allowBlank: false,
                     blankText: 'Это поле должно быть заполнено'
                 },
                 {
                     xtype: 'datefield',
                     name: 'shelfLife',
-                    fieldLabel: 'Срок годности',
+                    fieldLabel: 'shelf life',
                     regex: /^([0-9]{1,20})*$/,
                     //regexText: 'Цена должна состоять из цифр',
                     allowBlank: false,
@@ -35,20 +40,20 @@ Ext.define('app.view.EditClient', {
                 {
                     xtype: 'numberfield',
                     name: 'size',
-                    fieldLabel: 'Кол-во',
+                    fieldLabel: 'amount',
                     allowBlank: false,
                     blankText: 'Это поле должно быть заполнено'
                 },
                 {
                     xtype: 'textfield',
                     name: 'format',
-                    fieldLabel: 'Ед. изм.',
+                    fieldLabel: 'format',
                     allowBlank: false,
                     blankText: 'Это поле должно быть заполнено'
                 },
                 {
                     xtype: 'combo',
-                    fieldLabel: 'type',
+                    fieldLabel: 'cargo type',
                     name: 'name',
                     store: new Ext.data.Store({
                         fields: [{name: 'key'},{name: 'value'}],
@@ -60,19 +65,37 @@ Ext.define('app.view.EditClient', {
                     }),
                     displayField: 'key',
                     valueField: 'value'
+                },
+                {
+                    xtype: 'combo',
+                    fieldLabel: 'store',
+                    name: 'store',
+                    store: new Ext.data.Store({
+                        fields: [{name: 'key'},{name: 'value'}],
+                        data: [
+                            {'key':'gomel', 'value':'1'},
+                            {'key':'minsk', 'value':'2'}
+                        ]
+                    }),
+                    displayField: 'key',
+                    valueField: 'value'
                 }
+                /*{
+                xtype:'hidden',
+                name: 'owner'
+                }*/
             ]
         }
     ],
 
     buttons: [
         {
-            text: 'Сохранить',
+            text: 'Save',
             action: 'save'
             //disabled: true
         },
         {
-            text: 'Отменить',
+            text: 'Cancel',
             handler: function () {
                 this.up('window').close();
             }

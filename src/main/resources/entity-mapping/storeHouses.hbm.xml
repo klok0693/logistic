@@ -30,7 +30,7 @@
             <one-to-many class="project.domain.entity.pojo.cargo.Cargo"/>
         </set>
 
-        <subclass name="CargoStore" discriminator-value="CargoStoreHouse" extends="StoreHouse" />
+        <subclass name="CargoStoreHouse" discriminator-value="CargoStoreHouse" extends="StoreHouse" />
 
     </class>
 
