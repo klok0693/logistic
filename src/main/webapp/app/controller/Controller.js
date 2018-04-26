@@ -65,41 +65,44 @@ Ext.define('app.controller.Controller', {
             form   = win.down('form'),
             values = form.getValues();
 
-        var obj     = Ext.create(Ext.getStore('Cargos').model);
+        var obj;
         var object  = Ext.getStore('Cr').load().getAt(0);
         var store   = Ext.getStore('StoreHouses').load({params:{id:1}}).getAt(0);
 
         console.log('store', store);
 
-         var record = form.getRecord();
-          if(record !== undefined) {
-              record.set(values);
-              Ext.getStore('Cargos').findRecord('id', form.getForm().findField('id').getValue())
-                                         .set('owner', object.getData());
+        var frm = form.getForm();
 
-              console.log('record', record);
-          }
-          else {
-              var frm = form.getForm();
+        var record = form.getRecord();
 
-              obj.set('format',           frm.findField('format').getValue());
-              //obj.set('id', form.getForm().findField('id').getValue());
-              obj.set('name',             frm.findField('name').getValue());
-              obj.set('owner',            object.getData());
-              obj.set('productionDate',   frm.findField('productionDate').getValue());
-              obj.set('shelfLife',        frm.findField('shelfLife').getValue());
-              obj.set('size',             frm.findField('size').getValue());
-              obj.set('type',             frm.findField('type').getValue());
+         if(record !== undefined) {
+             obj = Ext.getStore('Cargos').findRecord('id', frm.findField('id').getValue());
+         }
+         else {
+             obj = Ext.create(Ext.getStore('Cargos').model);
+         }
 
-              console.log('loaded obj', object.getData());
-              console.log('form',form.getValues());
+         obj.set('format',           frm.findField('format').getValue());
+         //obj.set('id', form.getForm().findField('id').getValue());
+         obj.set('name',             frm.findField('name').getValue());
+         obj.set('owner',            object.getData());
+         obj.set('productionDate',   frm.findField('productionDate').getValue());
+         obj.set('shelfLife',        frm.findField('shelfLife').getValue());
+         obj.set('size',             frm.findField('size').getValue());
+         obj.set('type',             frm.findField('type').getValue());
+         obj.set('store',            store.getData());
 
-              this.getClientGrid().store.add(obj);
+         console.log('loaded obj', object.getData());
+         console.log('form',form.getValues());
 
-              console.log('obj after', obj);
-          }
+         if(record === undefined) {
+             this.getClientGrid().store.add(obj);
+         }
+         this.getClientGrid().store.sync();
 
-        win.close();
+         console.log('obj after', obj);
+
+    win.close();
     },
 
     addClient: function() {
@@ -110,13 +113,16 @@ Ext.define('app.controller.Controller', {
         var grid       = this.getClientGrid(),
             selection  = grid.getSelectionModel().getSelection();
 
-        Ext.getStore('Cargos').findRecord('id', selection[0].getData().id)
-                       .set('owner', Ext.getStore('Cr').load().getAt(0).getData());
+        var obj = Ext.getStore('Cargos').findRecord('id', selection[0].getData().id);
+
+        obj.set('owner', Ext.getStore('Cr').load().getAt(0).getData());
+        obj.set('store', Ext.getStore('StoreHouses').load().getAt(0).getData());
 
         console.log('selection', selection[[0]]);
 
         grid.store.remove(selection[0]);
-        grid.store.commitChanges();
+        //grid.store.commitChanges();
+        grid.store.sync();
     },
 
     loginUser: function(button) {

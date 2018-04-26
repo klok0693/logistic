@@ -6,7 +6,8 @@
      {name: 'size',            type: 'int'},
      {name: 'format'},
      {name: 'name'},
-     {name: 'owner', model: 'app.model.Owner'}
+     {name: 'owner', model: 'app.model.Owner'},
+     {name: 'store', model: 'app.model.StoreHouse'}
  ];
 
 Ext.define('app.model.Cargo', {

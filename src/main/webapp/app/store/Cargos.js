@@ -2,11 +2,17 @@ Ext.define('app.store.Cargos', {
     extend: 'Ext.data.Store',
     model: 'app.model.Cargo',
     autoLoad: true,
-    autoSync: true,
+    autoSync: false,
     proxy: {
             //type: 'ajax',
             type: 'rest',
-            url: 'http://localhost:8082/cargo/all',
+            //url: 'http://localhost:8082/cargo/all',
+            api: {
+                  create: 'http://localhost:8082/cargo/*',
+                  read:   'http://localhost:8082/cargo/all',
+                  update: 'http://localhost:8082/cargo',
+                  destroy: 'http://localhost:8082/cargo'
+            },
             reader: {
                 type: 'json',
                 root: '',

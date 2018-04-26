@@ -25,7 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Log4j
 @NoArgsConstructor
 @RestController
-@RequestMapping("/cargo")
+@RequestMapping("/cargo/*")
 public class CargoController extends AbstractRestController<Cargo, CargoService> {
 
     public CargoController(CargoService service) {
