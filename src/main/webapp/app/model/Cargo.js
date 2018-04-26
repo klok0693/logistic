@@ -12,15 +12,5 @@
 Ext.define('app.model.Cargo', {
     extend: 'Ext.data.Model',
     fields: fields,
-    belongsTo: 'app.model.Owner'
-});
-
-Ext.define('app.model.StoreHouse', {
-    extend: 'Ext.data.Model',
-    fields: {
-        name: 'id', type: 'int',
-        name: 'address',
-        name: 'name'
-    },
-    belongsTo:'app.model.Cargo'
+    belongsTo: ['app.model.Owner', 'app.model.StoreHouse']
 });

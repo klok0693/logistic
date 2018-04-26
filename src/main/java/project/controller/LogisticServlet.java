@@ -1,12 +1,10 @@
-package project.controller.page;
+package project.controller;
 
 import lombok.extern.log4j.Log4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 import project.aspect.NotNullByDefault;
-import project.factory.Factory;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -16,17 +14,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @NotNullByDefault
 
 @Log4j
-@Controller
+@RestController
 public class LogisticServlet {
-
-    static { Factory.getFactory().setApplicationContext("root-context.xml"); }
-
-    //welcome page
-    @RequestMapping(value = "/")
-    public @ResponseBody ModelAndView getIndex() {
-        return new ModelAndView("Index");
-    }
-
 
     //success authorization
     @RequestMapping(value = "/success", method = GET, produces = "application/json")

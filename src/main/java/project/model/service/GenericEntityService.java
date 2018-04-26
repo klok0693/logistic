@@ -1,4 +1,4 @@
-package project.model.logic;
+package project.model.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,6 @@ import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.model.data.DataException;
 import project.model.data.EntityData;
-
-import java.util.Collection;
 
 import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
 
@@ -80,15 +78,6 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
         }
     }
 
-    @Override
-    public Collection<T> getAll(String username, int store) throws ServiceException{
-        try {
-            return data.getAll(username, store);
-        }
-        catch (DataException e) {
-            throw getException(e);
-        }
-    }
 
     @Override
     public <E extends EntityData<T>> void setData(E data) {
@@ -101,7 +90,7 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
         return this;
     }*/
 
-    private ServiceException getException(Exception e) {
+    protected ServiceException getException(Exception e) {
         return new ServiceException(e);
     }
 }

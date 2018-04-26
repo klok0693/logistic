@@ -1,4 +1,4 @@
-package project.model.logic;
+package project.model.service;
 
 import project.aspect.NotNullByDefault;
 

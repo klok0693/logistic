@@ -1,12 +1,12 @@
-Ext.define('app.store.Cargos', {
+Ext.define('app.store.StoreHouses', {
     extend: 'Ext.data.Store',
-    model: 'app.model.Cargo',
+    model: 'app.model.StoreHouse',
     autoLoad: true,
-    autoSync: true,
+    autoSync: false,
     proxy: {
             //type: 'ajax',
             type: 'rest',
-            url: 'http://localhost:8082/cargo/all',
+            url: 'http://localhost:8082/storehouse/all',
             reader: {
                 type: 'json',
                 root: '',

@@ -5,16 +5,44 @@
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!-- service's beans -->
-    <bean name="entityService" class="project.model.logic.GenericEntityService" scope="prototype">
+    <bean name="entityService" class="project.model.service.GenericEntityService" scope="prototype">
         <property name="data" ref="entityData"/>
     </bean>
-    <bean name="userService" parent="entityService" class="project.model.logic.users.GenericUserService"/>
+
+    <bean name="userService" parent="entityService" class="project.model.service.users.GenericUserService">
+        <property name="data" ref="userData"/>
+    </bean>
+
+    <bean name="cargoService"      parent="entityService"     class="project.model.service.objects.cargo.CargoServiceImpl">
+        <property name="data" ref="cargoData"/>
+    </bean>
+
+    <bean name="clientService"     parent="userService"       class="project.model.service.objects.client.ClientServiceImpl">
+        <property name="data" ref="clientData"/>
+    </bean>
+
+    <bean name="storehouseService" parent="entityService" class="project.model.service.objects.storehouse.StoreHouseServiceImpl">
+        <property name="data" ref="storehouseData"/>
+    </bean>
 
 
     <!-- data's beans-->
     <bean name="entityData" class="project.model.data.GenericEntityData" scope="prototype">
         <property name="factory" ref="sessionFactory"/>
     </bean>
-    <bean name="userData" parent="entityData" class="project.model.data.users.GenericUserData" />
+
+    <bean name="userData"       parent="entityData" class="project.model.data.users.GenericUserData" />
+
+    <bean name="cargoData"      parent="entityData" class="project.model.data.objects.cargo.CargoDataImpl">
+        <property name="entityClass" value="project.domain.entity.pojo.cargo.Cargo"/>
+    </bean>
+
+    <bean name="clientData"     parent="userData"   class="project.model.data.objects.client.ClientDataImpl">
+        <property name="entityClass" value="project.domain.entity.pojo.client.Client"/>
+    </bean>
+
+    <bean name="storehouseData" parent="entityData" class="project.model.data.objects.storehouse.StoreHouseDataImpl">
+        <property name="entityClass" value="project.domain.entity.pojo.storehouse.StoreHouse"/>
+    </bean>
 
 </beans>

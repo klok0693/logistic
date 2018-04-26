@@ -11,8 +11,6 @@ import project.aspect.CatchException;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 
-import java.util.List;
-
 import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 
 /**
@@ -74,20 +72,6 @@ public class GenericEntityData<T extends Entity> implements EntityData<T> {
         String hql = "delete " + entityClass.getSimpleName() + " where id = :id";
         Query q = getCurrentSession().createQuery(hql).setParameter("id", id);
         q.executeUpdate();
-    }
-
-
-    @Override
-    @CatchException(message = "Can't load entity list")
-    public List<T> getAll(String username, int store) throws DataException {
-
-        String query = "get"+entityClass.getSimpleName()+"ListByUserName";
-        Query<T> q = getCurrentSession()
-                        .createNamedQuery(query)
-                        .setString("username", username)
-                        .setInteger("store", store);
-
-        return q.list();
     }
 
 

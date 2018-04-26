@@ -1,10 +1,8 @@
-package project.model.logic;
+package project.model.service;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.model.data.EntityData;
-
-import java.util.Collection;
 
 /**
  * Created by klok on 15.1.18.
@@ -22,7 +20,6 @@ public interface EntityService<T extends Entity> {
 
     void delete(int id)  throws ServiceException;
 
-    Collection<T> getAll(String username, int store)  throws ServiceException;
 
     <D extends EntityData<T>> void setData(D data);
     <D extends EntityData<T>> D getData();

@@ -9,47 +9,49 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-
+    <!--Spring core -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>4.3.9.RELEASE</version>
     </dependency>
 
+    <!--Spring transactions -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
       <version>4.3.9.RELEASE</version>
     </dependency>
 
+    <!--Spring mvc -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>4.3.9.RELEASE</version>
     </dependency>
 
+    <!--Spring orm -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>4.3.9.RELEASE</version>
     </dependency>
 
+    <!--Spring security-web -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
       <version>3.2.4.RELEASE</version>
     </dependency>
+
+    <!--Spring security-config -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
       <version>3.2.4.RELEASE</version>
     </dependency>
+
+    <!--Spring security-core -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
@@ -109,12 +111,14 @@
       <version>2.7.3</version>
     </dependency>
 
+    <!--FindBugs -->
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.1</version>
     </dependency>
 
+    <!--Hibernate core -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -128,6 +132,7 @@
       <version>5.2.12.Final</version>
     </dependency>
 
+    <!--Connection cache -->
     <dependency>
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>
@@ -140,6 +145,7 @@
       <version>3.12.1.GA</version>
     </dependency>
 
+    <!--Mockito -->
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
@@ -147,30 +153,34 @@
       <scope>test</scope>
     </dependency>
 
+    <!--Junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--log4j -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
     </dependency>
 
+    <!--Mysql-connector -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.42</version>
     </dependency>
 
+    <!--Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.16.18</version>
       <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
     </dependency>
 
   </dependencies>

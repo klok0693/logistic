@@ -6,7 +6,7 @@ Ext.define('app.store.Cr', {
     proxy: {
             //type: 'ajax',
             type: 'rest',
-            url: 'http://localhost:8082/cargo/single',
+            url: 'http://localhost:8082/client/single',
             reader: {
                 type: 'json',
                 root: '',

@@ -8,11 +8,13 @@ import project.domain.entity.ejb.authentication.Authentication;
 import project.model.data.DataException;
 import project.model.data.GenericEntityData;
 
+import static org.springframework.transaction.annotation.Propagation.REQUIRED;
+
 /**
  * Created by klok on 19.2.18.
  */
 @NotNullByDefault
-@Transactional
+@Transactional(propagation = REQUIRED, rollbackFor = DataException.class)
 
 public class GenericUserData<V extends Authentication> extends GenericEntityData<V> implements UserData<V> {
 

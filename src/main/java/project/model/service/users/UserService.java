@@ -1,9 +1,9 @@
-package project.model.logic.users;
+package project.model.service.users;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.Authentication;
-import project.model.logic.EntityService;
-import project.model.logic.ServiceException;
+import project.model.service.EntityService;
+import project.model.service.ServiceException;
 
 /**
  * Created by klok on 27.2.18.

@@ -1,9 +1,9 @@
 Ext.define('app.controller.Controller', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Cargos', 'Cr'],
+    stores: ['Cargos', 'Cr', 'StoreHouses'],
 
-    models: ['Cargo'],
+    models: ['Cargo','Owner','Company','StoreHouse'],
 
     views: [
             'ClientView',
@@ -67,6 +67,9 @@ Ext.define('app.controller.Controller', {
 
         var obj     = Ext.create(Ext.getStore('Cargos').model);
         var object  = Ext.getStore('Cr').load().getAt(0);
+        var store   = Ext.getStore('StoreHouses').load({params:{id:1}}).getAt(0);
+
+        console.log('store', store);
 
          var record = form.getRecord();
           if(record !== undefined) {

@@ -7,11 +7,17 @@ import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.domain.entity.ejb.authentication.Authentication;
 import project.model.data.EntityData;
+import project.model.data.objects.cargo.CargoData;
+import project.model.data.objects.client.ClientData;
+import project.model.data.objects.storehouse.StoreHouseData;
 import project.model.data.users.UserData;
-import project.model.logic.EntityService;
-import project.model.logic.GenericEntityService;
-import project.model.logic.users.GenericUserService;
-import project.model.logic.users.UserService;
+import project.model.service.EntityService;
+import project.model.service.GenericEntityService;
+import project.model.service.objects.cargo.CargoService;
+import project.model.service.objects.client.ClientService;
+import project.model.service.objects.storehouse.StoreHouseService;
+import project.model.service.users.GenericUserService;
+import project.model.service.users.UserService;
 
 /**
  * Created by klok on 11.10.17.
@@ -20,6 +26,8 @@ import project.model.logic.users.UserService;
 @NotNullByDefault
 public class Factory implements ApplicationContextAware {
     private static ApplicationContext context;
+
+    static { getFactory().setApplicationContext("root-context.xml"); }
 
     private Factory() {}
 
@@ -34,6 +42,8 @@ public class Factory implements ApplicationContextAware {
     private static class FactoryHolder{
         private static final Factory factory = new Factory();
     }
+
+    public static Factory getFactory() { return FactoryHolder.factory; }
 
 
     //example: getClass(Client.class) -> return GenericDao<Client>
@@ -71,6 +81,31 @@ public class Factory implements ApplicationContextAware {
     }
 
 
+    public static CargoData getCargoData() {
+        return context.getBean(CargoData.class);
+    }
+
+    public static ClientData getClientData() {
+        return context.getBean(ClientData.class);
+    }
+
+    public static StoreHouseData getStoreHouseData() {
+        return context.getBean(StoreHouseData.class);
+    }
+
+    public static CargoService getCargoService() {
+        return context.getBean(CargoService.class);
+    }
+
+    public static ClientService getClientService() {
+        return context.getBean(ClientService.class);
+    }
+
+    public static StoreHouseService getStoreHouseService() {
+        return context.getBean(StoreHouseService.class);
+    }
+
+
     //return's custom exception
     public static <T extends Exception> T getException(Class<T> tClass) {
         return context.getBean(tClass);
@@ -85,6 +120,4 @@ public class Factory implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext context){
         FactoryHolder.factory.context = context;
     }
-
-    public static Factory getFactory() { return FactoryHolder.factory; }
 }

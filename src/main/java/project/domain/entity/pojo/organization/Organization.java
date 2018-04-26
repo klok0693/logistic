@@ -36,14 +36,17 @@ public interface Organization extends Entity, Instance<Organization> {
     String getOwner();
     void setOwner(String owner);
 
-    @JsonManagedReference(value= "TrucksSet")
+    @JsonIgnore
+    //@JsonManagedReference(value= "TrucksSet")
     Set<Truck> getTrucks();
     void setTrucks(Set<Truck> trucks);
 
+    @JsonIgnore
     @JsonManagedReference(value = "ClientsSet")
     Set<Client> getClients();
     void setClients(Set<Client> clients);
 
+    @JsonIgnore
     @JsonManagedReference(value = "EmployeesSet")
     Set<Employee> getEmployees();
     void setEmployees(Set<Employee> employees);

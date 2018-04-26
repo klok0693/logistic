@@ -33,11 +33,13 @@ public interface Client extends Instance<Client>, Authentication {
     String getType();
     void setType(String type);
 
-    @JsonBackReference(value = "ClientsSet")
+    //@JsonInclude
+    //@JsonBackReference(value = "ClientsSet")
     Organization getOrganization();
     void setOrganization(Organization organization);
 
     //
+    @JsonIgnore
     @JsonManagedReference(value = "CargoSet")
     Set<Cargo> getCargoSet();
     void setCargoSet(Set<Cargo> cargoSet);
