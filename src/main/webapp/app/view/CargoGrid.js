@@ -1,6 +1,6 @@
-Ext.define('app.view.ClientGrid', {
+Ext.define('app.view.CargoGrid', {
     extend: 'Ext.grid.Panel',
-    alias:  'widget.clientGrid',
+    alias:  'widget.cargoGrid',
     store: 'Cargos',
     width: 400,
     height: 300,
@@ -94,16 +94,6 @@ Ext.define('app.view.ClientGrid', {
                     action: 'delete',
                     iconCls: 'icon-delete'
                 }
-                /*{
-                    text: 'Удалить',
-                    iconCls: 'icon-delete ',
-                    handler: function () {
-                        var selection = this.getView().getSelectionModel().getSelection()[0];
-                        if (selection) {
-                            store.remove(selection);
-                         }
-                    }
-                }*/
             ]
         }
     ]

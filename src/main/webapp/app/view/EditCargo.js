@@ -1,6 +1,6 @@
-Ext.define('app.view.EditClient', {
+Ext.define('app.view.EditCargo', {
     extend: 'Ext.window.Window',
-    alias: 'widget.editClient',
+    alias: 'widget.editCargo',
     autoShow: true,
     layout: 'fit',
     modal: true,
@@ -80,10 +80,6 @@ Ext.define('app.view.EditClient', {
                     displayField: 'key',
                     valueField: 'value'
                 }
-                /*{
-                xtype:'hidden',
-                name: 'owner'
-                }*/
             ]
         }
     ],

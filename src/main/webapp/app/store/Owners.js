@@ -1,4 +1,4 @@
-Ext.define('app.store.Cr', {
+Ext.define('app.store.Owners', {
     extend: 'Ext.data.Store',
     model: 'app.model.Owner',
     autoLoad: true,

@@ -37,7 +37,6 @@ Ext.define('app.view.welcome_page.WelcomePage', {
                         'background-size': 'cover !important'
                 },
                 bodyStyle: 'opacity:0.35;',
-                //bodyStyle: 'opacity:0.5;',
                 //frame:false,
                 //border: false,
                 /*bodyStyle: {

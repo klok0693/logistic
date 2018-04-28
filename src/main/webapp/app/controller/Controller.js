@@ -1,14 +1,14 @@
 Ext.define('app.controller.Controller', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Cargos', 'Cr', 'StoreHouses'],
+    stores: ['Cargos', 'Owners', 'StoreHouses'],
 
     models: ['Cargo','Owner','Company','StoreHouse'],
 
     views: [
             'ClientView',
-            'EditClient',
-            'ClientGrid',
+            'EditCargo',
+            'CargoGrid',
             'welcome_page.Login',
             'Viewport',
             'welcome_page.WelcomePage',
@@ -17,30 +17,30 @@ Ext.define('app.controller.Controller', {
     ],
 
     refs: [
-        {ref:'welcomePage',       selector:'welcomePage'},
+        {ref:'welcomePage',       selector: 'welcomePage'},
         {ref: 'viewport',         selector: 'viewport'},
         {ref: 'clientView',       selector: 'clientView'},
         {ref: 'clientsPanel',     selector: 'panel'},
-        {ref: 'clientGrid',       selector:'clientGrid'},
-        {ref: 'login',            selector:'login'},
-        {ref: 'editClient',       selector: 'editClient'},
+        {ref: 'cargoGrid',        selector: 'cargoGrid'},
+        {ref: 'login',            selector: 'login'},
+        {ref: 'editCargo',        selector: 'editCargo'},
         {ref: 'selectStoreHouse', selector: 'selectStoreHouse'},
         {ref: 'searchCargo',      selector: 'searchCargo'}
     ],
 
     init: function() {
         this.control({
-            'clientGrid': {
-                itemdblclick: this.editClient
+            'cargoGrid': {
+                itemdblclick: this.updateCargo
             },
-            'editClient button[action=save]': {
-                click: this.updateClient
+            'editCargo button[action=save]': {
+                click: this.editCargo
             },
-            'clientGrid button[action=add]': {
-                click: this.addClient
+            'cargoGrid button[action=add]': {
+                click: this.addCargo
             },
-            'clientGrid button[action=delete]': {
-                click: this.deleteClient
+            'cargoGrid button[action=delete]': {
+                click: this.deleteCargo
             },
             'login button[action=login]': {
                 click: this.loginUser
@@ -54,76 +54,76 @@ Ext.define('app.controller.Controller', {
         });
     },
 
-    editClient: function(grid, record) {
-        var edit = Ext.create('app.view.EditClient').show();
+    updateCargo: function(grid, record) {
+        var edit = Ext.create('app.view.EditCargo').show();
         edit.down('form').loadRecord(record);
     },
 
-    updateClient: function(button) {
-
+    editCargo: function(button) {
         var win    = button.up('window'),
-            form   = win.down('form'),
+            form   = win.down('form').getForm(),
             values = form.getValues();
 
-        var obj;
-        var object  = Ext.getStore('Cr').load().getAt(0);
-        var store   = Ext.getStore('StoreHouses').load({params:{id:1}}).getAt(0);
+        var cargo,
+            owner = Ext.getStore('Owners').load().getAt(0),
+            store = Ext.getStore('StoreHouses').load({params:{id:1}}).getAt(0);
 
+        console.log('owner', owner);
         console.log('store', store);
+        console.log('form',  form.getValues());
 
-        var frm = form.getForm();
 
         var record = form.getRecord();
-
          if(record !== undefined) {
-             obj = Ext.getStore('Cargos').findRecord('id', frm.findField('id').getValue());
+             cargo = Ext.getStore('Cargos').findRecord('id', form.findField('id').getValue());
          }
          else {
-             obj = Ext.create(Ext.getStore('Cargos').model);
+             cargo = Ext.create(Ext.getStore('Cargos').model);
          }
 
-         obj.set('format',           frm.findField('format').getValue());
-         //obj.set('id', form.getForm().findField('id').getValue());
-         obj.set('name',             frm.findField('name').getValue());
-         obj.set('owner',            object.getData());
-         obj.set('productionDate',   frm.findField('productionDate').getValue());
-         obj.set('shelfLife',        frm.findField('shelfLife').getValue());
-         obj.set('size',             frm.findField('size').getValue());
-         obj.set('type',             frm.findField('type').getValue());
-         obj.set('store',            store.getData());
+         cargo.set('format',           form.findField('format').getValue());
+         //cargo.set('id', form.getForm().findField('id').getValue());
+         cargo.set('name',             form.findField('name').getValue());
+         cargo.set('owner',            owner.getData());
+         cargo.set('productionDate',   form.findField('productionDate').getValue());
+         cargo.set('shelfLife',        form.findField('shelfLife').getValue());
+         cargo.set('size',             form.findField('size').getValue());
+         cargo.set('type',             form.findField('type').getValue());
+         cargo.set('store',            store.getData());
 
-         console.log('loaded obj', object.getData());
-         console.log('form',form.getValues());
+         console.log('obj after', cargo);
 
          if(record === undefined) {
-             this.getClientGrid().store.add(obj);
+             this.getCargoGrid().store.add(cargo);
          }
-         this.getClientGrid().store.sync();
+         this.getCargoGrid().store.sync();
 
-         console.log('obj after', obj);
-
-    win.close();
+         win.close();
     },
 
-    addClient: function() {
-        Ext.widget('editClient');
+
+    addCargo: function() {
+        Ext.widget('editCargo');
     },
 
-    deleteClient: function() {
-        var grid       = this.getClientGrid(),
+
+    deleteCargo: function() {
+        var grid       = this.getCargoGrid(),
+            store      = grid.store,
             selection  = grid.getSelectionModel().getSelection();
-
-        var obj = Ext.getStore('Cargos').findRecord('id', selection[0].getData().id);
-
-        obj.set('owner', Ext.getStore('Cr').load().getAt(0).getData());
-        obj.set('store', Ext.getStore('StoreHouses').load().getAt(0).getData());
 
         console.log('selection', selection[[0]]);
 
-        grid.store.remove(selection[0]);
-        //grid.store.commitChanges();
-        grid.store.sync();
+        var cargo = Ext.getStore('Cargos').findRecord('id', selection[0].getData().id);
+
+        cargo.set('owner', Ext.getStore('Owners').load().getAt(0).getData());
+        cargo.set('store', Ext.getStore('StoreHouses').load().getAt(0).getData());
+
+        store.remove(selection[0]);
+        //store.commitChanges();
+        store.sync();
     },
+
 
     loginUser: function(button) {
         //var form = button.up('form').getForm();
@@ -141,22 +141,24 @@ Ext.define('app.controller.Controller', {
                     });
     },
 
+
     changeStore: function(button) {
-        var store = this.getClientGrid().store,
+        var store = this.getCargoGrid().store,
             store_id = button.up('form').down('combo').getValue();
 
         //
         store.load({params:{store:store_id}});
     },
 
+
     findCargo: function(button) {
-        var store = this.getClientGrid().store,
-            name = button.up('form').down('textfield').getValue(),
+        var store = this.getCargoGrid().store,
+            name  = button.up('form').down('textfield').getValue(),
             cargo = store.findRecord('type', name);
 
         if (cargo !== null) {
 
-            var edit = Ext.create('app.view.EditClient').show();
+            var edit = Ext.create('app.view.EditCargo').show();
             edit.down('form').loadRecord(cargo);
         }
         else Ext.MessageBox.alert('Cant find Cargo');

@@ -6,7 +6,7 @@ Ext.define('app.store.Cargos', {
     proxy: {
             //type: 'ajax',
             type: 'rest',
-            //url: 'http://localhost:8082/cargo/all',
+            //url: 'http://localhost:8082/cargo',
             api: {
                   create: 'http://localhost:8082/cargo/*',
                   read:   'http://localhost:8082/cargo/all',

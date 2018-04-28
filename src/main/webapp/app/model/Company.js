@@ -6,5 +6,4 @@ Ext.define('app.model.Company', {//Organization
         {name:'owner', type:'string'},
         {name:'type', type:'string'}
     ]
-    //belongsTo:'app.model.Owner'
 });

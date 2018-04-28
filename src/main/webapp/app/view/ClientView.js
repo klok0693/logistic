@@ -53,7 +53,7 @@ Ext.define('app.view.ClientView', {
                     }
             },*/
             {
-             xtype: 'clientGrid',
+             xtype: 'cargoGrid',
              region: 'center'
              }
     ]
