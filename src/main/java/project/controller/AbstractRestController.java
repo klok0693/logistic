@@ -13,6 +13,7 @@ import project.domain.entity.Entity;
 import project.model.service.EntityService;
 import project.model.service.ServiceException;
 
+import javax.validation.Valid;
 import javax.ws.rs.PathParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -36,7 +37,7 @@ public abstract class AbstractRestController<T extends Entity, S extends EntityS
 
 
     @RequestMapping(method = GET, produces = "application/json")
-    public @ResponseBody T load(@PathParam("id") Integer id) {
+    public @ResponseBody T load(@PathParam("id") @Valid Integer id) {
 
         if (id == null) return null;
 
@@ -50,7 +51,7 @@ public abstract class AbstractRestController<T extends Entity, S extends EntityS
 
 
     @RequestMapping(method = POST, produces = "application/json")
-    public @ResponseBody boolean save(@RequestBody T obj) {
+    public @ResponseBody boolean save(@RequestBody @Valid T obj) {
 
         try {
             service.save(obj);
@@ -63,7 +64,7 @@ public abstract class AbstractRestController<T extends Entity, S extends EntityS
 
 
     @RequestMapping(method = PUT, produces = "application/json")//application/x-www-form-urlencoded;charset=UTF-8
-    public @ResponseBody boolean update(@RequestBody T obj) {
+    public @ResponseBody boolean update(@RequestBody @Valid T obj) {
         try {
             service.update(obj);
             return true;
@@ -75,7 +76,7 @@ public abstract class AbstractRestController<T extends Entity, S extends EntityS
 
 
     @RequestMapping(method = DELETE, produces = "application/json")
-    public @ResponseBody boolean delete(@RequestBody T obj) {
+    public @ResponseBody boolean delete(@RequestBody @Valid T obj) {
         try {
             service.delete(obj.getId());
             return true;

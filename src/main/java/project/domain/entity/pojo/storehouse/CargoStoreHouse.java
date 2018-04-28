@@ -4,6 +4,8 @@ import lombok.*;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -15,8 +17,17 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class CargoStoreHouse implements StoreHouse{
+
     private volatile int id;
-    private volatile String address, name;
+
+    @Size(min = 2, max = 200,         message="field must be between 2 and 200 characters long.")
+    @Pattern(regexp="[a-zA-Z0-9]+&",  message="field must be alphanumeric")
+    private volatile String address;
+
+    @Size(min = 2, max = 70,          message="field must be between 2 and 70 characters long.")
+    @Pattern(regexp="[a-zA-Z0-9]+&",  message="field must be alphanumeric")
+    private volatile String name;
+
     private volatile Integer size;
 
     private volatile Set<Cargo> cargoSet;

@@ -1,12 +1,13 @@
 package project.domain.entity.ejb.authentication;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -20,14 +21,17 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"username", "password"})
 public class User implements UserDetails, Entity {
     private volatile int id;
-    private volatile String username,
-                            password;
+
+    @Size(min = 2, max = 100,         message="field must be between 2 and 100 characters long.")
+    @Pattern(regexp="[a-zA-Z0-9]+&",  message="field must be alphanumeric")
+    private volatile String username, password;
+
     private volatile boolean isAccountNonExpired,
                              isAccountNonLocked,
                              isCredentialsNonExpired,
                              isEnabled;
-    @JsonBackReference(value = "UserAuthorities")
-    private volatile Set<GrantedAuthority> authorities;
+
+    private volatile Set<Roles> authorities;
 
     //getters and setters for hibernate
     public boolean getIsAccountNonExpired(){return this.isAccountNonExpired;}
@@ -48,5 +52,6 @@ public class User implements UserDetails, Entity {
     public boolean isCredentialsNonExpired(){return this.isCredentialsNonExpired;}
     public boolean isEnabled(){return this.isEnabled;}
 
-    public Set<GrantedAuthority> getAuthorities(){return this.authorities;}
+    @JsonManagedReference(value = "UserAuthorities")
+    public Set<Roles> getAuthorities(){return this.authorities;}
 }

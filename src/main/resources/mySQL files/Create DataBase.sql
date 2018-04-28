@@ -35,7 +35,7 @@ create table Organizations(
 org_id int unsigned NOT NULL AUTO_INCREMENT,
 type   varchar(70)  NOT NULL,
 owner  varchar(70)  NOT NULL,
-name   varchar(30)  NOT NULL,
+name   varchar(70)  NOT NULL,
 
 PRIMARY KEY(org_id)
 );
@@ -63,7 +63,7 @@ FOREIGN KEY(user)       REFERENCES Users(user_id)      ON DELETE cascade ON UPDA
 
 create table Drivers(
 driver_id int unsigned UNIQUE,
-driveCard varchar(100) NOT NULL,
+driveCard varchar(16) NOT NULL,
 
 PRIMARY KEY(driver_id),
 FOREIGN KEY(driver_id) REFERENCES Employees(empl_id) ON DELETE cascade ON UPDATE cascade
@@ -71,11 +71,11 @@ FOREIGN KEY(driver_id) REFERENCES Employees(empl_id) ON DELETE cascade ON UPDATE
 
 create table Trucks(
 truck_id        int unsigned NOT NULL AUTO_INCREMENT,
-model           varchar(100) NOT NULL,
+model           varchar(70)  NOT NULL,
 registerNumber  int unsigned NOT NULL,
-trailer         varchar(30)  NOT NULL,
+trailer         varchar(70)  NOT NULL,
 organization    int unsigned NOT NULL,
-name            varchar(30)  NOT NULL,
+name            varchar(70)  NOT NULL,
 
 PRIMARY KEY(truck_id),
 FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade
@@ -83,10 +83,10 @@ FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON 
 
 create table Clients(
 client_id     int unsigned NOT NULL AUTO_INCREMENT,
-type          varchar(100) NOT NULL,
+type          varchar(70)  NOT NULL,
 organization  int unsigned NOT NULL,
 user          int unsigned NOT NULL UNIQUE,
-name          varchar(30)  NOT NULL,
+name          varchar(70)  NOT NULL,
 
 PRIMARY KEY(client_id),
 FOREIGN KEY(organization) REFERENCES Organizations(org_id) ON DELETE cascade ON UPDATE cascade,
@@ -101,8 +101,8 @@ shelf_date       date         NOT NULL,
 owner            int unsigned NOT NULL,
 store            int unsigned NOT NULL,
 size             int unsigned NOT NULL,
-format           varchar(30)  NOT NULL,
-name             varchar(30)  NOT NULL,
+format           varchar(70)  NOT NULL,
+name             varchar(70)  NOT NULL,
 
 PRIMARY KEY(cargo_id),
 FOREIGN KEY(owner) REFERENCES Clients(client_id)    ON DELETE cascade ON UPDATE cascade,

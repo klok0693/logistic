@@ -9,6 +9,8 @@ import project.domain.entity.ejb.authentication.User;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organization.Organization;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -24,13 +26,17 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(exclude = {"id", "cargoSet"})
 public class LogisticClient implements Client {
-    private volatile int          id;
-    private volatile String       type,
-                                  name;
+
+    private volatile int id;
+
+    @Size(min = 2, max = 70,          message="field must be between 2 and 70 characters long.")
+    @Pattern(regexp="[a-zA-Z0-9]+&",  message="field must be alphanumeric")
+    private volatile String type, name;
+
     private volatile Organization organization;
     private volatile User user;
 
-    private Set<Cargo> cargoSet;
+    private volatile Set<Cargo> cargoSet;
 
     public LogisticClient() {
         this.name  = "LogisticClient";

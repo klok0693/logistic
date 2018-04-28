@@ -8,6 +8,8 @@ import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.domain.entity.pojo.organization.Organization;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -24,14 +26,15 @@ import java.util.Set;
 public abstract class AbstractTruck<V extends Cargo> implements Truck<V> {
     //TODO:id=registerNumber?
     //TODO:remove trailer?
-    protected volatile int          id;
-    protected volatile int          registerNumber;
-    protected volatile String       name,
-                                    model,
-                                    trailer;
-    protected volatile Organization organization;
+    protected volatile int id, registerNumber;
 
-    @Getter @Setter protected Set<V> cargo;
+    @Size(min = 2, max = 70,          message="field must be between 2 and 70 characters long.")
+    @Pattern(regexp="[a-zA-Z0-9]+&",  message="field must be alphanumeric")
+    protected volatile String name, model, trailer;
+
+    protected volatile Organization organization;
+    protected volatile Set<V> cargo;
+
 
     protected AbstractTruck(String name) {
         this.name = name;

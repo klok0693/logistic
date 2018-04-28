@@ -8,6 +8,8 @@ import project.domain.entity.pojo.client.Client;
 import project.domain.entity.pojo.employee.Employee;
 import project.domain.entity.pojo.truck.Truck;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -23,10 +25,12 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"name", "owner"})
 public class LogisticOrganization implements Organization {
-    private volatile int     id;
-    private volatile String  type,
-                             owner,
-                             name;
+
+    private volatile int id;
+
+    @Size(min = 2, max = 200,         message="field must be between 2 and 200 characters long.")
+    @Pattern(regexp="[a-zA-Z0-9]+&",  message="field must be alphanumeric")
+    private volatile String  type, owner, name;
 
     private volatile Set<Truck>    trucks;
     private volatile Set<Client>   clients;

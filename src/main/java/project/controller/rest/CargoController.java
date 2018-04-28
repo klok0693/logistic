@@ -12,6 +12,7 @@ import project.domain.entity.pojo.cargo.Cargo;
 import project.model.service.ServiceException;
 import project.model.service.objects.cargo.CargoService;
 
+import javax.validation.Valid;
 import javax.ws.rs.PathParam;
 import java.util.Collection;
 
@@ -33,7 +34,7 @@ public class CargoController extends AbstractRestController<Cargo, CargoService>
     }
 
     @RequestMapping(value = "/all", method = GET, produces = "application/json")
-    public @ResponseBody Collection<Cargo> getAll(@PathParam("store") Integer store) {
+    public @ResponseBody Collection<Cargo> getAll(@PathParam("store") @Valid Integer store) {
 
         //
         if (store == null) store = 0;
