@@ -10,7 +10,7 @@ import project.aspect.NotNullByDefault;
 import project.controller.AbstractRestController;
 import project.domain.entity.pojo.storehouse.StoreHouse;
 import project.model.service.ServiceException;
-import project.model.service.objects.storehouse.StoreHouseService;
+import project.model.service.rest.objects.storehouse.StoreHouseService;
 
 import java.util.Collection;
 

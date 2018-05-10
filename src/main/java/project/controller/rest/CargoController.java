@@ -10,7 +10,7 @@ import project.aspect.NotNullByDefault;
 import project.controller.AbstractRestController;
 import project.domain.entity.pojo.cargo.Cargo;
 import project.model.service.ServiceException;
-import project.model.service.objects.cargo.CargoService;
+import project.model.service.rest.objects.cargo.CargoService;
 
 import javax.validation.Valid;
 import javax.ws.rs.PathParam;

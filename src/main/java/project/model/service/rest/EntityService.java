@@ -1,8 +1,9 @@
-package project.model.service;
+package project.model.service.rest;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.model.data.EntityData;
+import project.model.service.ServiceException;
 
 /**
  * Created by klok on 15.1.18.

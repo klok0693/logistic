@@ -1,8 +1,8 @@
-package project.model.service.objects.cargo;
+package project.model.service.rest.objects.cargo;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.cargo.Cargo;
-import project.model.service.EntityService;
+import project.model.service.rest.EntityService;
 import project.model.service.ServiceException;
 
 import java.util.Collection;

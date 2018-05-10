@@ -1,8 +1,8 @@
-package project.model.service.objects.storehouse;
+package project.model.service.rest.objects.storehouse;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.storehouse.StoreHouse;
-import project.model.service.EntityService;
+import project.model.service.rest.EntityService;
 import project.model.service.ServiceException;
 
 import java.util.Collection;

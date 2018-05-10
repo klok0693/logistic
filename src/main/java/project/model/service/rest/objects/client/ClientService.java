@@ -1,9 +1,9 @@
-package project.model.service.objects.client;
+package project.model.service.rest.objects.client;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.client.Client;
 import project.model.service.ServiceException;
-import project.model.service.users.UserService;
+import project.model.service.rest.users.UserService;
 
 import java.util.Collection;
 

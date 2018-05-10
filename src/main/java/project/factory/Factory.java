@@ -11,13 +11,13 @@ import project.model.data.objects.cargo.CargoData;
 import project.model.data.objects.client.ClientData;
 import project.model.data.objects.storehouse.StoreHouseData;
 import project.model.data.users.UserData;
-import project.model.service.EntityService;
-import project.model.service.GenericEntityService;
-import project.model.service.objects.cargo.CargoService;
-import project.model.service.objects.client.ClientService;
-import project.model.service.objects.storehouse.StoreHouseService;
-import project.model.service.users.GenericUserService;
-import project.model.service.users.UserService;
+import project.model.service.rest.EntityService;
+import project.model.service.rest.GenericEntityService;
+import project.model.service.rest.objects.cargo.CargoService;
+import project.model.service.rest.objects.client.ClientService;
+import project.model.service.rest.objects.storehouse.StoreHouseService;
+import project.model.service.rest.users.GenericUserService;
+import project.model.service.rest.users.UserService;
 
 /**
  * Created by klok on 11.10.17.

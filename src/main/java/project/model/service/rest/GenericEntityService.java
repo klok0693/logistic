@@ -1,4 +1,4 @@
-package project.model.service;
+package project.model.service.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
 import project.model.data.DataException;
 import project.model.data.EntityData;
+import project.model.service.ServiceException;
 
 import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
 

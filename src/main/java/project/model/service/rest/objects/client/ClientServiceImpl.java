@@ -1,15 +1,15 @@
-package project.model.service.objects.cargo;
+package project.model.service.rest.objects.client;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.NotNullByDefault;
-import project.domain.entity.pojo.cargo.Cargo;
+import project.domain.entity.pojo.client.Client;
 import project.model.data.DataException;
-import project.model.data.objects.cargo.CargoData;
-import project.model.service.GenericEntityService;
+import project.model.data.objects.client.ClientDataImpl;
 import project.model.service.ServiceException;
+import project.model.service.rest.users.GenericUserService;
 
 import java.util.Collection;
 
@@ -24,13 +24,13 @@ import static org.springframework.transaction.annotation.Isolation.REPEATABLE_RE
 //@Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
-public class CargoServiceImpl extends GenericEntityService<Cargo, CargoData> implements CargoService {
+public class ClientServiceImpl extends GenericUserService<Client, ClientDataImpl> implements ClientService {
+
 
     @Override
-    public Collection<Cargo> getAll(String username, int store) throws ServiceException {
-
+    public Collection<Client> getAll(int company) throws ServiceException {
         try {
-            return data.getAll(username, store);
+            return data.getAll(company);
         }
         catch (DataException e) {
             throw getException(e);

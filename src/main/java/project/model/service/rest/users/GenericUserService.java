@@ -1,11 +1,11 @@
-package project.model.service.users;
+package project.model.service.rest.users;
 
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.Authentication;
 import project.model.data.DataException;
 import project.model.data.users.GenericUserData;
-import project.model.service.GenericEntityService;
+import project.model.service.rest.GenericEntityService;
 import project.model.service.ServiceException;
 
 /**

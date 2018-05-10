@@ -1,4 +1,4 @@
-package project.model.service.objects.storehouse;
+package project.model.service.rest.objects.storehouse;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import project.aspect.NotNullByDefault;
 import project.domain.entity.pojo.storehouse.StoreHouse;
 import project.model.data.DataException;
 import project.model.data.objects.storehouse.StoreHouseDataImpl;
-import project.model.service.GenericEntityService;
+import project.model.service.rest.GenericEntityService;
 import project.model.service.ServiceException;
 
 import java.util.Collection;

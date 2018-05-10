@@ -12,7 +12,7 @@ import project.controller.AbstractRestController;
 import project.domain.entity.pojo.client.Client;
 import project.factory.Factory;
 import project.model.data.DataException;
-import project.model.service.objects.client.ClientService;
+import project.model.service.rest.objects.client.ClientService;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 

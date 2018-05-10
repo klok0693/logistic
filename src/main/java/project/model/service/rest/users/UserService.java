@@ -1,8 +1,8 @@
-package project.model.service.users;
+package project.model.service.rest.users;
 
 import project.aspect.NotNullByDefault;
 import project.domain.entity.ejb.authentication.Authentication;
-import project.model.service.EntityService;
+import project.model.service.rest.EntityService;
 import project.model.service.ServiceException;
 
 /**

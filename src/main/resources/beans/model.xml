@@ -5,23 +5,23 @@
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!-- service's beans -->
-    <bean name="entityService" class="project.model.service.GenericEntityService" scope="prototype">
+    <bean name="entityService" class="project.model.service.rest.GenericEntityService" scope="prototype">
         <property name="data" ref="entityData"/>
     </bean>
 
-    <bean name="userService" parent="entityService" class="project.model.service.users.GenericUserService">
+    <bean name="userService" parent="entityService" class="project.model.service.rest.users.GenericUserService">
         <property name="data" ref="userData"/>
     </bean>
 
-    <bean name="cargoService"      parent="entityService"     class="project.model.service.objects.cargo.CargoServiceImpl">
+    <bean name="cargoService"      parent="entityService"     class="project.model.service.rest.objects.cargo.CargoServiceImpl">
         <property name="data" ref="cargoData"/>
     </bean>
 
-    <bean name="clientService"     parent="userService"       class="project.model.service.objects.client.ClientServiceImpl">
+    <bean name="clientService"     parent="userService"       class="project.model.service.rest.objects.client.ClientServiceImpl">
         <property name="data" ref="clientData"/>
     </bean>
 
-    <bean name="storehouseService" parent="entityService" class="project.model.service.objects.storehouse.StoreHouseServiceImpl">
+    <bean name="storehouseService" parent="entityService" class="project.model.service.rest.objects.storehouse.StoreHouseServiceImpl">
         <property name="data" ref="storehouseData"/>
     </bean>
 

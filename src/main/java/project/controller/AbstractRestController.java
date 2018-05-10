@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-import project.model.service.EntityService;
+import project.model.service.rest.EntityService;
 import project.model.service.ServiceException;
 
 import javax.validation.Valid;
