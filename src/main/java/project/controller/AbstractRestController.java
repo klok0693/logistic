@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @NoArgsConstructor
 @RestController
 public abstract class AbstractRestController<T extends Entity, S extends EntityService<T>> {
+    @Autowired
     protected S service;
 
     protected AbstractRestController(S service) {

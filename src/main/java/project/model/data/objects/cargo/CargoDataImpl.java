@@ -20,7 +20,7 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 /**
  * Created by klok on 26.4.18.
  */
-@NotNullByDefault
+/*@NotNullByDefault
 @Transactional(propagation = REQUIRED, rollbackFor = DataException.class)
 
 @Log4j
@@ -43,3 +43,4 @@ public class CargoDataImpl extends GenericEntityData<Cargo> implements CargoData
         return q.list();
     }
 }
+*/

@@ -2,6 +2,7 @@ package project.controller.rest;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping("/cargo/*")
 public class CargoController extends AbstractRestController<Cargo, CargoService> {
 
+    @Autowired
     public CargoController(CargoService service) {
         super(service);
     }

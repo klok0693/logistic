@@ -11,13 +11,9 @@ import project.model.data.objects.cargo.CargoData;
 import project.model.data.objects.client.ClientData;
 import project.model.data.objects.storehouse.StoreHouseData;
 import project.model.data.users.UserData;
-import project.model.service.rest.EntityService;
-import project.model.service.rest.GenericEntityService;
 import project.model.service.rest.objects.cargo.CargoService;
 import project.model.service.rest.objects.client.ClientService;
 import project.model.service.rest.objects.storehouse.StoreHouseService;
-import project.model.service.rest.users.GenericUserService;
-import project.model.service.rest.users.UserService;
 
 /**
  * Created by klok on 11.10.17.
@@ -66,19 +62,19 @@ public class Factory implements ApplicationContextAware {
 
 
     //example: getService(Client.class) -> return Service<Client>
-    public static <T extends Entity> EntityService<T> getService(Class<T> aClass) {
+    /*public static <T extends Entity> EntityService<T> getService(Class<T> aClass) {
         GenericEntityService service = (GenericEntityService) context.getBean("entityService");
         service.setData(getData(aClass));
         return service;
-    }
+    }*/
 
 
     //example: getUserService(Client.class) -> return UserService<Client>
-    public static <T extends Authentication> UserService<T> getUserService(Class<T> aClass) {
+    /*public static <T extends Authentication> UserService<T> getUserService(Class<T> aClass) {
         GenericUserService service = (GenericUserService) context.getBean("userService");
         service.setData(getUserData(aClass));
         return service;
-    }
+    }*/
 
 
     public static CargoData getCargoData() {

@@ -1,8 +1,8 @@
 package project.model.service.rest;
 
+import org.springframework.data.repository.CrudRepository;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-import project.model.data.EntityData;
 import project.model.service.ServiceException;
 
 /**
@@ -22,6 +22,6 @@ public interface EntityService<T extends Entity> {
     void delete(int id)  throws ServiceException;
 
 
-    <D extends EntityData<T>> void setData(D data);
-    <D extends EntityData<T>> D getData();
+    <R extends CrudRepository<T, Integer>> void setData(R data);
+    <D extends CrudRepository<T, Integer>> D getData();
 }

@@ -26,10 +26,10 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 @Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
-public class StoreHouseDataImpl extends GenericEntityData<StoreHouse> implements StoreHouseData {
+public class StoreHouseDataImpl extends GenericEntityData<StoreHouse> {
 
 
-    @Override
+    //@Override
     @CatchException(message = "Can't load storehouse list")
     public Collection<StoreHouse> getAll() throws DataException {
         return getCurrentSession()

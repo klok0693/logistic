@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 import project.aspect.NotNullByDefault;
 import project.domain.entity.Entity;
-import project.model.data.DataException;
-import project.model.data.EntityData;
 import project.model.service.ServiceException;
 
 import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
@@ -23,8 +23,9 @@ import static org.springframework.transaction.annotation.Isolation.REPEATABLE_RE
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenericEntityService<T extends Entity, D extends EntityData<T>> implements EntityService<T> {
+public class GenericEntityService<T extends Entity, D extends CrudRepository<T, Integer>> implements EntityService<T> {
     //private EntityData<T> data;
+    @Autowired
     protected D data;
     //private Class<T> type;
 
@@ -34,7 +35,7 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
        try{
             data.save(obj);
         }
-        catch (DataException e) {
+        catch (Exception e) {
             throw getException(e);
         }
     }
@@ -42,9 +43,9 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
     @Override
     public T get(int id) throws ServiceException {
         try {
-            return data.get(id);
+            return data.findById(id).get();
         }
-        catch (DataException e) {
+        catch (Exception e) {
             throw getException(e);
         }
     }
@@ -52,9 +53,9 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
     @Override
     public void update(T obj) throws ServiceException {
         try {
-            data.update(obj);
+            data.save(obj) ;
         }
-        catch (DataException e) {
+        catch (Exception e) {
             throw getException(e);
         }
     }
@@ -64,7 +65,7 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
         try {
             data.delete(obj);
         }
-        catch (DataException e) {
+        catch (Exception e) {
             throw getException(e);
         }
     }
@@ -72,16 +73,15 @@ public class GenericEntityService<T extends Entity, D extends EntityData<T>> imp
     @Override
     public void delete(int id) throws ServiceException {
         try {
-            data.delete(id);
+            data.deleteById(id);
         }
-        catch (DataException e) {
+        catch (Exception e) {
             throw getException(e);
         }
     }
 
-
     @Override
-    public <E extends EntityData<T>> void setData(E data) {
+    public <R extends CrudRepository<T, Integer>> void setData(R data) {
         this.data = (D) data;
     }
 

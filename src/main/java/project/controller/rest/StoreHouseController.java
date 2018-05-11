@@ -2,6 +2,7 @@ package project.controller.rest;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping("/storehouse")
 public class StoreHouseController extends AbstractRestController<StoreHouse, StoreHouseService> {
 
+    @Autowired
     public StoreHouseController(StoreHouseService service) {
         super(service);
     }

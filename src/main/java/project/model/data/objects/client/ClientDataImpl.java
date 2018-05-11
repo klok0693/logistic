@@ -27,10 +27,10 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 @Accessors(chain = true)
 @Getter @Setter
 @NoArgsConstructor
-public class ClientDataImpl extends GenericUserData<Client> implements ClientData {
+public class ClientDataImpl extends GenericUserData<Client> {
 
 
-    @Override
+    //@Override
     @CatchException(message = "Can't load clients list")
     public Collection<Client> getAll(int company) throws DataException {
         return getCurrentSession()
